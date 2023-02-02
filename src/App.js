@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  Container,
+  Box,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Button,
+  Typography,
+  CssBaseline,
+  ThemeProvider
+} from '@mui/material';
+import Layout, { theme } from './components/common/Layout';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Layout>
+
+      </Layout>
+    </ThemeProvider>
   );
 }
 
