@@ -3,7 +3,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 const NavBar = () => {
   return (
-    <AppBar position="fixed">
+    <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" component="div">
           Quiztionnaire
