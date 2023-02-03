@@ -7,6 +7,7 @@ const QuizQuestion = ({ data, callback }) => {
 
   const handleSubmit = () => {
     callback(res);
+    setRes('');
   };
 
   const handleChange = (event) => {
@@ -14,15 +15,19 @@ const QuizQuestion = ({ data, callback }) => {
     setRes(event.target.value);
   };
 
+
   return (
     <Box component="div" sx={{ mt: 5 }}>
       <Typography variant="body">{data.q}</Typography>
 
       <Box component="div">
         <FormControl>
-          <RadioGroup>
+          <RadioGroup
+            value={res}
+            onChange={handleChange}
+          >
             {Object.entries(data.res).map(([key,val]) => (
-              <FormControlLabel key={key} value={key} control={<Radio />} label={val} onChange={handleChange} />
+              <FormControlLabel key={key} value={key} control={<Radio />} label={val} />
             ))}
           </RadioGroup>
         </FormControl>

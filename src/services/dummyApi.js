@@ -1,7 +1,7 @@
 
 const quiz = {
   title: 'Quiz 5',
-  time: '180',
+  time: '10',
   questions: [
     {
       type: 'mc',
@@ -30,4 +30,4 @@ const getQuiz = () => {
   return quiz;
 };
 
-export { getQuiz }
+export { getQuiz };

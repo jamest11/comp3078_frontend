@@ -1,5 +1,4 @@
-import { AppBar, Toolbar, IconButton, Button, Typography, Box } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { AppBar, Toolbar, Button, Typography, Box } from '@mui/material';
 
 const NavBar = () => {
   return (
