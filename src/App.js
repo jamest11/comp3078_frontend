@@ -12,6 +12,7 @@ import {
 import Layout, { theme } from './components/common/Layout';
 import { getQuiz } from './services/dummyApi';
 import Quiz from './components/pages/Quiz';
+import { Route, Routes } from 'react-router-dom';
 
 
 function App() {
@@ -23,7 +24,21 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Layout>
-        <Quiz quizData={quiz} course={course} />
+        <Routes>
+          <Route
+            path="/"
+            elemement={
+              <>
+              </>
+            }
+          />
+          <Route
+            path="/quiz"
+            element={
+              <Quiz quizData={quiz} course={course} />
+            }
+          />
+        </Routes>
       </Layout>
     </ThemeProvider>
   );

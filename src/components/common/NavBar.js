@@ -9,9 +9,9 @@ const NavBar = () => {
           Quiztionnaire
         </Typography>
         <Box sx={{ flex: 1, marginLeft: 5 }}>
-          <Button color="inherit">Home</Button>
+          <Button href="/" color="inherit">Home</Button>
           <Button color="inherit">Grades</Button>
-          <Button color="inherit">Quizzes</Button>
+          <Button href="/quiz" color="inherit">Quizzes</Button>
         </Box>
       </Toolbar>
     </AppBar>
