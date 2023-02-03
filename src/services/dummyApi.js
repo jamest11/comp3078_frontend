@@ -1,7 +1,7 @@
 
 const quiz = {
   title: 'Quiz 5',
-  time: '10',
+  time: '30',
   questions: [
     {
       type: 'mc',
@@ -15,11 +15,13 @@ const quiz = {
     },
     {
       type: 'mc',
-      q: 'What is capital of Canda?',
+      q: 'What is capital of Canada?',
       res: {
         r1: 'Toronto',
         r2: 'Ottawa',
-        r3: 'Montreal'
+        r3: 'Montreal',
+        r4: 'Winnipeg',
+        r5: 'Vancouver'
       },
       a: 'r2'
     }

@@ -2,9 +2,9 @@ import {
   CssBaseline,
   ThemeProvider
 } from '@mui/material';
-import Layout, { theme } from './components/common/Layout';
+import Layout, { theme } from './common/Layout';
 import { getQuiz } from './services/dummyApi';
-import Quiz from './components/pages/Quiz';
+import Quiz from './student/quiz/Quiz';
 import { Route, Routes } from 'react-router-dom';
 
 
