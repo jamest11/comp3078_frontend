@@ -6,6 +6,7 @@ import Layout, { theme } from './common/Layout';
 import { getQuiz } from './services/dummyApi';
 import Quiz from './student/quiz/Quiz';
 import { Route, Routes } from 'react-router-dom';
+import CreateQuiz from './instructor/create-quiz/CreateQuiz';
 
 
 function App() {
@@ -29,6 +30,12 @@ function App() {
             path="/quiz"
             element={
               <Quiz quizData={quiz} course={course} />
+            }
+          />
+          <Route
+            path="/create-quiz"
+            element={
+              <CreateQuiz />
             }
           />
         </Routes>
