@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import apiService from '../../services/apiService';
 import Quiz from "./Quiz";
 import ScheduledQuiz from "./ScheduledQuiz";
+import ScheduleQuizModal from "./ScheduleQuizModal";
 
 const Quizzes = () => {
   const [quizzes, setQuizzes] = useState([]);
   const [scheduledQuizzes, setScheduledQuizzes] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchQuizzes = async () => {
@@ -27,13 +29,13 @@ const Quizzes = () => {
   }, []);
 
   const scheduleQuiz = () => {
-    apiService.scheduleQuiz({ date: new Date() })
-      .then((res) => console.log(res))
-      .catch(console.error);
+    setShowModal(true);
   };
 
   return (
     <Container maxWidth="lg" sx={{ mt: 2 }}>
+      <ScheduleQuizModal open={showModal} setOpen={setShowModal} quizzes={quizzes} />
+
       <Typography variant="h3">Quizzes</Typography>
       <Divider  sx={{ my: 2, boxShadow: 2 }}/>
       <Grid container>
