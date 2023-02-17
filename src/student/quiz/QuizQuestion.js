@@ -18,7 +18,7 @@ const QuizQuestion = ({ data, callback }) => {
 
   return (
     <Box component="div" sx={{ mt: 5 }}>
-      <Typography variant="body">{data.q}</Typography>
+      <Typography>{data.q}</Typography>
 
       <Box component="div">
         <FormControl>
