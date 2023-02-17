@@ -9,6 +9,7 @@ import { Route, Routes } from 'react-router-dom';
 import CreateQuiz from './instructor/create-quiz/CreateQuiz';
 import StudentProfile from './student/profile/StudentProfile';
 import Login from 'public/login/Login';
+import Quizzes from 'instructor/quizzes/Quizzez';
 
 
 function App() {
@@ -50,6 +51,12 @@ function App() {
             path="/login"
             element={
               <Login />
+            }
+          />
+          <Route
+            path="/instructor-quizzes"
+            element={
+              <Quizzes />
             }
           />
         </Routes>
