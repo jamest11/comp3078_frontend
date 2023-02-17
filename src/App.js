@@ -7,6 +7,8 @@ import { getQuiz } from './services/dummyApi';
 import Quiz from './student/quiz/Quiz';
 import { Route, Routes } from 'react-router-dom';
 import CreateQuiz from './instructor/create-quiz/CreateQuiz';
+import StudentProfile from './student/profile/StudentProfile';
+import Login from 'public/login/Login';
 
 
 function App() {
@@ -36,6 +38,18 @@ function App() {
             path="/create-quiz"
             element={
               <CreateQuiz />
+            }
+          />
+          <Route
+            path="/student-profile"
+            element={
+              <StudentProfile />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <Login />
             }
           />
         </Routes>
