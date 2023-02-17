@@ -1,7 +1,7 @@
 import { Box, Container, Paper, Typography } from '@mui/material';
-import NavBar from './NavBar';
 import { createTheme } from '@mui/material/styles';
 import { deepPurple, blue } from '@mui/material/colors';
+import NavBar from './NavBar';
 
 const theme = createTheme({
   palette: {
@@ -11,6 +11,9 @@ const theme = createTheme({
       default: '#CACACA'
     }
   },
+  typography: {
+    fontFamily: ['Roboto', 'sans-serif'].join(',')
+  }
 });
 
 
@@ -21,7 +24,7 @@ const Layout = ({ children }) => {
       <Container component="main">
         { children }
       </Container>
-      <Paper sx={{ width: '100%', position: 'sticky', bottom: 0, height: 50 }}>
+      <Paper sx={{ width: '100%', position: 'fixed', bottom: 0, height: 50 }}>
         <Box
           sx={{
             flexGrow: 1,

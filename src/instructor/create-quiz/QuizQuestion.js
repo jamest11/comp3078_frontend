@@ -1,15 +1,14 @@
-import { Box, TextField, Typography, FormControl, InputLabel, Select, MenuItem, Button } from "@mui/material";
+import { Box, TextField, Typography, FormControl, InputLabel, Select, MenuItem, Button, Paper } from "@mui/material";
 
 const QuizQuestion = ({ register, errors, index, remove}) => {
 
   return (
     <Box 
-      component="div" 
+      component={Paper} 
+      elevation={1}
       sx={{ 
-        borderRadius: 2, 
         p: 2, 
-        m: 2 ,
-        backgroundColor: 'white'
+        mx: 2,
       }}
       >
       <Typography variant="h5" sx={{ mb: 1 }}>Question {index + 1}</Typography>
