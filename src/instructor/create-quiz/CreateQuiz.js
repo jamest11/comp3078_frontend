@@ -2,6 +2,7 @@ import { Container, Box, FormGroup, TextField, InputLabel, Select, MenuItem, But
 import { useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import QuizQuestion from "../../instructor/create-quiz/QuizQuestion";
+import apiService from '../../services/apiService';
 
 const CreateQuiz = () => {
   const { register, handleSubmit, setError, getValues, control, formState: { errors } } = useForm();
@@ -12,11 +13,13 @@ const CreateQuiz = () => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    apiService.createQuiz(data)
+      .then(() => console.log('SUCCESS'))
+      .catch(console.error);
   };
 
   const addQuestion = () => {
-    append({ title: '', r1: '', r2: '', r3: '', r4: '', a: '' });
+    append({ q: '', r1: '', r2: '', r3: '', r4: '', a: '' });
   };
 
   return (

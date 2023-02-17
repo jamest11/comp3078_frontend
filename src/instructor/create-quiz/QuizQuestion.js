@@ -19,7 +19,7 @@ const QuizQuestion = ({ register, errors, index, remove}) => {
           rows={4}
           sx={{ m: 1, width: '62ch' }}
           multiline
-          {...register(`questions.${index}.title`, {
+          {...register(`questions.${index}.q`, {
             required: {
               value: true
             }
