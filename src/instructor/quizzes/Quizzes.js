@@ -1,11 +1,13 @@
 import { Box, Button, Container, Divider, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import apiService from '../../services/apiService';
 import Quiz from "./Quiz";
 import ScheduledQuiz from "./ScheduledQuiz";
 import ScheduleQuizModal from "./ScheduleQuizModal";
 
 const Quizzes = () => {
+  const navigate = useNavigate();
   const [quizzes, setQuizzes] = useState([]);
   const [scheduledQuizzes, setScheduledQuizzes] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -20,7 +22,7 @@ const Quizzes = () => {
     const fetchScheduledQuizzes = async() => {
       const res = await apiService.getScheduledQuizzes();
 
-      console.log(res.data);
+      //console.log(res.data);
       setScheduledQuizzes(res.data);
     };
 
@@ -58,7 +60,7 @@ const Quizzes = () => {
               <Quiz key={index} data={quiz} />
             ))}
           </Box>
-          <Button variant="contained" color="success" sx={{ mt: 1 }}>Create New Quiz</Button>
+          <Button variant="contained" color="success" sx={{ mt: 1 }} onClick={() => navigate('/create-quiz')}>Create New Quiz</Button>
         </Grid>
       </Grid>
     </Container>
