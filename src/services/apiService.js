@@ -5,8 +5,20 @@ const axiosInstance = axios.create({
   headers: { post: { 'Content-Type': 'application/json' } }
 });
 
+const setAuthHeader = (token) => {
+  if(token) {
+    axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  } else {
+    delete axiosInstance.defaults.headers.common['Authorization'];
+  }
+};
+
+const login = async (data) => {
+  return axiosInstance.post('/auth/login', data);
+};
+
+
 const createQuiz = async (data) => {
-  data.instructor = '63e9484d75a0d420004aa45a';
   return axiosInstance.post('/instructor/create-quiz', data);
 };
 
@@ -26,5 +38,5 @@ const getScheduledQuizzes = async () => {
 };
 
 
-const exports = { createQuiz, getQuizzes, scheduleQuiz, getScheduledQuizzes };
+const exports = { createQuiz, getQuizzes, scheduleQuiz, getScheduledQuizzes, setAuthHeader, login };
 export default exports;
