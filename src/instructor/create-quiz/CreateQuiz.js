@@ -3,8 +3,10 @@ import { useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import QuizQuestion from "../../instructor/create-quiz/QuizQuestion";
 import apiService from '../../services/apiService';
+import { useNavigate } from 'react-router-dom';
 
 const CreateQuiz = () => {
+  const navigate = useNavigate();
   const { register, handleSubmit, setError, getValues, control, formState: { errors } } = useForm();
 
   const { fields, append, remove } = useFieldArray({
@@ -14,7 +16,7 @@ const CreateQuiz = () => {
 
   const onSubmit = (data) => {
     apiService.createQuiz(data)
-      .then(() => console.log('SUCCESS'))
+      .then(() => navigate('/instructor-quizzes'))
       .catch(console.error);
   };
 
