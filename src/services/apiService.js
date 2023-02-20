@@ -17,7 +17,20 @@ const login = async (data) => {
   return axiosInstance.post('/auth/login', data);
 };
 
+// Student API
+const getStudentQuizzes = async () => {
+  return axiosInstance.get('/student/quizzes');
+};
 
+const getStudentQuiz = async (id) => {
+  return axiosInstance.get(`/student/quiz?id=${id}`);
+};
+
+const submitQuiz = async (data) => {
+  return axiosInstance.post('/student/submit-quiz', data);
+};
+
+// Instructor API
 const createQuiz = async (data) => {
   return axiosInstance.post('/instructor/create-quiz', data);
 };
@@ -29,7 +42,7 @@ const scheduleQuiz = async (data) => {
   return axiosInstance.post('/instructor/schedule-quiz', data);
 };
 
-const getQuizzes = async () => {
+const getInstructorQuizzes = async () => {
   return axiosInstance.get('/instructor/quizzes');
 };
 
@@ -38,5 +51,6 @@ const getScheduledQuizzes = async () => {
 };
 
 
-const exports = { createQuiz, getQuizzes, scheduleQuiz, getScheduledQuizzes, setAuthHeader, login };
-export default exports;
+export const studentApi = { getStudentQuizzes, getStudentQuiz, setAuthHeader, submitQuiz };
+export const authApi = { setAuthHeader, login };
+export const instructorApi = { createQuiz, getInstructorQuizzes, scheduleQuiz, getScheduledQuizzes };

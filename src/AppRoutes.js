@@ -2,9 +2,10 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Quiz from 'pages/student/Quiz';
 import StudentProfile from 'pages/student/StudentProfile';
+import StudentQuizzes from 'pages/student/StudentQuizzes';
 
 import CreateQuiz from 'pages/instructor/CreateQuiz';
-import Quizzes from 'pages/instructor/InstructorQuizzes';
+import InstructorQuizzes from 'pages/instructor/InstructorQuizzes';
 
 import Login from 'pages/public/Login';
 
@@ -36,14 +37,8 @@ const AppRoutes = () => {
       <Route
         path="/quiz"
         element={
-          <Quiz quizData={quiz} course={course} />
-        }
-      />
-      <Route
-        path="/create-quiz"
-        element={
-          <PrivateRoute userType="instructor">
-            <CreateQuiz />
+          <PrivateRoute userType="student">
+            <Quiz />
           </PrivateRoute>
         }
       />
@@ -56,10 +51,26 @@ const AppRoutes = () => {
         }
       />
       <Route
+        path="/student-quizzes"
+        element={
+          <PrivateRoute userType="student">
+            <StudentQuizzes />
+          </PrivateRoute>
+        }
+      />
+      <Route
         path="/instructor-quizzes"
         element={
           <PrivateRoute userType="instructor">
-            <Quizzes />
+            <InstructorQuizzes />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/create-quiz"
+        element={
+          <PrivateRoute userType="instructor">
+            <CreateQuiz />
           </PrivateRoute>
         }
       />

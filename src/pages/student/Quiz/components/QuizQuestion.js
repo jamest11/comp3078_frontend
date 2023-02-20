@@ -1,9 +1,12 @@
-import { Box, Button, FormControl, FormControlLabel, FormGroup, Radio, RadioGroup, Typography } from '@mui/material';
+import { Box, Button, FormControl, FormControlLabel, FormGroup, Paper, Radio, RadioGroup, Typography } from '@mui/material';
 import { useState } from 'react';
 
 const QuizQuestion = ({ data, callback }) => {
   const [res, setRes] = useState('');
   const [complete, setComplete] = useState(false);
+
+  const question = data.q;
+  const options = { r1: data.r1, r2: data.r2, r3: data.r3, r4: data.r4 };
 
   const handleSubmit = () => {
     callback(res);
@@ -17,8 +20,8 @@ const QuizQuestion = ({ data, callback }) => {
 
 
   return (
-    <Box component="div" sx={{ mt: 5 }}>
-      <Typography>{data.q}</Typography>
+    <Box component={Paper} sx={{ mt: 5, p: 2, width: 600 }} elevation={2}>
+      <Typography>{question}</Typography>
 
       <Box component="div">
         <FormControl>
@@ -26,7 +29,7 @@ const QuizQuestion = ({ data, callback }) => {
             value={res}
             onChange={handleChange}
           >
-            {Object.entries(data.res).map(([key,val]) => (
+            {Object.entries(options).map(([key,val]) => (
               <FormControlLabel key={key} value={key} control={<Radio />} label={val} />
             ))}
           </RadioGroup>
