@@ -1,5 +1,5 @@
-import { Button, Grid, Paper, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Button, Grid, Paper, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 
 const ScheduledQuiz = ({ data }) => {
   return (

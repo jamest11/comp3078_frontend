@@ -1,11 +1,12 @@
-import { Box, Button, Container, Divider, Grid, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box, Button, Container, Divider, Grid, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import apiService from 'services/apiService';
 
+import apiService from 'services/apiService';
 import Quiz from "./components/Quiz";
 import ScheduledQuiz from "./components/ScheduledQuiz";
 import ScheduleQuizModal from "./components/ScheduleQuizModal";
+
 
 const Quizzes = () => {
   const navigate = useNavigate();

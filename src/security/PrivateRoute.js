@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
-import { useAuth } from "./AuthContextProvider";
 
+import { useAuth } from 'security/AuthContextProvider';
 import AccessDenied from 'pages/public/AccessDenied';
 
 const PrivateRoute = ({ userType, children }) => {

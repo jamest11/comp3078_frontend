@@ -1,6 +1,7 @@
-import { Button, Grid, Paper, Typography } from "@mui/material";
-import { Box } from "@mui/system";
-import { formatTime } from "utils/utils";
+import { Button, Grid, Paper, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+
+import { formatTime } from 'utils';
 
 const Quiz = ({ data }) => {
   return (

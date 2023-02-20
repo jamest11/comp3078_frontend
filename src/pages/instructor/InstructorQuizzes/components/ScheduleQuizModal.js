@@ -1,4 +1,4 @@
-import {Modal, Button, Box, Typography, FormGroup, TextField} from "@mui/material";
+import {Modal, Button, Box, Typography, FormGroup, TextField} from '@mui/material';
 
 const style = {
   position: 'absolute',
