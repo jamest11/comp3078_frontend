@@ -1,6 +1,6 @@
 import { Box, Container, Typography, Divider, Chip, CircularProgress } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 
 import QuizProgress from './components/QuizProgress';
 import QuizQuestion from './components/QuizQuestion';
@@ -12,7 +12,7 @@ const Quiz = () => {
 
   const data = location.state?.quizData;
   const questions = data?.quiz.questions;
-  const responses = [];
+  const responses = useRef([]);
 
   const [currIndex, setCurrIndex] = useState(0);
   const [currQuestion, setCurrQuestion] = useState(questions ? questions[currIndex] : null);
@@ -46,7 +46,7 @@ const Quiz = () => {
 
   const submitQuiz = () => {
     setComplete(true);
-    studentApi.submitQuiz({ id: data._id, responses })
+    studentApi.submitQuiz({ id: data._id, responses: responses.current })
       .then((res) => {
         setGrade({ correct: res.data.correct, total: res.data.total });
         setGraded(true);
@@ -55,7 +55,8 @@ const Quiz = () => {
   };
 
   const submitQuestion = (res) => {
-    responses.push(res);
+    responses.current = [...responses.current, res];
+    console.log(responses.current);
 
     if(currIndex === questions.length - 1) {
       submitQuiz();
