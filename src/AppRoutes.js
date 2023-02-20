@@ -1,15 +1,15 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import Quiz from './student/quiz/Quiz';
-import StudentProfile from './student/profile/StudentProfile';
+import Quiz from 'pages/student/Quiz';
+import StudentProfile from 'pages/student/StudentProfile';
 
-import CreateQuiz from './instructor/create-quiz/CreateQuiz';
-import Quizzes from './instructor/quizzes/Quizzes';
+import CreateQuiz from 'pages/instructor/CreateQuiz';
+import Quizzes from 'pages/instructor/InstructorQuizzes';
 
-import Login from './public/login/Login';
+import Login from 'pages/public/Login';
 
-import { getQuiz } from './services/dummyApi';
-import { useAuth } from './security/AuthContextProvider';
+import { getQuiz } from 'services/dummyApi';
+import { useAuth } from 'security/AuthContextProvider';
 import PrivateRoute from 'security/PrivateRoute';
 
 

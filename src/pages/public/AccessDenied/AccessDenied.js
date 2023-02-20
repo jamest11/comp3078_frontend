@@ -1,4 +1,4 @@
-const { Container, Typography } = require("@mui/material");
+import { Container, Typography } from '@mui/material';
 
 const AccessDenied = () => {
   return (

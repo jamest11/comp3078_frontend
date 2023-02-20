@@ -1,8 +1,9 @@
 import { Box, Container, Typography, Divider, Chip } from '@mui/material';
-import QuizProgress from './QuizProgress';
 import { useEffect, useState } from 'react';
-import QuizQuestion from './QuizQuestion';
-import QuizResult from './QuizResult';
+
+import QuizProgress from './components/QuizProgress';
+import QuizQuestion from './components/QuizQuestion';
+import QuizResult from './components/QuizResult';
 
 const Quiz = ({ quizData, course }) => {
   const questions = quizData.questions;

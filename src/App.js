@@ -2,7 +2,7 @@ import {
   CssBaseline,
   ThemeProvider
 } from '@mui/material';
-import Layout, { theme } from 'common/Layout';
+import Layout, { theme } from 'components/Layout';
 import AuthContextProvider from 'security/AuthContextProvider';
 import AppRoutes from './AppRoutes';
 

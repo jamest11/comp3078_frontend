@@ -1,5 +1,6 @@
 import { Button, Grid, Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { formatTime } from "utils/utils";
 
 const Quiz = ({ data }) => {
   return (
@@ -12,7 +13,7 @@ const Quiz = ({ data }) => {
         <Grid item xs={8}>
           <Typography variant="h6">{data.title}</Typography>
           <Typography variant="body1">{data.questions.length} Questions</Typography>
-          <Typography variant="body1">{data.timeLimit}s Time Limit</Typography>
+          <Typography variant="body1">{formatTime(data.timeLimit)} Time Limit</Typography>
         </Grid>
         <Grid item container alignItems="center" justifyContent="flex-end" xs={4}>
           <Button variant="outlined" color="success" size="small">Edit</Button>

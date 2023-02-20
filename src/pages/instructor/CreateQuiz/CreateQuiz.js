@@ -1,9 +1,11 @@
 import { Container, Box, FormGroup, TextField, InputLabel, Select, MenuItem, Button, FormControl, Typography, Paper } from "@mui/material";
 import { useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
-import QuizQuestion from "../../instructor/create-quiz/QuizQuestion";
-import apiService from '../../services/apiService';
 import { useNavigate } from 'react-router-dom';
+
+import QuizQuestion from "./components/QuizQuestion";
+import apiService from 'services/apiService';
+
 
 const CreateQuiz = () => {
   const navigate = useNavigate();
