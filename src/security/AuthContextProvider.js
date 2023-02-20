@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 
-import apiService from 'services/apiService';
+import { authApi } from 'services/api';
 
 const AuthContext = createContext(undefined);
 
@@ -9,7 +9,7 @@ const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
 
   if(token){
-    apiService.setAuthHeader(token);
+    authApi.setAuthHeader(token);
   }
   // create token service class w/ export
 
@@ -20,7 +20,7 @@ const AuthContextProvider = ({ children }) => {
       localStorage.setItem('token', data.jwt_token);
       localStorage.setItem('user', JSON.stringify(data.user));
 
-      apiService.setAuthHeader(data.jwt_token);
+      authApi.setAuthHeader(data.jwt_token);
     }
 
   };
@@ -30,7 +30,7 @@ const AuthContextProvider = ({ children }) => {
     setUser(null);
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    apiService.setAuthHeader();
+    authApi.setAuthHeader();
   };
 
   const checkAuth = (err) => {

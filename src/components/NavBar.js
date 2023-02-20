@@ -26,6 +26,7 @@ const NavBar = () => {
           ) : (
             <>
               <Button component={Link} to="/student-profile" color="inherit">Home</Button>
+              <Button component={Link} to="/student-quizzes" color="inherit">Quizzes</Button>
               <Button color="inherit" onClick={logout}>Logout</Button>            
             </>
           ) : (

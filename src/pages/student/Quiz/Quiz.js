@@ -5,7 +5,7 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import QuizProgress from './components/QuizProgress';
 import QuizQuestion from './components/QuizQuestion';
 import QuizResult from './components/QuizResult';
-import { studentApi } from 'services/apiService';
+import { studentApi } from 'services/api';
 
 const Quiz = () => {
   const location = useLocation();

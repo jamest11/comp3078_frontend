@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useAuth } from 'security/AuthContextProvider';
 import { useNavigate } from 'react-router-dom';
 
-import apiService from 'services/apiService';
+import { authApi } from 'services/api';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const Login = () => {
   const { handleLogin } = useAuth();
 
   const onSubmit = (data) => {
-    apiService.login(data)
+    authApi.login(data)
       .then((res) => {
         handleLogin(res.data);
         if(res.data.user.userType === 'instructor') {

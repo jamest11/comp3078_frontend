@@ -2,13 +2,13 @@ import { Box, Button, Container, Divider, Grid, Typography } from '@mui/material
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import apiService from 'services/apiService';
+import { instructorApi } from 'services/api';
 import Quiz from "./components/Quiz";
 import ScheduledQuiz from "./components/ScheduledQuiz";
 import ScheduleQuizModal from "./components/ScheduleQuizModal";
 
 
-const Quizzes = () => {
+const InstructorQuizzes = () => {
   const navigate = useNavigate();
   const [quizzes, setQuizzes] = useState([]);
   const [scheduledQuizzes, setScheduledQuizzes] = useState([]);
@@ -16,13 +16,13 @@ const Quizzes = () => {
 
   useEffect(() => {
     const fetchQuizzes = async () => {
-      const res = await apiService.getQuizzes();
+      const res = await instructorApi.getInstructorQuizzes();
       //console.log(res.data);
       setQuizzes(res.data);
     };
 
     const fetchScheduledQuizzes = async() => {
-      const res = await apiService.getScheduledQuizzes();
+      const res = await instructorApi.getScheduledQuizzes();
 
       //console.log(res.data);
       setScheduledQuizzes(res.data);
@@ -69,4 +69,4 @@ const Quizzes = () => {
   );
 };
 
-export default Quizzes;
+export default InstructorQuizzes;

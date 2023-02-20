@@ -2,7 +2,7 @@ import { Container, Box, FormGroup, TextField, InputLabel, Select, MenuItem, But
 import { useForm, useFieldArray } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import apiService from 'services/apiService';
+import { instructorApi } from 'services/api';
 import QuizQuestion from './components/QuizQuestion';
 
 
@@ -16,7 +16,7 @@ const CreateQuiz = () => {
   });
 
   const onSubmit = (data) => {
-    apiService.createQuiz(data)
+    instructorApi.createQuiz(data)
       .then(() => navigate('/instructor-quizzes'))
       .catch(console.error);
   };
