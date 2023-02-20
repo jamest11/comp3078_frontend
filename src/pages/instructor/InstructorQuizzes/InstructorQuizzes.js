@@ -12,24 +12,31 @@ const InstructorQuizzes = () => {
   const navigate = useNavigate();
   const [quizzes, setQuizzes] = useState([]);
   const [scheduledQuizzes, setScheduledQuizzes] = useState([]);
+  const [classes, setClasses] = useState([]);
   const [showModal, setShowModal] = useState(false);
+
+  const fetchScheduledQuizzes = async () => {
+    const res = await instructorApi.getScheduledQuizzes();
+
+    setScheduledQuizzes(res.data);
+  };
 
   useEffect(() => {
     const fetchQuizzes = async () => {
       const res = await instructorApi.getInstructorQuizzes();
-      //console.log(res.data);
+      
       setQuizzes(res.data);
     };
 
-    const fetchScheduledQuizzes = async() => {
-      const res = await instructorApi.getScheduledQuizzes();
+    const fetchClasses = async () => {
+      const res = await instructorApi.getClasses();
 
-      //console.log(res.data);
-      setScheduledQuizzes(res.data);
+      setClasses(res.data);
     };
 
     fetchQuizzes();
     fetchScheduledQuizzes();
+    fetchClasses();
   }, []);
 
   const scheduleQuiz = () => {
@@ -38,7 +45,7 @@ const InstructorQuizzes = () => {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 2 }}>
-      <ScheduleQuizModal open={showModal} setOpen={setShowModal} quizzes={quizzes} />
+      <ScheduleQuizModal open={showModal} setOpen={setShowModal} quizzes={quizzes} classes={classes} callback={fetchScheduledQuizzes} />
 
       <Typography variant="h3">Quizzes</Typography>
       <Divider  sx={{ my: 2, boxShadow: 2 }}/>

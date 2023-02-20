@@ -8,7 +8,7 @@ import QuizQuestion from './components/QuizQuestion';
 
 const CreateQuiz = () => {
   const navigate = useNavigate();
-  const { register, handleSubmit, setError, getValues, control, formState: { errors } } = useForm();
+  const { register, handleSubmit, control, formState: { errors } } = useForm();
 
   const { fields, append, remove } = useFieldArray({
     control,

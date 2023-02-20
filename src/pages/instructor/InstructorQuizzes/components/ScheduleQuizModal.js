@@ -1,4 +1,7 @@
-import {Modal, Button, Box, Typography, FormGroup, TextField} from '@mui/material';
+import {Modal, Button, Box, FormGroup, TextField, FormControl, Select, MenuItem, InputLabel} from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { instructorApi } from 'services/api';
+
 
 const style = {
   position: 'absolute',
@@ -14,9 +17,17 @@ const style = {
   pb: 3,
 };
 
-const ScheduleQuizModal = ({ open, setOpen, quizzes }) => {
+const ScheduleQuizModal = ({ open, setOpen, quizzes, classes, callback }) => {
+
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const handleClose = () => setOpen(false);
+  const onSubmit = (data) => {
+    setOpen(false);
+    instructorApi.scheduleQuiz(data)
+      .then((res) => callback())
+      .catch(console.error);
+  };
 
   return (
     <Modal
@@ -25,11 +36,61 @@ const ScheduleQuizModal = ({ open, setOpen, quizzes }) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={style}>
-        <FormGroup row sx={{ gap: 2, mt: 2, mb: 1, justifyContent: 'flex-end' }}>
-          <TextField type="date" inputProps={{ min: '2018-01-01', max: '2018-12-31' }} />
+      <Box 
+        sx={style} 
+        component="form"  
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
+        <FormGroup row sx={{ gap: 2, mt: 2, mb: 1, justifyContent: 'flex-start' }}>
+          <TextField 
+            type="date" 
+            name="dueDate" 
+            helperText="Due Date"
+            error={!!errors.date}
+            {...register('date', { required: true })} 
+          />
         </FormGroup>
-        <Button variant="contained" size="small" onClick={handleClose}>Cancel</Button>
+
+        <FormControl required fullWidth sx={{ mb: 1 }}>
+          <InputLabel id="class-label">Class</InputLabel>
+          <Select
+            labelId="class-label"
+            label="Class"
+            defaultValue=""
+            error={!!errors.class}
+            {...register('class', { required: true })}
+          >
+            {classes.map((option) => (
+              <MenuItem key={option._id} value={option._id}>
+                {option.title}
+              </MenuItem>
+          ))}
+          </Select>
+        </FormControl>
+
+        <FormControl required fullWidth sx={{ mb: 1 }}>
+          <InputLabel id="quiz-label">Quiz</InputLabel>
+          <Select
+            labelId="class-label"
+            label="Quiz"
+            defaultValue=""
+            error={!!errors.quiz}
+            {...register('quiz', { required: true })}
+          >
+            {quizzes.map((option) => (
+              <MenuItem key={option._id} value={option._id}>
+                {option.title}
+              </MenuItem>
+          ))}
+          </Select>
+        </FormControl>
+        
+        <FormGroup row sx={{ gap: 1 }}>
+          <Button variant="contained" size="small" type="submit">Save</Button>
+          <Button variant="contained" size="small" onClick={handleClose}>Cancel</Button>
+        </FormGroup>
+
       </Box>
     </Modal>
   );
