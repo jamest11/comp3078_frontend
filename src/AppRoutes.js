@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Quiz from 'pages/student/Quiz';
 import StudentProfile from 'pages/student/StudentProfile';
 import StudentQuizzes from 'pages/student/StudentQuizzes';
+import StudentGrades from 'pages/student/StudentGrades';
 
 import CreateQuiz from 'pages/instructor/CreateQuiz';
 import InstructorQuizzes from 'pages/instructor/InstructorQuizzes';
@@ -10,6 +11,7 @@ import InstructorQuizzes from 'pages/instructor/InstructorQuizzes';
 import Login from 'pages/public/Login';
 
 import PrivateRoute from 'security/PrivateRoute';
+
 
 
 const AppRoutes = () => {
@@ -48,6 +50,14 @@ const AppRoutes = () => {
         element={
           <PrivateRoute userType="student">
             <StudentQuizzes />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/student-grades"
+        element={
+          <PrivateRoute userType="student">
+            <StudentGrades />
           </PrivateRoute>
         }
       />
