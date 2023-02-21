@@ -1,6 +1,6 @@
 import { Container, Box, FormGroup, TextField, InputLabel, Select, MenuItem, Button, FormControl, Typography, Paper } from '@mui/material';
 import { useForm, useFieldArray } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { instructorApi } from 'services/api';
 import QuizQuestion from './components/QuizQuestion';
@@ -26,7 +26,7 @@ const CreateQuiz = () => {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 2 }}>
+    <Container maxWidth="md" sx={{ mt: 2 }}>
       
       <Box
         component="form"
@@ -38,7 +38,7 @@ const CreateQuiz = () => {
           <Typography variant="h4" sx={{ pt: 2, px: 2 }}>New Quiz</Typography>
           <FormGroup row sx={{ pt: 1, m: 2 }}>
             <TextField
-              sx={{ m: 1 }}
+              sx={{ m: 1, width: '40ch' }}
               variant="outlined"
               label="Quiz Title"
               error={!!errors.title}
@@ -56,8 +56,11 @@ const CreateQuiz = () => {
                 {...register('timeLimit', { required: true })}
               >
                 <MenuItem value={60}>1:00</MenuItem>
+                <MenuItem value={120}>2:00</MenuItem>
+                <MenuItem value={180}>3:00</MenuItem>
                 <MenuItem value={300}>5:00</MenuItem>
                 <MenuItem value={600}>10:00</MenuItem>
+                <MenuItem value={900}>15:00</MenuItem>
               </Select>
             </FormControl>
           </FormGroup>
@@ -69,7 +72,7 @@ const CreateQuiz = () => {
           <FormGroup row sx={{ gap: 2, m: 2, py: 2 }}>
             <Button variant="contained" onClick={addQuestion}>Add Question</Button>
             <Button type="submit" variant="contained" color="primary">Save</Button>
-            <Button variant="contained" color="secondary">Cancel</Button>
+            <Button variant="contained" color="secondary" component={Link} to="/instructor-quizzes">Cancel</Button>
           </FormGroup>
         </Paper>
       </Box>
