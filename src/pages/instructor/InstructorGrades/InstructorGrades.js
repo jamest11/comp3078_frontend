@@ -1,22 +1,33 @@
-import { Container, Divider, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { Container, Divider, Grid, LinearProgress, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 import { instructorApi } from 'services/api';
 import { formatDate } from 'utils';
+import ClassGrade from './components/ClassGrade';
 
 const InstructorGrades = () => {
-  const [loading, setLoading] = useState(true);
+  const [qgLoading, setQgLoading] = useState(true);
+  const [cgLoading, setCgLoading] = useState(true);
   const [quizGrades, setQuizGrades] = useState([]);
+  const [classGrades, setClassGrades] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchQuizGrades = async () => {
       const res = await instructorApi.getQuizGrades();
 
       setQuizGrades(res.data);
-      setLoading(false);
+      setQgLoading(false);
     };
     
-    fetchData();
+    const fetchClassGrades = async () => {
+      const res = await instructorApi.getClassGrades();
+
+      setClassGrades(res.data);
+      setCgLoading(false);
+    };
+
+    fetchQuizGrades();
+    fetchClassGrades();
   }, []);
 
   return (
@@ -29,7 +40,7 @@ const InstructorGrades = () => {
           <Typography variant="h4" gutterBottom>Quiz Grades</Typography>
 
           <TableContainer component={Paper}>
-            {loading ? (
+            {qgLoading ? (
               <LinearProgress />
             ) : (
             <Table>
@@ -59,6 +70,15 @@ const InstructorGrades = () => {
 
         <Grid item>
           <Typography variant="h4" gutterBottom>Average Class Grades</Typography>
+          {cgLoading ? (
+            <LinearProgress />
+          ) : (
+            <Stack spacing={1}>
+              {classGrades.map((grade, index) => (
+                <ClassGrade key={index} data={grade} />
+              ))}
+            </Stack>
+          )}
         </Grid>
       </Grid>
     </Container>
