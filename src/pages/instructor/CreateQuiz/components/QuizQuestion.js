@@ -1,4 +1,4 @@
-import { Box, TextField, Typography, FormControl, InputLabel, Select, MenuItem, Button, Paper, IconButton } from '@mui/material';
+import { Box, TextField, Typography, FormControl, InputLabel, Select, MenuItem, Paper, IconButton } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 
 const QuizQuestion = ({ register, errors, index, remove}) => {

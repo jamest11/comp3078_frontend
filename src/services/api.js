@@ -55,7 +55,10 @@ const getClasses = async () => {
   return axiosInstance.get('/instructor/classes');
 };
 
+const getQuizGrades = async () => {
+  return axiosInstance.get('/instructor/quiz-grades');
+};
 
 export const studentApi = { getStudentQuizzes, getStudentQuiz, submitQuiz, getStudentGrades };
 export const authApi = { setAuthHeader, login };
-export const instructorApi = { createQuiz, getInstructorQuizzes, scheduleQuiz, getScheduledQuizzes, getClasses };
+export const instructorApi = { createQuiz, getInstructorQuizzes, scheduleQuiz, getScheduledQuizzes, getClasses, getQuizGrades };

@@ -35,6 +35,13 @@ const NavBar = () => {
               >
                 Quizzes
               </Button>
+              <Button 
+                component={Link} 
+                to="/instructor-grades" 
+                variant={location.pathname === '/instructor-grades' ? 'navActive' : 'navInactive'}
+              >
+                Grades
+              </Button>
             </>
           ) : (
             <>
