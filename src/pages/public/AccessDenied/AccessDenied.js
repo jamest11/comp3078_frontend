@@ -1,9 +1,12 @@
-import { Container, Typography } from '@mui/material';
+import { Alert, AlertTitle, Container } from '@mui/material';
 
 const AccessDenied = () => {
   return (
-    <Container maxWidth="lg" sx={{ mt: 2 }}>
-      <Typography variant="h4">Access Denied</Typography>
+    <Container maxWidth="sm" sx={{ mt: 2 }}>
+      <Alert severity="error">
+        <AlertTitle>Access Denied</AlertTitle>
+        You do not have permission to view this page
+      </Alert>
     </Container>
   );
 };
