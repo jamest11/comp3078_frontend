@@ -1,4 +1,4 @@
-import { Box, Button, Container, Divider, Grid, Typography } from '@mui/material';
+import { Box, Button, Container, Divider, Grid, LinearProgress, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,10 +15,14 @@ const InstructorQuizzes = () => {
   const [classes, setClasses] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
+  const [qLoading, setQLoading] = useState(true);
+  const [sqLoading, setSqLoading] = useState(true);
+
   const fetchScheduledQuizzes = async () => {
     const res = await instructorApi.getScheduledQuizzes();
 
     setScheduledQuizzes(res.data);
+    setSqLoading(false);
   };
 
   useEffect(() => {
@@ -26,6 +30,7 @@ const InstructorQuizzes = () => {
       const res = await instructorApi.getInstructorQuizzes();
       
       setQuizzes(res.data);
+      setQLoading(false);
     };
 
     const fetchClasses = async () => {
@@ -48,27 +53,37 @@ const InstructorQuizzes = () => {
       <ScheduleQuizModal open={showModal} setOpen={setShowModal} quizzes={quizzes} classes={classes} callback={fetchScheduledQuizzes} />
 
       <Typography variant="h3">Quizzes</Typography>
-      <Divider  sx={{ my: 2, boxShadow: 2 }}/>
+      <Divider  sx={{ my: 2 }}/>
       <Grid container>
         <Grid item xs={6}>
           <Typography variant="h4">Scheduled Quizzes</Typography>
         
-          <Box  sx={{ overflow: 'auto', maxHeight: 400 }}>
-            {scheduledQuizzes.map((quiz, index) => (
-              <ScheduledQuiz key={index} data={quiz} />
-            ))}
-          </Box>
+          {sqLoading ? (
+            <LinearProgress />
+          ) : (
+            <Box  sx={{ overflow: 'auto', maxHeight: 400 }}>
+              {scheduledQuizzes.map((quiz, index) => (
+                <ScheduledQuiz key={index} data={quiz} />
+              ))}
+            </Box>
+          )}
 
           <Button variant="contained" color="success" sx={{ mt: 1 }} onClick={scheduleQuiz}>Schedule Quiz</Button>
         </Grid>
 
         <Grid item xs={4}>
           <Typography variant="h4">My Quizzes</Typography>
-          <Box  sx={{ overflow: 'auto', maxHeight: 400 }}>
-            {quizzes.map((quiz, index) => (
-              <Quiz key={index} data={quiz} />
-            ))}
-          </Box>
+
+          {qLoading ? (
+            <LinearProgress />
+          ) : (
+            <Box  sx={{ overflow: 'auto', maxHeight: 400 }}>
+              {quizzes.map((quiz, index) => (
+                <Quiz key={index} data={quiz} />
+              ))}
+            </Box>
+          )}
+
           <Button variant="contained" color="success" sx={{ mt: 1 }} onClick={() => navigate('/create-quiz')}>Create New Quiz</Button>
         </Grid>
       </Grid>

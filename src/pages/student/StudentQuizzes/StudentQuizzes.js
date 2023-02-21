@@ -21,15 +21,16 @@ const StudentQuizzes = () => {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 2 }}>
-
-      <Typography variant="h3" gutterBottom>Upcoming Quizzes</Typography>
+      <Typography variant="h4" gutterBottom>Upcoming Quizzes</Typography>
       <Divider  sx={{ my: 2, boxShadow: 2 }}/>
       <Box  sx={{ overflow: 'auto', maxHeight: 400 }}>
-      <Grid container>
-        {quizzes.map((quiz, index) => (
-          <Quiz key={index} data={quiz} />
-        ))}
-      </Grid>
+        <Grid container>
+          {quizzes.map((quiz, index) => (
+            <Grid item xs={4}>
+              <Quiz key={index} data={quiz} />
+            </Grid>
+          ))}
+        </Grid>
       </Box>
     </Container>
   );
