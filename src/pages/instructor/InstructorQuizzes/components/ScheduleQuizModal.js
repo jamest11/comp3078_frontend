@@ -1,5 +1,10 @@
-import {Modal, Button, Box, FormGroup, TextField, FormControl, Select, MenuItem, InputLabel} from '@mui/material';
+import {Modal, Button, Box, FormGroup, TextField, FormControl, Select, MenuItem, InputLabel, Typography} from '@mui/material';
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
+
 import { instructorApi } from 'services/api';
 
 
@@ -8,7 +13,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 500,
+  width: 400,
   bgcolor: 'background.paper',
   boxShadow: 24,
   borderRadius: 2,
@@ -19,10 +24,29 @@ const style = {
 
 const ScheduleQuizModal = ({ open, setOpen, quizzes, classes, callback }) => {
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, setValue, getValues, reset, formState: { errors } } = useForm();
+
+  const [dueDate, setDueDate] = useState(null);
+
+  useEffect(() => {
+    if(open) {
+      reset();
+      setDueDate(null);
+
+      register('date', {
+        required: {
+          value: true,
+          message: 'Due date is required'
+        }
+      });
+    }
+  }, [open, reset, register]);
 
   const handleClose = () => setOpen(false);
+
   const onSubmit = (data) => {
+    console.log(getValues());
+
     setOpen(false);
     instructorApi.scheduleQuiz(data)
       .then((res) => callback())
@@ -36,61 +60,75 @@ const ScheduleQuizModal = ({ open, setOpen, quizzes, classes, callback }) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box 
-        sx={style} 
-        component="form"  
-        onSubmit={handleSubmit(onSubmit)}
-        noValidate
-      >
-        <FormGroup row sx={{ gap: 2, mt: 2, mb: 1, justifyContent: 'flex-start' }}>
-          <TextField 
-            type="date" 
-            name="dueDate" 
-            helperText="Due Date"
-            error={!!errors.date}
-            {...register('date', { required: true })} 
-          />
-        </FormGroup>
+      <Box sx={style} >
+        <Typography variant="h5" gutterBottom>Schedule Quiz</Typography>
 
-        <FormControl required fullWidth sx={{ mb: 1 }}>
-          <InputLabel id="class-label">Class</InputLabel>
-          <Select
-            labelId="class-label"
-            label="Class"
-            defaultValue=""
-            error={!!errors.class}
-            {...register('class', { required: true })}
-          >
-            {classes.map((option) => (
-              <MenuItem key={option._id} value={option._id}>
-                {option.title}
-              </MenuItem>
-          ))}
-          </Select>
-        </FormControl>
+        <Box 
+          component="form"  
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+        >
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker 
+              disablePast
+              label="Due Date"
+              value={dueDate}
+              onChange={(date) => {
+                setValue('date', dayjs(date).format(), { shouldValidate: true });
+                setDueDate(date);
+              }}
+              renderInput={(params) => (
+                <TextField 
+                  {...params} 
+                  fullWidth
+                  required
+                  error={!!errors.date}
+                  helperText={errors.date?.message?.toString()}
+                />
+              )}
+            />
+          </LocalizationProvider>      
 
-        <FormControl required fullWidth sx={{ mb: 1 }}>
-          <InputLabel id="quiz-label">Quiz</InputLabel>
-          <Select
-            labelId="class-label"
-            label="Quiz"
-            defaultValue=""
-            error={!!errors.quiz}
-            {...register('quiz', { required: true })}
-          >
-            {quizzes.map((option) => (
-              <MenuItem key={option._id} value={option._id}>
-                {option.title}
-              </MenuItem>
-          ))}
-          </Select>
-        </FormControl>
-        
-        <FormGroup row sx={{ gap: 1 }}>
-          <Button variant="contained" size="small" type="submit">Save</Button>
-          <Button variant="contained" size="small" onClick={handleClose}>Cancel</Button>
-        </FormGroup>
+          <FormControl required fullWidth sx={{ my: 2 }}>
+            <InputLabel id="class-label" error={!!errors.class}>Class</InputLabel>
+            <Select
+              labelId="class-label"
+              label="Class"
+              defaultValue=""
+              error={!!errors.class}
+              {...register('class', { required: true })}
+            >
+              {classes.map((option) => (
+                <MenuItem key={option._id} value={option._id}>
+                  {option.title}
+                </MenuItem>
+            ))}
+            </Select>
+          </FormControl>
 
+          <FormControl required fullWidth sx={{ mb: 2 }}>
+            <InputLabel id="quiz-label" error={!!errors.quiz}>Quiz</InputLabel>
+            <Select
+              labelId="class-label"
+              label="Quiz"
+              defaultValue=""
+              error={!!errors.quiz}
+              {...register('quiz', { required: true })}
+            >
+              {quizzes.map((option) => (
+                <MenuItem key={option._id} value={option._id}>
+                  {option.title}
+                </MenuItem>
+            ))}
+            </Select>
+          </FormControl>
+          
+          <FormGroup row sx={{ gap: 1 }}>
+            <Button variant="contained" size="small" type="submit">Save</Button>
+            <Button variant="contained" size="small" color="secondary" onClick={handleClose}>Cancel</Button>
+          </FormGroup>
+
+        </Box>
       </Box>
     </Modal>
   );

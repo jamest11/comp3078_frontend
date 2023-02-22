@@ -1,4 +1,4 @@
-import { Box, Button, Container, Divider, Grid, LinearProgress } from '@mui/material';
+import { Box, Button, Container, Grid, LinearProgress } from '@mui/material';
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -59,13 +59,13 @@ const InstructorQuizzes = () => {
       <TitleDivider />
       
       <Grid container>
-        <Grid item xs={6}>
+        <Grid item xs={7}>
           <Subtitle>Scheduled Quizzes</Subtitle>
         
           {sqLoading ? (
             <LinearProgress />
           ) : (
-            <Box  sx={{ overflow: 'auto', maxHeight: 400 }}>
+            <Box sx={{ overflow: 'auto', maxHeight: 400, maxWidth: 500 }}>
               {scheduledQuizzes.map((quiz, index) => (
                 <ScheduledQuiz key={index} data={quiz} />
               ))}
@@ -82,7 +82,7 @@ const InstructorQuizzes = () => {
             </Button>
         </Grid>
 
-        <Grid item xs={4}>
+        <Grid item xs={5}>
           <Subtitle>My Quizzes</Subtitle>
 
           {qLoading ? (

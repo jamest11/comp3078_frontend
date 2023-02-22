@@ -14,7 +14,15 @@ const ScheduledQuiz = ({ data }) => {
           <Typography variant="h6">{data.quiz.title}</Typography>
           <Typography variant="body1" paragraph>{data.class.description} &emsp; <b>|</b> &emsp; {new Date(data.date).toLocaleDateString()}</Typography>
         </Grid>
-        <Grid item container alignItems="center" justifyContent="flex-end" xs={4} gap={1}>
+        <Grid 
+          item 
+          container 
+          alignItems="center" 
+          justifyContent="flex-end" 
+          xs={4} 
+          gap={1}
+          sx={{ pb: 1 }}  
+        >
           <Button variant="outlined" color="success" size="small">Edit</Button>
           <Button variant="outlined" color="error" size="small">Delete</Button>
         </Grid>
