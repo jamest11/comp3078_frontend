@@ -9,6 +9,7 @@ import ScheduledQuiz from './components/ScheduledQuiz';
 import ScheduleQuizModal from './components/ScheduleQuizModal';
 import Subtitle from 'components/Subtitle';
 import Title from 'components/Title';
+import TitleDivider from 'components/TitleDivider';
 
 const InstructorQuizzes = () => {
   const navigate = useNavigate();
@@ -55,7 +56,8 @@ const InstructorQuizzes = () => {
       <ScheduleQuizModal open={showModal} setOpen={setShowModal} quizzes={quizzes} classes={classes} callback={fetchScheduledQuizzes} />
 
       <Title>Quizzes</Title>
-      <Divider  sx={{ my: 2, boxShadow: 1 }}/>
+      <TitleDivider />
+      
       <Grid container>
         <Grid item xs={6}>
           <Subtitle>Scheduled Quizzes</Subtitle>

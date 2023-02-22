@@ -1,4 +1,6 @@
-import { Container, Divider, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { Container, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import Title from 'components/Title';
+import TitleDivider from 'components/TitleDivider';
 import { useEffect, useState } from 'react';
 
 import { studentApi } from 'services/api';
@@ -20,10 +22,10 @@ const StudentGrades = () => {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 2 }}>
-      <Typography variant="h4" gutterBottom>My Grades</Typography>
-      <Divider  sx={{ my: 2, boxShadow: 2 }}/>
+      <Title>My Grades</Title>
+      <TitleDivider />
 
-      <Grid container gap={4}>
+      <Grid container spacing={4}>
         <Grid item xs={6}>
           <Typography variant="h5">All Grades</Typography>
 

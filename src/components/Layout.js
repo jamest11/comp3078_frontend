@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { Box, Container } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
-import { deepPurple, blue } from '@mui/material/colors';
 import NavBar from './NavBar';
 import Footer from './Footer';
 

@@ -1,5 +1,7 @@
 
-import { Box, Container, Divider, Grid, Typography } from '@mui/material';
+import { Box, Container, Grid } from '@mui/material';
+import Title from 'components/Title';
+import TitleDivider from 'components/TitleDivider';
 import { useEffect, useState } from 'react';
 
 import { studentApi } from 'services/api';
@@ -21,8 +23,8 @@ const StudentQuizzes = () => {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 2 }}>
-      <Typography variant="h4" gutterBottom>Upcoming Quizzes</Typography>
-      <Divider  sx={{ my: 2, boxShadow: 2 }}/>
+      <Title>Upcoming Quizzes</Title>
+      <TitleDivider />
       <Box  sx={{ overflow: 'auto', maxHeight: 400 }}>
         <Grid container>
           {quizzes.map((quiz, index) => (
