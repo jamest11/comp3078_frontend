@@ -17,6 +17,10 @@ const login = async (data) => {
   return axiosInstance.post('/auth/login', data);
 };
 
+const register = async (data) => {
+  return axiosInstance.post('/auth/register', data);
+};
+
 // Student API
 const getStudentQuizzes = async () => {
   return axiosInstance.get('/student/quizzes');
@@ -64,5 +68,5 @@ const getClassGrades = async () => {
 };
 
 export const studentApi = { getStudentQuizzes, getStudentQuiz, submitQuiz, getStudentGrades };
-export const authApi = { setAuthHeader, login };
+export const authApi = { setAuthHeader, login, register };
 export const instructorApi = { createQuiz, getInstructorQuizzes, scheduleQuiz, getScheduledQuizzes, getClasses, getQuizGrades, getClassGrades };

@@ -10,6 +10,7 @@ import InstructorQuizzes from 'pages/instructor/InstructorQuizzes';
 import InstructorGrades from 'pages/instructor/InstructorGrades';
 
 import Login from 'pages/public/Login';
+import Register from 'pages/public/Register';
 
 import PrivateRoute from 'security/PrivateRoute';
 
@@ -22,13 +23,21 @@ const AppRoutes = () => {
       <Route
         path=""
         element={
-          <></>
+          <PrivateRoute userType="any">
+            <></>
+          </PrivateRoute>
         }
       />
       <Route
         path="/login"
         element={
           <Login />
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <Register />
         }
       />
       <Route

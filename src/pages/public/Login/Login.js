@@ -1,4 +1,4 @@
-import { Box, Paper, Avatar, Typography, TextField,  Button, Container } from '@mui/material';
+import { Box, Paper, Avatar, Typography, TextField,  Button, Container, FormGroup } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useForm } from 'react-hook-form';
 import { useAuth } from 'security/AuthContextProvider';
@@ -29,73 +29,80 @@ const Login = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-        <Box
-          component={Paper}
-          elevation={6}
-          sx={{
-            p: 6,
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
+    <Container maxWidth="xs">
+      <Box
+        component={Paper}
+        elevation={6}
+        sx={{
+          p: 6,
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Avatar sx={{ mb: 1, bgcolor: 'primary.main' }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Login
+        </Typography>
+        <Box 
+          component="form" 
+          noValidate 
+          sx={{ mt: 1 }}
+          onSubmit={handleSubmit(onSubmit)}
+          autoComplete="off"
         >
-          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Login
-          </Typography>
-          <Box 
-            component="form" 
-            noValidate 
-            sx={{ mt: 1 }}
-            onSubmit={handleSubmit(onSubmit)}
-            autoComplete="off"
-          >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              label="Email Address"
-              autoComplete="email"
-              autoFocus
-              error={!!errors.email}
-              helperText={errors.email?.message?.toString()}
-              {...register('email', {
-                required: {
-                  value: true,
-                  message: 'Email is required'
-                }
-              })}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              label="Password"
-              type="password"
-              error={!!errors.password}
-              helperText={errors.password?.message?.toString()}
-              {...register('password', {
-                required: {
-                  value: true,
-                  message: 'Password is required'
-                }
-              })}
-            />
+          <TextField
+            required
+            fullWidth
+            margin="normal"
+            label="Email Address"
+            autoComplete="email"
+            autoFocus
+            error={!!errors.email}
+            helperText={errors.email?.message?.toString()}
+            {...register('email', {
+              required: {
+                value: true,
+                message: 'Email is required'
+              }
+            })}
+          />
+          <TextField
+            required
+            fullWidth
+            margin="normal"
+            label="Password"
+            type="password"
+            error={!!errors.password}
+            helperText={errors.password?.message?.toString()}
+            {...register('password', {
+              required: {
+                value: true,
+                message: 'Password is required'
+              }
+            })}
+          />
+          <FormGroup row sx={{ gap: 1, mt: 2 }}>
             <Button
               type="submit"
-              fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
             >
               Login
             </Button>
-          </Box>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => navigate('/register')}
+            >
+              Register
+            </Button>
+          </FormGroup>
         </Box>
-      </Container>
+      </Box>
+    </Container>
   );
 };
 
