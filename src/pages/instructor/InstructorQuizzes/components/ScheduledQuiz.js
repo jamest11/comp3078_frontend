@@ -1,5 +1,6 @@
 import { Button, Grid, Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import { formatDate } from 'utils';
 
 const ScheduledQuiz = ({ data }) => {
   return (
@@ -12,7 +13,7 @@ const ScheduledQuiz = ({ data }) => {
       <Grid container>
         <Grid item xs={8}>
           <Typography variant="h6">{data.quiz.title}</Typography>
-          <Typography variant="body1" paragraph>{data.class.description} &emsp; <b>|</b> &emsp; {new Date(data.date).toLocaleDateString()}</Typography>
+          <Typography variant="body1" paragraph>{data.class.description} &nbsp; <b>|</b> &nbsp; Due {formatDate(data.date)}</Typography>
         </Grid>
         <Grid 
           item 

@@ -51,6 +51,14 @@ const NavBar = () => {
               >
                 Grades
               </Button>
+              <Button 
+                sx={{ 
+                  color: (location.pathname === '/instructor-profile' ? 'text.light' : 'text.dark'), 
+                  ':hover': { color: 'text.light' 
+                }}}
+              >
+                Classes
+              </Button>
             </>
           ) : (
             <>
