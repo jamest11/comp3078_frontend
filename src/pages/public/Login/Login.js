@@ -2,14 +2,23 @@ import { Box, Paper, Avatar, Typography, TextField,  Button, Container, FormGrou
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useForm } from 'react-hook-form';
 import { useAuth } from 'security/AuthContextProvider';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import { authApi } from 'services/api';
 
 const Login = () => {
   const navigate = useNavigate();
   const { register, handleSubmit, setError, formState: { errors } } = useForm();
-  const { handleLogin } = useAuth();
+  const { handleLogin, user } = useAuth();
+
+  if(user && user.userType) {
+    if(user.userType === 'instructor') {
+      return (<Navigate to="/instructor-quizzes" replace />);
+    }
+    else if(user.userType === 'student') {
+      return (<Navigate to="/student-quizzes" replace />);
+    }
+  }
 
   const onSubmit = (data) => {
     authApi.login(data)
@@ -19,7 +28,7 @@ const Login = () => {
           navigate('/instructor-quizzes');
         }
         else if(res.data.user.userType === 'student') {
-          navigate('/student-profile');
+          navigate('/student-quizzes');
         }
       })
       .catch((err) => {

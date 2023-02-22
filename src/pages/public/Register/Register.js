@@ -1,26 +1,23 @@
-import { Avatar, Box, Button, Container, FormControl, FormGroup, Grid, InputLabel, MenuItem, Paper, Select, TextField, Typography } from '@mui/material';
+import { Avatar, Box, Button, Container, FormControl, FormGroup, FormHelperText, Grid, InputLabel, MenuItem, Paper, Select, TextField, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
-
-import { authApi } from 'services/api';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
+
+import { useAuth } from 'security/AuthContextProvider';
+import { authApi } from 'services/api';
 
 const Register = () => {
   const { register, handleSubmit, setError, getValues, setValue, formState: { errors } } = useForm();
 
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [birthDate, setBirthDate] = useState(null);
+  
   const emailValidator = /(?!.*[-_.]{2}.*)^[a-zA-Z\d][a-zA-Z\d._-]+[a-zA-Z\d]@([a-zA-Z\d][a-zA-Z\d-]*[a-zA-Z\d]\.){1,}[a-z]{2,}$/;
-
-  const onSubmit = (data) => {
-    authApi.register(data)
-      .then(() => navigate('/login'))
-      .catch(console.error);
-  };
 
   useEffect(() => {
     register('birthDate', {
@@ -30,6 +27,21 @@ const Register = () => {
       }
     });
   }, [register]);
+
+  if(user && user.userType) {
+    if(user.userType === 'instructor') {
+      return (<Navigate to="/instructor-quizzes" replace />);
+    }
+    else if(user.userType === 'student') {
+      return (<Navigate to="/student-quizzes" replace />);
+    }
+  }
+
+  const onSubmit = (data) => {
+    authApi.register(data)
+      .then(() => navigate('/login'))
+      .catch(console.error);
+  };
 
   return (
     <Container maxWidth="sm">
@@ -61,8 +73,8 @@ const Register = () => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                required
                 fullWidth
+                required
                 autoFocus
                 label="First Name"
                 error={!!errors.firstName}
@@ -77,8 +89,8 @@ const Register = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                required
                 fullWidth
+                required
                 label="Last Name"
                 error={!!errors.lastName}
                 helperText={errors.lastName?.message?.toString()}
@@ -92,8 +104,8 @@ const Register = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField 
-                required
                 fullWidth
+                required
                 label="Email Address"
                 error={!!errors.email}
                 helperText={errors.email?.message?.toString()}
@@ -111,8 +123,8 @@ const Register = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField 
-                required
                 fullWidth
+                required
                 type="password"
                 label="Password"
                 error={!!errors.password}
@@ -131,8 +143,8 @@ const Register = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField 
-                required
                 fullWidth
+                required
                 type="password"
                 label="Confirm Password"
                 error={!!errors.passwordConfirm}
@@ -147,8 +159,8 @@ const Register = () => {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <FormControl fullWidth>
-                <InputLabel id="user-type-label">User Type</InputLabel>
+              <FormControl required fullWidth>
+                <InputLabel id="user-type-label" error={!!errors.userType}>User Type</InputLabel>
                 <Select
                   labelId="user-type-label"
                   label="User Type"
@@ -164,6 +176,7 @@ const Register = () => {
                   <MenuItem value={'student'}>Student</MenuItem>
                   <MenuItem value={'instructor'}>Instructor</MenuItem>
                 </Select>
+                <FormHelperText error>{errors?.userType?.message?.toString()}</FormHelperText>
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -180,7 +193,9 @@ const Register = () => {
                     <TextField 
                       {...params} 
                       fullWidth
+                      required
                       error={!!errors.birthDate}
+                      helperText={errors.birthDate?.message?.toString()}
                     />
                   )}
                 />
