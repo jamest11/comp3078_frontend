@@ -1,4 +1,4 @@
-import { Box, Container, Typography, Chip, CircularProgress } from '@mui/material';
+import { Container, Typography, CircularProgress } from '@mui/material';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 

@@ -20,7 +20,11 @@ const QuizQuestion = ({ data, callback }) => {
 
 
   return (
-    <Box component={Paper} sx={{ mt: 5, p: 2, width: 600 }} elevation={2}>
+    <Box 
+      component={Paper}
+      elevation={2}
+      sx={{ mt: 5, p: 2, width: 600 }}
+    >
       <Typography>{question}</Typography>
 
       <Box component="div">
@@ -35,7 +39,14 @@ const QuizQuestion = ({ data, callback }) => {
           </RadioGroup>
         </FormControl>
         <FormGroup row>
-          <Button variant="contained" disabled={!complete} onClick={handleSubmit} color="success">Submit</Button>
+          <Button 
+            variant="contained" 
+            disabled={!complete} 
+            onClick={handleSubmit} 
+            color="success"
+          >
+            Submit
+          </Button>
         </FormGroup>
       </Box>
 
