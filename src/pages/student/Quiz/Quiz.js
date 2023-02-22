@@ -84,26 +84,8 @@ const Quiz = () => {
           <CircularProgress />
         )): (
         <>
-          <Box 
-            component="div" 
-            sx={{ 
-              display: 'flex', 
-              flexDirection: 'row', 
-              width: 'auto', 
-              alignItems: 'center', 
-              mt: 2 }}
-            >
-            <Chip 
-              label={time} 
-              color={time < 30 ? 'error' : (time < 60 ? 'warning' : 'success')}
-            />
-            <QuizProgress progress={currIndex + 1} length={questions.length} />
-            <Chip 
-              label={`${currIndex + 1} / ${questions.length}`} 
-              sx={{ bgcolor: 'secondary.light', color: 'text.light' }}
-            />
-          </Box>
-
+          <QuizProgress progress={currIndex + 1} length={questions.length} time={time} />
+          
           <QuizQuestion data={currQuestion} callback={submitQuestion} />
         </>
       )}
