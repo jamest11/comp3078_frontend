@@ -1,12 +1,14 @@
-import { Box, Button, Container, Divider, Grid, LinearProgress, Typography } from '@mui/material';
+import { Box, Button, Container, Divider, Grid, LinearProgress } from '@mui/material';
+
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { instructorApi } from 'services/api';
-import Quiz from "./components/Quiz";
-import ScheduledQuiz from "./components/ScheduledQuiz";
-import ScheduleQuizModal from "./components/ScheduleQuizModal";
-
+import Quiz from './components/Quiz';
+import ScheduledQuiz from './components/ScheduledQuiz';
+import ScheduleQuizModal from './components/ScheduleQuizModal';
+import Subtitle from 'components/Subtitle';
+import Title from 'components/Title';
 
 const InstructorQuizzes = () => {
   const navigate = useNavigate();
@@ -52,11 +54,11 @@ const InstructorQuizzes = () => {
     <Container maxWidth="lg" sx={{ mt: 2 }}>
       <ScheduleQuizModal open={showModal} setOpen={setShowModal} quizzes={quizzes} classes={classes} callback={fetchScheduledQuizzes} />
 
-      <Typography variant="h3">Quizzes</Typography>
-      <Divider  sx={{ my: 2 }}/>
+      <Title>Quizzes</Title>
+      <Divider  sx={{ my: 2, boxShadow: 1 }}/>
       <Grid container>
         <Grid item xs={6}>
-          <Typography variant="h4">Scheduled Quizzes</Typography>
+          <Subtitle>Scheduled Quizzes</Subtitle>
         
           {sqLoading ? (
             <LinearProgress />
@@ -68,11 +70,18 @@ const InstructorQuizzes = () => {
             </Box>
           )}
 
-          <Button variant="contained" color="success" sx={{ mt: 1 }} onClick={scheduleQuiz}>Schedule Quiz</Button>
+          <Button 
+            variant="contained" 
+            color="success"
+            sx={{ mt: 1 }} 
+            onClick={scheduleQuiz}
+          >
+              Schedule Quiz
+            </Button>
         </Grid>
 
         <Grid item xs={4}>
-          <Typography variant="h4">My Quizzes</Typography>
+          <Subtitle>My Quizzes</Subtitle>
 
           {qLoading ? (
             <LinearProgress />
@@ -84,7 +93,14 @@ const InstructorQuizzes = () => {
             </Box>
           )}
 
-          <Button variant="contained" color="success" sx={{ mt: 1 }} onClick={() => navigate('/create-quiz')}>Create New Quiz</Button>
+          <Button 
+            variant="contained" 
+            color="success"
+            sx={{ mt: 1 }} 
+            onClick={() => navigate('/create-quiz')}
+          >
+            Create New Quiz
+          </Button>
         </Grid>
       </Grid>
     </Container>

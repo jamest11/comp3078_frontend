@@ -24,21 +24,30 @@ const NavBar = () => {
           { user ? user.userType === 'instructor' ? (
             <>
               <Button 
-                variant={location.pathname === '/instructor-profile' ? 'navActive' : 'navInactive'}
+                sx={{ 
+                  color: (location.pathname === '/instructor-profile' ? 'text.light' : 'text.dark'), 
+                  ':hover': { color: 'text.light' 
+                }}}
               >
                 Profile
               </Button>
               <Button 
                 component={Link} 
                 to="/instructor-quizzes" 
-                variant={location.pathname === '/instructor-quizzes' ? 'navActive' : 'navInactive'}
+                sx={{ 
+                  color: (location.pathname === '/instructor-quizzes' ? 'text.light' : 'text.dark'), 
+                  ':hover': { color: 'text.light' 
+                }}}
               >
                 Quizzes
               </Button>
               <Button 
                 component={Link} 
                 to="/instructor-grades" 
-                variant={location.pathname === '/instructor-grades' ? 'navActive' : 'navInactive'}
+                sx={{ 
+                  color: (location.pathname === '/instructor-grades' ? 'text.light' : 'text.dark'), 
+                  ':hover': { color: 'text.light' 
+                }}}
               >
                 Grades
               </Button>
@@ -48,21 +57,30 @@ const NavBar = () => {
               <Button 
                 component={Link} 
                 to="/student-profile" 
-                variant={location.pathname === '/student-profile' ? 'navActive' : 'navInactive'}
+                sx={{ 
+                  color: (location.pathname === '/student-profile' ? 'text.light' : 'text.dark'), 
+                  ':hover': { color: 'text.light' 
+                }}}
               >
                 Profile
               </Button>
               <Button 
                 component={Link} 
                 to="/student-quizzes" 
-                variant={location.pathname === '/student-quizzes' ? 'navActive' : 'navInactive'}
+                sx={{ 
+                  color: (location.pathname === '/student-quizzes' ? 'text.light' : 'text.dark'), 
+                  ':hover': { color: 'text.light' 
+                }}}
               >
                 Quizzes
               </Button>
               <Button 
                 component={Link} 
                 to="/student-grades" 
-                variant={location.pathname === '/student-grades' ? 'navActive' : 'navInactive'}
+                sx={{ 
+                  color: (location.pathname === '/student-grades' ? 'text.light' : 'text.dark'), 
+                  ':hover': { color: 'text.light' 
+                }}}
               >
                 Grades
               </Button>
@@ -74,7 +92,15 @@ const NavBar = () => {
         </Box>
         <Box>
             {user && (
-              <Button color="inherit" onClick={logout}>Logout</Button>
+              <Button 
+                onClick={logout}
+                sx={{ 
+                  color: 'text.dark', 
+                  ':hover': { color: 'text.light' 
+                }}}
+              >
+                Logout
+              </Button>
             )}
         </Box>
       </Toolbar>

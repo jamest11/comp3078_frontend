@@ -1,6 +1,11 @@
 import { Box, TextField, Typography, FormControl, InputLabel, Select, MenuItem, Paper, IconButton } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 
+const responseField = {
+  m: 1,
+  width: '40ch'
+};
+
 const QuizQuestion = ({ register, errors, index, remove}) => {
 
   return (
@@ -38,7 +43,7 @@ const QuizQuestion = ({ register, errors, index, remove}) => {
           label="Option A"
           size="small"
           error={!!errors?.['questions']?.[index]?.['r1']}
-          sx={{ m: 1, width: '40ch' }}
+          sx={responseField}
           {...register(`questions.${index}.r1`, {
             required: true
           })}
@@ -48,7 +53,7 @@ const QuizQuestion = ({ register, errors, index, remove}) => {
           label="Option B"
           size="small"
           error={!!errors?.['questions']?.[index]?.['r2']}
-          sx={{ m: 1, width: '40ch' }}
+          sx={responseField}
           {...register(`questions.${index}.r2`, {
             required: true
           })}
@@ -60,7 +65,7 @@ const QuizQuestion = ({ register, errors, index, remove}) => {
           label="Option C"
           size="small"
           error={!!errors?.['questions']?.[index]?.['r3']}
-          sx={{ m: 1, width: '40ch' }}
+          sx={responseField}
           {...register(`questions.${index}.r3`, {
             required: true
           })}
@@ -70,7 +75,7 @@ const QuizQuestion = ({ register, errors, index, remove}) => {
           label="Option D"
           size="small"
           error={!!errors?.['questions']?.[index]?.['r4']}
-          sx={{ m: 1, width: '40ch' }}
+          sx={responseField}
           {...register(`questions.${index}.r4`, {
             required: true
           })}

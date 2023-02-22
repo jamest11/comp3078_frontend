@@ -7,11 +7,28 @@ import Footer from './Footer';
 
 const theme = createTheme({
   palette: {
-    primary: deepPurple,
-    secondary: blue,
-    background: {
-      default: '#CACACA'
+    primary: {
+      main: '#673ab7'
     },
+    secondary: {
+      main: '#2196f3'
+    },
+    background: {
+      default: '#cacaca'
+    },
+    text: {
+      light: '#ffffff',
+      dark: '#bdbdbd'
+    },
+    success: {
+      main: '#43a047'
+    },
+    warning: {
+      main: '#fb8c00'
+    },
+    error: {
+      main: '#f44336'
+    }
   },
   typography: {
     fontFamily: ['Roboto', 'sans-serif'].join(',')
@@ -21,26 +38,10 @@ const theme = createTheme({
       styleOverrides: {
         ":root": {
           body: {
-            backgroundImage: "url(notebook.png)"
+            backgroundImage: "url(squared_metal.png)"
           }
         }
       }
-    },
-    MuiButton: {
-      variants: [
-        {
-          props: { variant: 'navInactive' },
-          style: {
-            color: '#bdbdbd'
-          },
-        },
-        {
-          props: { variant: 'navActive' },
-          style: {
-            color: '#FFFFFF'
-          },
-        },
-      ],
     },
   }
 });

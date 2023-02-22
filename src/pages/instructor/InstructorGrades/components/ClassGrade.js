@@ -25,14 +25,16 @@ const ClassGrade = ({ data }) => {
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          
           {data.count === 0 ? (
             <Typography variant="body1">
               No grades have been recorded for this class
             </Typography>
           ) : (
             <>
-              <Chip color="success" label={`${data.average}%`} />
+              <Chip 
+                color={ data.average <= 50 ? 'error' : (data.average < 70 ? 'warning' : 'success')} 
+                label={`${data.average}%`} 
+              />
               <Typography variant="body1" display="inline" sx={{ ml: 1 }}>
                 over {data.count} quizzes
               </Typography>
