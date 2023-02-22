@@ -1,4 +1,4 @@
-import { Box, Container, Typography, Divider, Chip, CircularProgress } from '@mui/material';
+import { Box, Container, Typography, Chip, CircularProgress } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
@@ -6,6 +6,7 @@ import QuizProgress from './components/QuizProgress';
 import QuizQuestion from './components/QuizQuestion';
 import QuizResult from './components/QuizResult';
 import { studentApi } from 'services/api';
+import TitleDivider from 'components/TitleDivider';
 
 const Quiz = () => {
   const location = useLocation();
@@ -36,7 +37,7 @@ const Quiz = () => {
 
   useEffect(() => {
     if(time <= 0) {
-      submitQuiz();
+      //submitQuiz();
     }
   }, [time]);
 
@@ -70,7 +71,7 @@ const Quiz = () => {
   return (
     <Container maxWidth="lg" sx={{ mt: 2 }}>
       <Typography variant="h4">{data.quiz.title}</Typography>
-      <Divider sx={{ mt: 2, mb: 1, bgcolor: 'darkGray' }} />
+      <TitleDivider />
       <Typography variant="h6">{data.class.title}</Typography>
 
       {complete ? 
@@ -80,10 +81,24 @@ const Quiz = () => {
           <CircularProgress />
         )): (
         <>
-          <Box component="div" sx={{ display: 'flex', flexDirection: 'row', width: 'auto', alignItems: 'center', mt: 2 }}>
-            <Chip label={time} sx={{ bgcolor: 'lightGreen' }} />
+          <Box 
+            component="div" 
+            sx={{ 
+              display: 'flex', 
+              flexDirection: 'row', 
+              width: 'auto', 
+              alignItems: 'center', 
+              mt: 2 }}
+            >
+            <Chip 
+              label={time} 
+              color={time < 30 ? 'error' : (time < 60 ? 'warning' : 'success')}
+            />
             <QuizProgress progress={currIndex + 1} length={questions.length} />
-            <Chip label={`${currIndex + 1} / ${questions.length}`} sx={{ bgcolor: 'lightBlue' }} />
+            <Chip 
+              label={`${currIndex + 1} / ${questions.length}`} 
+              sx={{ bgcolor: 'secondary.light', color: 'text.light' }}
+            />
           </Box>
 
           <QuizQuestion data={currQuestion} callback={submitQuestion} />
