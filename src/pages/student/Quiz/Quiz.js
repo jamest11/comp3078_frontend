@@ -1,5 +1,5 @@
 import { Box, Container, Typography, Chip, CircularProgress } from '@mui/material';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
 import QuizProgress from './components/QuizProgress';
@@ -35,25 +35,28 @@ const Quiz = () => {
     };
   }, [complete]);
 
+  const submitQuiz = useCallback(
+    () => {
+      setComplete(true);
+      studentApi.submitQuiz({ id: data._id, responses: responses.current })
+        .then((res) => {
+          setGrade({ correct: res.data.correct, total: res.data.total });
+          setGraded(true);
+        })
+        .catch(console.error);
+    },
+    [data._id]
+  );
+
   useEffect(() => {
     if(time <= 0) {
-      //submitQuiz();
+      submitQuiz();
     }
-  }, [time]);
+  }, [time, submitQuiz]);
 
   if(!data) {
     return (<Navigate to="/student-profile" replace />);
   }
-
-  const submitQuiz = () => {
-    setComplete(true);
-    studentApi.submitQuiz({ id: data._id, responses: responses.current })
-      .then((res) => {
-        setGrade({ correct: res.data.correct, total: res.data.total });
-        setGraded(true);
-      })
-      .catch(console.error);
-  };
 
   const submitQuestion = (res) => {
     responses.current = [...responses.current, res];
