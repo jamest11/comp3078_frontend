@@ -26,11 +26,20 @@ const Quiz = ({ data }) => {
         <Grid item xs={6}>
           <Typography variant="h6">{data.quiz.title}</Typography>
           <Typography variant="body1">{data.class.title}</Typography>
+          <Typography variant="body1">{data.quiz.questions.length} question(s)</Typography>
           <Typography variant="body1">{formatTime(data.quiz.timeLimit)} Time Limit</Typography>
         </Grid>
         <Grid item container alignItems="center" justifyContent="flex-end" xs={6}>
           <Typography variant="body1">Due {formatDate(data.date)}</Typography>
-          <Button variant="contained" color="primary" size="small" onClick={handleClick}>Take Quiz</Button>
+          <Button 
+            variant="contained" 
+            color="primary" 
+            size="small" 
+            onClick={handleClick}
+            sx={{ ml: 1 }}          
+          >
+            Take Quiz
+          </Button>
         </Grid>
       </Grid>
 

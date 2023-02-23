@@ -13,12 +13,13 @@ const QuizQuestion = ({ register, errors, index, remove}) => {
       component={Paper} 
       elevation={1}
       sx={{ 
-        p: 2, 
+        px: 2,
+        py: 1, 
         mx: 2,
       }}
       >
       <Box sx={{ display: 'flex', width: 1 }}>
-          <Typography variant="h5" sx={{ mb: 1 }}>Question {index + 1}</Typography>
+          <Typography variant="h5">Question {index + 1}</Typography>
           <IconButton onClick={() => remove(index)} sx={{ ml: 'auto', mr: 1 }}>
             <ClearIcon color="primary" />
           </IconButton>
@@ -28,9 +29,10 @@ const QuizQuestion = ({ register, errors, index, remove}) => {
         <TextField
           variant="outlined"
           label="Question"
-          rows={2}
-          sx={{ m: 1, width: '82ch' }}
+          size="small"
           multiline
+          maxRows={4}
+          sx={{ m: 1, width: '81ch' }}
           error={!!errors?.['questions']?.[index]?.['q']}
           {...register(`questions.${index}.q`, {
             required: true
@@ -42,6 +44,8 @@ const QuizQuestion = ({ register, errors, index, remove}) => {
           variant="outlined"
           label="Option A"
           size="small"
+          multiline
+          maxRows={4}
           error={!!errors?.['questions']?.[index]?.['r1']}
           sx={responseField}
           {...register(`questions.${index}.r1`, {
@@ -52,6 +56,8 @@ const QuizQuestion = ({ register, errors, index, remove}) => {
           variant="outlined"
           label="Option B"
           size="small"
+          multiline
+          maxRows={4}
           error={!!errors?.['questions']?.[index]?.['r2']}
           sx={responseField}
           {...register(`questions.${index}.r2`, {
@@ -64,6 +70,8 @@ const QuizQuestion = ({ register, errors, index, remove}) => {
           variant="outlined"
           label="Option C"
           size="small"
+          multiline
+          maxRows={4}
           error={!!errors?.['questions']?.[index]?.['r3']}
           sx={responseField}
           {...register(`questions.${index}.r3`, {
@@ -74,6 +82,8 @@ const QuizQuestion = ({ register, errors, index, remove}) => {
           variant="outlined"
           label="Option D"
           size="small"
+          multiline
+          maxRows={4}
           error={!!errors?.['questions']?.[index]?.['r4']}
           sx={responseField}
           {...register(`questions.${index}.r4`, {
@@ -82,7 +92,7 @@ const QuizQuestion = ({ register, errors, index, remove}) => {
         />
       </div>
       <div>
-        <FormControl required sx={{ m: 1, width: 190 }} size="small">
+        <FormControl sx={{ m: 1, width: 190 }} size="small">
           <InputLabel id="question-correct-response-label">Correct Response</InputLabel>
           <Select
             labelId="question-correct-response-label"

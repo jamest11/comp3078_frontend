@@ -27,7 +27,6 @@ const CreateQuiz = () => {
 
   return (
     <Container maxWidth="md" sx={{ mt: 2 }}>
-      
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
@@ -35,16 +34,17 @@ const CreateQuiz = () => {
         autoComplete="off"
       >
         <Paper elevation={6}>
-          <Typography variant="h4" sx={{ pt: 2, px: 2 }}>New Quiz</Typography>
-          <FormGroup row sx={{ pt: 1, m: 2 }}>
+          <Typography variant="h4" sx={{ pt: 2, px: 2 }} gutterBottom>New Quiz</Typography>
+          <FormGroup row sx={{ pb: 2, mx: 2, columnGap: 1 }}>
             <TextField
-              sx={{ m: 1, width: '40ch' }}
+              sx={{ width: '60ch' }}
               variant="outlined"
               label="Quiz Title"
+              size="small"
               error={!!errors.title}
               {...register('title', { required: true })}
             />
-            <FormControl required sx={{ m: 1 }}>
+            <FormControl size="small">
               <InputLabel id="quiz-time-limit-label">Time Limit</InputLabel>
               <Select
                 sx={{ width: 200 }}
@@ -69,9 +69,9 @@ const CreateQuiz = () => {
             <QuizQuestion key={item.id} index={index} register={register} errors={errors} remove={remove} />
           ))}
 
-          <FormGroup row sx={{ gap: 2, m: 2, py: 2 }}>
-            <Button variant="contained" onClick={addQuestion}>Add Question</Button>
-            <Button type="submit" variant="contained" color="primary">Save</Button>
+          <FormGroup row sx={{ gap: 2, mx: 2, py: 2 }}>
+            <Button variant="contained" color="success" onClick={addQuestion}>Add Question</Button>
+            <Button type="submit" variant="contained">Save</Button>
             <Button variant="contained" color="secondary" component={Link} to="/instructor-quizzes">Cancel</Button>
           </FormGroup>
         </Paper>

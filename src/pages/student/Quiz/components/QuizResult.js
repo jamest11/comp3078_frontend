@@ -11,7 +11,7 @@ const QuizResult = ({ grade }) => {
         <Typography variant="body1">Score: {grade.correct} / {grade.total}</Typography>
         <Typography variant="body1">Percent: {`${(grade.correct / grade.total * 100).toFixed(1)}%`}</Typography>
       </Paper>
-      <Button component={Link} to="/student-profile" variant="contained" color="success" sx={{ mt: 2 }}>Ok</Button>
+      <Button component={Link} to="/student-grades" variant="contained" color="success" sx={{ mt: 2 }}>Ok</Button>
     </Box>
   );
 };
