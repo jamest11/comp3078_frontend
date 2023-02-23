@@ -47,10 +47,6 @@ const InstructorQuizzes = () => {
     fetchClasses();
   }, []);
 
-  const scheduleQuiz = () => {
-    setShowModal(true);
-  };
-
   return (
     <Container maxWidth="lg" sx={{ mt: 2 }}>
       <ScheduleQuizModal open={showModal} setOpen={setShowModal} quizzes={quizzes} classes={classes} callback={fetchScheduledQuizzes} />
@@ -76,7 +72,7 @@ const InstructorQuizzes = () => {
             variant="contained" 
             color="success"
             sx={{ mt: 1 }} 
-            onClick={scheduleQuiz}
+            onClick={() => setShowModal(true)}
           >
               Schedule Quiz
             </Button>

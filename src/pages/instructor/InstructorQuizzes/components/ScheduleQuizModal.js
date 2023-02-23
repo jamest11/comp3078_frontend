@@ -24,7 +24,7 @@ const style = {
 
 const ScheduleQuizModal = ({ open, setOpen, quizzes, classes, callback }) => {
 
-  const { register, handleSubmit, setValue, getValues, reset, formState: { errors } } = useForm();
+  const { register, handleSubmit, setValue, reset, formState: { errors } } = useForm();
 
   const [dueDate, setDueDate] = useState(null);
 
@@ -45,8 +45,6 @@ const ScheduleQuizModal = ({ open, setOpen, quizzes, classes, callback }) => {
   const handleClose = () => setOpen(false);
 
   const onSubmit = (data) => {
-    console.log(getValues());
-
     setOpen(false);
     instructorApi.scheduleQuiz(data)
       .then((res) => callback())
