@@ -1,4 +1,4 @@
-import { Container, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Container, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Alert, Typography, Link as MUILink } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 import TitleDivider from 'components/TitleDivider';
@@ -6,6 +6,7 @@ import Subtitle from 'components/Subtitle';
 import Title from 'components/Title';
 import { studentApi } from 'services/api';
 import { formatDate } from 'utils';
+import { Link } from 'react-router-dom';
 
 const StudentGrades = () => {
   const [loading, setLoading] = useState(true);
@@ -28,38 +29,48 @@ const StudentGrades = () => {
 
       <Grid container spacing={4}>
         <Grid item xs={6}>
-          <Subtitle>All Grades</Subtitle>
-
-          <TableContainer component={Paper}>
-            {loading ? (
-              <LinearProgress />
-            ) : (
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Class</TableCell>
-                  <TableCell>Quiz</TableCell>
-                  <TableCell>Date</TableCell>
-                  <TableCell>Grade</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {grades.map((grade, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{grade.class}</TableCell>
-                    <TableCell>{grade.quiz}</TableCell>
-                    <TableCell>{formatDate(grade.date)}</TableCell>
-                    <TableCell>{grade.grade}%</TableCell>
+          {/*<Subtitle>All Grades</Subtitle>*/}
+            
+          {loading ? (
+            <LinearProgress />
+          ) : grades.length === 0 ? (
+            <Alert severity="info">
+              <Typography variant="body1">
+                You haven't completed any quizzes yet.
+              </Typography>
+              <Typography variant="body1">
+                Click <MUILink component={Link} to="/student-quizzes">here</MUILink> to view your assigned quizzes.
+              </Typography>
+            </Alert>
+          ) : (
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Class</TableCell>
+                    <TableCell>Quiz</TableCell>
+                    <TableCell>Date</TableCell>
+                    <TableCell>Grade</TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>)}
-          </TableContainer>
+                </TableHead>
+                <TableBody>
+                  {grades.map((grade, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{grade.class}</TableCell>
+                      <TableCell>{grade.quiz}</TableCell>
+                      <TableCell>{formatDate(grade.date)}</TableCell>
+                      <TableCell>{grade.grade}%</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
         </Grid>
-
-        <Grid item xs={4}>
+        
+        {/*<Grid item xs={4}>
           <Subtitle>Average Grades</Subtitle>
-        </Grid>
+        </Grid>*/}
       </Grid>
     </Container>
   );
