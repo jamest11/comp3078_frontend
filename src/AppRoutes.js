@@ -13,6 +13,7 @@ import AddStudents from 'pages/instructor/AddStudents';
 
 import Login from 'pages/public/Login';
 import Register from 'pages/public/Register';
+import UnknownPage from 'pages/public/UnknownPage';
 
 import PrivateRoute from 'security/PrivateRoute';
 
@@ -21,11 +22,9 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route
-        path=""
+        path="*"
         element={
-          <PrivateRoute userType="any">
-            <></>
-          </PrivateRoute>
+          <UnknownPage />
         }
       />
       <Route
