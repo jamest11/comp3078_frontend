@@ -24,7 +24,7 @@ const QuizGradesTable = ({ quizGrades, loading }) => {
               <TableCell>{grade.quiz}</TableCell>
               <TableCell>{formatDate(grade.dueDate)}</TableCell>
               <TableCell>{grade.completed}</TableCell>
-              <TableCell>{grade.average}%</TableCell>
+              <TableCell>{grade.completed > 0 ? `${grade.average}%` : 'N/A'}</TableCell>
             </TableRow>
           ))}
         </TableBody>

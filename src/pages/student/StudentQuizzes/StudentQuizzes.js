@@ -25,7 +25,7 @@ const StudentQuizzes = () => {
     <Container maxWidth="lg" sx={{ mt: 2 }}>
       <Title>Upcoming Quizzes</Title>
       <TitleDivider />
-      <Box  sx={{ overflow: 'auto', maxHeight: 400 }}>
+      <Box  sx={{ overflow: 'auto', maxHeight: 500 }}>
         <Grid container>
           {quizzes.map((quiz, index) => (
             <Grid item xs={4}>

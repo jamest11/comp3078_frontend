@@ -1,8 +1,9 @@
-import { Container, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
-import Title from 'components/Title';
-import TitleDivider from 'components/TitleDivider';
+import { Container, Grid, LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { useEffect, useState } from 'react';
 
+import TitleDivider from 'components/TitleDivider';
+import Subtitle from 'components/Subtitle';
+import Title from 'components/Title';
 import { studentApi } from 'services/api';
 import { formatDate } from 'utils';
 
@@ -27,7 +28,7 @@ const StudentGrades = () => {
 
       <Grid container spacing={4}>
         <Grid item xs={6}>
-          <Typography variant="h5">All Grades</Typography>
+          <Subtitle>All Grades</Subtitle>
 
           <TableContainer component={Paper}>
             {loading ? (
@@ -57,7 +58,7 @@ const StudentGrades = () => {
         </Grid>
 
         <Grid item xs={4}>
-          <Typography variant="h5">Average Grades</Typography>
+          <Subtitle>Average Grades</Subtitle>
         </Grid>
       </Grid>
     </Container>

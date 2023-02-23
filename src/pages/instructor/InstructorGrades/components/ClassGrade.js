@@ -25,7 +25,7 @@ const ClassGrade = ({ data }) => {
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          {data.count === 0 ? (
+          {data.count === -1 ? (
             <Typography variant="body1">
               No grades have been recorded for this class
             </Typography>

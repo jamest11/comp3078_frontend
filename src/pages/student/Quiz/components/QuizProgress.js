@@ -1,4 +1,5 @@
 import { Box, Chip, LinearProgress } from '@mui/material';
+import { formatTime } from 'utils';
 
 const QuizProgress = ({ length, progress, time }) => {
   return (
@@ -12,7 +13,7 @@ const QuizProgress = ({ length, progress, time }) => {
         mt: 2 }}
       >
       <Chip 
-        label={time} 
+        label={formatTime(time)} 
         color={time < 30 ? 'error' : (time < 60 ? 'warning' : 'success')}
       />
      

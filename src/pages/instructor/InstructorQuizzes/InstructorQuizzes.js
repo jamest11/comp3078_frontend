@@ -65,7 +65,7 @@ const InstructorQuizzes = () => {
           {sqLoading ? (
             <LinearProgress />
           ) : (
-            <Box sx={{ overflow: 'auto', maxHeight: 400, maxWidth: 500 }}>
+            <Box sx={{ overflow: 'auto', maxHeight: 500, maxWidth: 500 }}>
               {scheduledQuizzes.map((quiz, index) => (
                 <ScheduledQuiz key={index} data={quiz} />
               ))}
@@ -88,7 +88,7 @@ const InstructorQuizzes = () => {
           {qLoading ? (
             <LinearProgress />
           ) : (
-            <Box  sx={{ overflow: 'auto', maxHeight: 400 }}>
+            <Box  sx={{ overflow: 'auto', maxHeight: 500 }}>
               {quizzes.map((quiz, index) => (
                 <Quiz key={index} data={quiz} />
               ))}
