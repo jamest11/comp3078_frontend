@@ -7,4 +7,6 @@ const formatDate = (dateStr) => {
   return `${date.getUTCFullYear()}-${date.getUTCMonth() + 1}-${date.getUTCDate()}`;
 };
 
-export { formatTime, formatDate };
+const emailValidatorRx = /(?!.*[-_.]{2}.*)^[a-zA-Z\d][a-zA-Z\d._-]+[a-zA-Z\d]@([a-zA-Z\d][a-zA-Z\d-]*[a-zA-Z\d]\.){1,}[a-z]{2,}$/;
+
+export { formatTime, formatDate, emailValidatorRx };

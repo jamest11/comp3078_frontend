@@ -9,6 +9,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 import { useAuth } from 'security/AuthContextProvider';
 import { authApi } from 'services/api';
+import { emailValidatorRx } from 'utils';
 
 const Register = () => {
   const { register, handleSubmit, setError, getValues, setValue, formState: { errors } } = useForm();
@@ -17,8 +18,6 @@ const Register = () => {
   const navigate = useNavigate();
   const [birthDate, setBirthDate] = useState(null);
   
-  const emailValidator = /(?!.*[-_.]{2}.*)^[a-zA-Z\d][a-zA-Z\d._-]+[a-zA-Z\d]@([a-zA-Z\d][a-zA-Z\d-]*[a-zA-Z\d]\.){1,}[a-z]{2,}$/;
-
   useEffect(() => {
     register('birthDate', {
       required: {
@@ -115,7 +114,7 @@ const Register = () => {
                     message: 'Email address is required'
                   },
                   pattern: {
-                    value: emailValidator,
+                    value: emailValidatorRx,
                     message: 'Invalid email address'
                   }
                 })}
