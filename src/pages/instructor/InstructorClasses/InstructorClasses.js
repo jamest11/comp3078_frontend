@@ -6,24 +6,26 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Title from 'components/Title';
 import TitleDivider from 'components/TitleDivider';
 import { instructorApi } from 'services/api';
+import CreateClassModal from './components/CreateClassModal';
 
 const InstructorClasses = () => {
   const [classes, setClasses] = useState([]);
   const [classGrades, setClassGrades] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
   const [message, setMessage] = useState(location?.state?.message);
 
+  const fetchClasses = async () => {
+    const res = await instructorApi.getClasses();
+
+    setClasses(res.data);
+    setLoading(false);
+  };
+
   useEffect(() => {
-    const fetchClasses = async () => {
-      const res = await instructorApi.getClasses();
-
-      setClasses(res.data);
-      setLoading(false);
-    };
-
     const fetchClassGrades = async () => {
       const res = await instructorApi.getClassGrades();
 
@@ -46,6 +48,8 @@ const InstructorClasses = () => {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 2 }}>
+      <CreateClassModal open={showModal} setOpen={setShowModal} callback={fetchClasses} />
+
       <Title>Classes</Title>
       <TitleDivider />
 
@@ -99,7 +103,11 @@ const InstructorClasses = () => {
       </Box>
 
       <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
-        <Button variant="contained" color="success">
+        <Button 
+          variant="contained" 
+          color="success"
+          onClick={() => setShowModal(true)}
+        >
           Create New Class
         </Button>
         <Button 

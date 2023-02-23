@@ -47,6 +47,10 @@ const scheduleQuiz = async (data) => {
   return axiosInstance.post('/instructor/schedule-quiz', data);
 };
 
+const createClass = async (data) => {
+  return axiosInstance.post('/instructor/create-class', data);
+};
+
 const updateClass = async (data) => {
   return axiosInstance.patch('/instructor/update-class', data);
 };
@@ -77,6 +81,7 @@ export const instructorApi = {
   createQuiz, 
   scheduleQuiz,
   updateClass,
+  createClass,
   getScheduledQuizzes, 
   getInstructorQuizzes, 
   getClasses, 
