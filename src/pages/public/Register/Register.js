@@ -39,7 +39,9 @@ const Register = () => {
   const onSubmit = (data) => {
     authApi.register(data)
       .then(() => navigate('/login'))
-      .catch(console.error);
+      .catch(err => {
+        setError('email', { type: 'server', message: 'Email already in use' });
+      });
   };
 
   return (
@@ -73,7 +75,6 @@ const Register = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                required
                 autoFocus
                 label="First Name"
                 error={!!errors.firstName}
@@ -89,7 +90,6 @@ const Register = () => {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                required
                 label="Last Name"
                 error={!!errors.lastName}
                 helperText={errors.lastName?.message?.toString()}
@@ -104,7 +104,6 @@ const Register = () => {
             <Grid item xs={12}>
               <TextField 
                 fullWidth
-                required
                 label="Email Address"
                 error={!!errors.email}
                 helperText={errors.email?.message?.toString()}
@@ -123,7 +122,6 @@ const Register = () => {
             <Grid item xs={12} sm={6}>
               <TextField 
                 fullWidth
-                required
                 type="password"
                 label="Password"
                 error={!!errors.password}
@@ -143,7 +141,6 @@ const Register = () => {
             <Grid item xs={12} sm={6}>
               <TextField 
                 fullWidth
-                required
                 type="password"
                 label="Confirm Password"
                 error={!!errors.passwordConfirm}
@@ -158,7 +155,7 @@ const Register = () => {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <FormControl required fullWidth>
+              <FormControl fullWidth>
                 <InputLabel id="user-type-label" error={!!errors.userType}>User Type</InputLabel>
                 <Select
                   labelId="user-type-label"
@@ -192,7 +189,6 @@ const Register = () => {
                     <TextField 
                       {...params} 
                       fullWidth
-                      required
                       error={!!errors.birthDate}
                       helperText={errors.birthDate?.message?.toString()}
                     />
