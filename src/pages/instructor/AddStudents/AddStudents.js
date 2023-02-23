@@ -36,7 +36,10 @@ const AddStudents = () => {
     }
 
     instructorApi.updateClass({ class: data.class, students })
-      .then(() => navigate('/instructor-classes'))
+      .then((res) => navigate('/instructor-classes', { state: { 
+        message: { 
+          text: `${res.data.count} new student(s) added to class ${res.data.class}`, severity: 'success' 
+      }}}))
       //.then((res) => console.log(res.data))
       .catch(console.error);
   };
@@ -105,6 +108,7 @@ const AddStudents = () => {
               <Button
                 variant="contained"
                 color="secondary"
+                onClick={() => navigate('/instructor-classes')}
               >
                 Cancel
               </Button>
