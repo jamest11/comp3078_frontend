@@ -47,6 +47,10 @@ const scheduleQuiz = async (data) => {
   return axiosInstance.post('/instructor/schedule-quiz', data);
 };
 
+const updateClass = async (data) => {
+  return axiosInstance.patch('/instructor/update-class', data);
+};
+
 const getInstructorQuizzes = async () => {
   return axiosInstance.get('/instructor/quizzes');
 };
@@ -69,4 +73,13 @@ const getClassGrades = async () => {
 
 export const studentApi = { getStudentQuizzes, getStudentQuiz, submitQuiz, getStudentGrades };
 export const authApi = { setAuthHeader, login, register };
-export const instructorApi = { createQuiz, getInstructorQuizzes, scheduleQuiz, getScheduledQuizzes, getClasses, getQuizGrades, getClassGrades };
+export const instructorApi = { 
+  createQuiz, 
+  scheduleQuiz,
+  updateClass,
+  getScheduledQuizzes, 
+  getInstructorQuizzes, 
+  getClasses, 
+  getQuizGrades, 
+  getClassGrades 
+};
