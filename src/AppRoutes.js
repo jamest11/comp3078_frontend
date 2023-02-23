@@ -8,13 +8,12 @@ import StudentGrades from 'pages/student/StudentGrades';
 import CreateQuiz from 'pages/instructor/CreateQuiz';
 import InstructorQuizzes from 'pages/instructor/InstructorQuizzes';
 import InstructorGrades from 'pages/instructor/InstructorGrades';
+import AddStudents from 'pages/instructor/AddStudents';
 
 import Login from 'pages/public/Login';
 import Register from 'pages/public/Register';
 
 import PrivateRoute from 'security/PrivateRoute';
-
-
 
 
 const AppRoutes = () => {
@@ -93,6 +92,14 @@ const AppRoutes = () => {
         element={
           <PrivateRoute userType="instructor">
             <CreateQuiz />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/add-students"
+        element={
+          <PrivateRoute userType="instructor">
+            <AddStudents />
           </PrivateRoute>
         }
       />
