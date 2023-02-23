@@ -64,7 +64,6 @@ const Login = () => {
           autoComplete="off"
         >
           <TextField
-            required
             fullWidth
             margin="normal"
             label="Email Address"
@@ -80,7 +79,6 @@ const Login = () => {
             })}
           />
           <TextField
-            required
             fullWidth
             margin="normal"
             label="Password"

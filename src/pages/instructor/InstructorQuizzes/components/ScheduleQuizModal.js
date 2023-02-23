@@ -79,7 +79,6 @@ const ScheduleQuizModal = ({ open, setOpen, quizzes, classes, callback }) => {
                 <TextField 
                   {...params} 
                   fullWidth
-                  required
                   error={!!errors.date}
                   helperText={errors.date?.message?.toString()}
                 />
@@ -87,7 +86,7 @@ const ScheduleQuizModal = ({ open, setOpen, quizzes, classes, callback }) => {
             />
           </LocalizationProvider>      
 
-          <FormControl required fullWidth sx={{ my: 2 }}>
+          <FormControl fullWidth sx={{ my: 2 }}>
             <InputLabel id="class-label" error={!!errors.class}>Class</InputLabel>
             <Select
               labelId="class-label"
@@ -104,7 +103,7 @@ const ScheduleQuizModal = ({ open, setOpen, quizzes, classes, callback }) => {
             </Select>
           </FormControl>
 
-          <FormControl required fullWidth sx={{ mb: 2 }}>
+          <FormControl fullWidth sx={{ mb: 2 }}>
             <InputLabel id="quiz-label" error={!!errors.quiz}>Quiz</InputLabel>
             <Select
               labelId="class-label"
