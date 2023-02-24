@@ -1,4 +1,4 @@
-import { Container, Grid, LinearProgress, Stack } from '@mui/material';
+import { Container, Grid, LinearProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 import { instructorApi } from 'services/api';
@@ -50,11 +50,11 @@ const InstructorGrades = () => {
           {cgLoading ? (
             <LinearProgress />
           ) : (
-            <Stack spacing={1}>
+            <>
               {classGrades.map((grade, index) => (
                 <ClassGrade key={index} data={grade} />
               ))}
-            </Stack>
+            </>        
           )}
         </Grid>
       </Grid>
