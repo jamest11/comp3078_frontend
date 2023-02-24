@@ -31,6 +31,7 @@ const QuizQuestion = ({ register, errors, index, remove}) => {
           label="Question"
           size="small"
           multiline
+          spellCheck
           maxRows={4}
           sx={{ m: 1, width: '81ch' }}
           error={!!errors?.['questions']?.[index]?.['q']}
@@ -45,6 +46,7 @@ const QuizQuestion = ({ register, errors, index, remove}) => {
           label="Option A"
           size="small"
           multiline
+          spellCheck
           maxRows={4}
           error={!!errors?.['questions']?.[index]?.['r1']}
           sx={responseField}
@@ -57,6 +59,7 @@ const QuizQuestion = ({ register, errors, index, remove}) => {
           label="Option B"
           size="small"
           multiline
+          spellCheck
           maxRows={4}
           error={!!errors?.['questions']?.[index]?.['r2']}
           sx={responseField}
@@ -71,6 +74,7 @@ const QuizQuestion = ({ register, errors, index, remove}) => {
           label="Option C"
           size="small"
           multiline
+          spellCheck
           maxRows={4}
           error={!!errors?.['questions']?.[index]?.['r3']}
           sx={responseField}
@@ -83,6 +87,7 @@ const QuizQuestion = ({ register, errors, index, remove}) => {
           label="Option D"
           size="small"
           multiline
+          spellCheck
           maxRows={4}
           error={!!errors?.['questions']?.[index]?.['r4']}
           sx={responseField}

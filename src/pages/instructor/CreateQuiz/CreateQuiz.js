@@ -26,7 +26,7 @@ const CreateQuiz = () => {
   };
 
   return (
-    <Container maxWidth="md" sx={{ mt: 2 }}>
+    <Container maxWidth="md" sx={{ mt: 2, pb: 2 }}>
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
@@ -41,6 +41,7 @@ const CreateQuiz = () => {
               variant="outlined"
               label="Quiz Title"
               size="small"
+              spellCheck
               error={!!errors.title}
               {...register('title', { required: true })}
             />
