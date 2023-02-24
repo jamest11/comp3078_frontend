@@ -23,7 +23,7 @@ const QuizGradesTable = ({ quizGrades, loading }) => {
               <TableCell>{grade.class}</TableCell>
               <TableCell>{grade.quiz}</TableCell>
               <TableCell>{formatDate(grade.dueDate)}</TableCell>
-              <TableCell>{grade.completed}</TableCell>
+              <TableCell>{grade.total > 0 ? `${grade.completed} / ${grade.total}` : 'N/A'}</TableCell>
               <TableCell>{grade.completed > 0 ? `${grade.average}%` : 'N/A'}</TableCell>
             </TableRow>
           ))}

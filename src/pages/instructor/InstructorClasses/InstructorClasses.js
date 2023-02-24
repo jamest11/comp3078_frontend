@@ -69,11 +69,11 @@ const InstructorClasses = () => {
         ) : (
           <>
             {classes.map((item, index) => (
-              <Accordion key={index}>
+              <Accordion key={index} disableGutters>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                 >
-                  <Typography variant="h6">{item.title}</Typography>
+                  <Typography variant="h5">{item.title}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Grid container alignItems="center">
