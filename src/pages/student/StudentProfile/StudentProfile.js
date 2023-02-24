@@ -29,7 +29,7 @@ const StudentProfile = () => {
       <TitleDivider />
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <Typography variant="h4">Upcoming Quizzes</Typography>
+          <Typography variant="h4" gutterBottom>Upcoming Quizzes</Typography>
 
           <TableContainer component={Paper}>
             <Table>
@@ -48,7 +48,9 @@ const StudentProfile = () => {
                       <TableCell>{quiz.quiz.title}</TableCell>
                       <TableCell>{quiz.class.title}</TableCell>
                       <TableCell>{formatDate(quiz.quiz.date)}</TableCell>  
-                      <Button size="small" variant="contained">Take Quiz</Button>
+                      <TableCell>
+                        <Button size="small" variant="contained">Take Quiz</Button>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </>
@@ -58,17 +60,17 @@ const StudentProfile = () => {
         </Grid>
    
         <Grid item xs={6}>   
-          <Typography variant="h4" sx={{mr:30, mt:0, mb:2}} >Grades</Typography>
+          <Typography variant="h4" gutterBottom>Grades</Typography>
           <Paper sx={{ width: 300, p: 2, mt: 0, mb: 3 }} elevation={2}>
             <Typography variant="h5">Great Work!</Typography>
-            <Box> The Average of your quizzes is %!</Box>
+            <Box> The Average of your quizzes is 75%!</Box>
           </Paper>
-          <Button component={Link} to="../StudentGrades" variant="contained" color="success">Grade History</Button>
+          <Button component={Link} to="/student-grades" variant="contained" color="success">Grade History</Button>
 
         </Grid>
 
         <Grid item xs={4}>
-          <Paper sx={{ p: 2, mt:4 }} elevation={2}>
+          <Paper sx={{ p: 2 }} elevation={2}>
             <Typography variant="h6">User Details
 
             <Button onClick={() => handleLogout()} sx={{ color: 'text.origin', ':hover': { color: 'text.light ' 
@@ -76,10 +78,10 @@ const StudentProfile = () => {
             </Button>     
             
             </Typography>
-            <Typography variant="body1">Name: {user.name}</Typography>
+            {/*<Typography variant="body1">Name: {user.name}</Typography>*/}
             <Typography variant="body1">Email: {user.email}</Typography>
             <Typography variant="body1">User Type: {user.userType}</Typography>
-            <Typography variant="body1"> Registered Since: {user.email}</Typography>
+            {/*<Typography variant="body1"> Registered Since: {user.email}</Typography>*/}
           </Paper> 
         </Grid>
     
@@ -87,9 +89,8 @@ const StudentProfile = () => {
           <Paper sx={{ width: 250, p: 2, mb:2 }} elevation={2}>
             <Typography sx={{ mt: 0, ml:6 }} variant="h6">Site Navigation</Typography>
             <Divider sx={{ mt: 2, mb: 1, bgcolor: 'darkGray' }} />
-            <Button sx={{ mt: 3, ml:8}} component={Link} to="../../instructor/InstructorQuizzes" variant="contained" color="success" >Quizzes</Button><br/><br/>
-            <Button sx={{ mt: 1, ml:8 }} component={Link} to="../../instructor/InstructorGrades" variant="contained" color="success" >Grades</Button><br/><br/>
-            <Button sx={{ mt: 1, ml:8 }} component={Link} to="../../instructor/CreateQuiz" variant="contained" color="success" >classes</Button><br/><br/>
+            <Button sx={{ mt: 3, ml:8}} component={Link} to="/student-quizzes" variant="contained" color="success" >Quizzes</Button><br/><br/>
+            <Button sx={{ mt: 1, ml:8 }} component={Link} to="/student-grades" variant="contained" color="success" >Grades</Button><br/><br/>
           </Paper> 
         </Grid>
       </Grid>
