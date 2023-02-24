@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Quiz from 'pages/student/Quiz';
 import StudentProfile from 'pages/student/StudentProfile';
@@ -21,6 +21,12 @@ import PrivateRoute from 'security/PrivateRoute';
 const AppRoutes = () => {
   return (
     <Routes>
+      <Route 
+        path="/"
+        element={
+          <Navigate to="/login" replace />
+        }
+      />
       <Route
         path="*"
         element={
