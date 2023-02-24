@@ -38,7 +38,7 @@ const InstructorGrades = () => {
       <Title>Grades</Title>
       <TitleDivider />
 
-      <Grid container columnGap={4}>
+      <Grid container spacing={4}>
         <Grid item sm={10} md={7}>
           <Subtitle>Quiz Grades</Subtitle>
 

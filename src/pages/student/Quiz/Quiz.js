@@ -55,12 +55,12 @@ const Quiz = () => {
   }, [time, submitQuiz]);
 
   if(!data) {
-    return (<Navigate to="/student-profile" replace />);
+    return (<Navigate to="/student-quizzes" replace />);
   }
 
   const submitQuestion = (res) => {
     responses.current = [...responses.current, res];
-    console.log(responses.current);
+    //console.log(responses.current);
 
     if(currIndex === questions.length - 1) {
       submitQuiz();
