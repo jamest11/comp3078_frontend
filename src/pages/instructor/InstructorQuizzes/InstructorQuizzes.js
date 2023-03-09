@@ -22,7 +22,7 @@ const InstructorQuizzes = () => {
   const [sqLoading, setSqLoading] = useState(true);
 
   const fetchScheduledQuizzes = async () => {
-    const res = await instructorApi.getScheduledQuizzes();
+    const res = await instructorApi.getScheduledQuizzes('incomplete');
 
     setScheduledQuizzes(res.data);
     setSqLoading(false);

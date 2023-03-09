@@ -7,7 +7,7 @@ const QuizGradesTable = ({ quizGrades, loading }) => {
       {loading ? (
         <LinearProgress />
       ) : (
-      <Table>
+      <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell>Class</TableCell>

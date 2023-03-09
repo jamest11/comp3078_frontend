@@ -1,4 +1,4 @@
-import { Container, Grid, LinearProgress } from '@mui/material';
+import { Container, Grid, LinearProgress, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 import { instructorApi } from 'services/api';
@@ -40,9 +40,12 @@ const InstructorGrades = () => {
 
       <Grid container spacing={4}>
         <Grid item sm={10} md={7}>
-          <Subtitle>Quiz Grades</Subtitle>
+          <Subtitle>Ongoing Quizzes</Subtitle>
 
-          <QuizGradesTable loading={qgLoading} quizGrades={quizGrades} />
+          <QuizGradesTable loading={qgLoading} quizGrades={quizGrades.filter(q => q.complete === false)} />
+
+          <Typography variant="h5" sx={{ mt: 2 }} gutterBottom>Completed Quizzes</Typography>
+          <QuizGradesTable loading={qgLoading} quizGrades={quizGrades.filter(q => q.complete === true)} />
         </Grid>
 
         <Grid item>

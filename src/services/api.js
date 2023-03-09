@@ -59,8 +59,8 @@ const getInstructorQuizzes = async () => {
   return axiosInstance.get('/instructor/quizzes');
 };
 
-const getScheduledQuizzes = async () => {
-  return axiosInstance.get('/instructor/scheduled-quizzes');
+const getScheduledQuizzes = async (complete = 'all') => {
+  return axiosInstance.get(`/instructor/scheduled-quizzes?filter=${complete}`);
 };
 
 const getClasses = async () => {
