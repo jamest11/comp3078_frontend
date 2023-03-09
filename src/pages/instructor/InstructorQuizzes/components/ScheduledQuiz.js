@@ -9,11 +9,10 @@ const ScheduledQuiz = ({ data }) => {
       elevation={1}
       sx={{ px: 2, pt: 2, my: 1, mr: 2 }}
     >
-
-      <Grid container>
+      <Grid container >
         <Grid item xs={8}>
-          <Typography variant="h6">{data.quiz.title}</Typography>
-          <Typography variant="body1" paragraph>{data.class.title} &nbsp; <b>|</b> &nbsp; Due {formatDate(data.date)}</Typography>
+          <Typography variant="h6">{data.quizTitle}</Typography>
+          <Typography variant="body1" paragraph>{data.classTitle} &nbsp; <b>|</b> &nbsp; Due {formatDate(data.date)}</Typography>
         </Grid>
         <Grid 
           item 

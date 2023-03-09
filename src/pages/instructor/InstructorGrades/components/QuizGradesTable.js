@@ -20,11 +20,11 @@ const QuizGradesTable = ({ quizGrades, loading }) => {
         <TableBody>
           {quizGrades.map((grade, index) => (
             <TableRow key={index}>
-              <TableCell>{grade.class}</TableCell>
-              <TableCell>{grade.quiz}</TableCell>
-              <TableCell>{formatDate(grade.dueDate)}</TableCell>
-              <TableCell>{grade.total > 0 ? `${grade.completed} / ${grade.total}` : 'N/A'}</TableCell>
-              <TableCell>{grade.completed > 0 ? `${grade.average}%` : 'N/A'}</TableCell>
+              <TableCell>{grade.classTitle}</TableCell>
+              <TableCell>{grade.quizTitle}</TableCell>
+              <TableCell>{formatDate(grade.date)}</TableCell>
+              <TableCell>{grade.completed}</TableCell>
+              <TableCell>{grade.average !== null ? `${grade.average}%` : 'N/A'}</TableCell>
             </TableRow>
           ))}
         </TableBody>

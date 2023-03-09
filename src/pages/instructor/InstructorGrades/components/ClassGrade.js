@@ -7,10 +7,10 @@ const ClassGrade = ({ data }) => {
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
       >
-        <Typography variant="h5">{data.class}</Typography>
+        <Typography variant="h5">{data.title}</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        {data.count === -1 ? (
+        {data.count === 0 ? (
           <Typography variant="body1">
             No grades have been recorded for this class
           </Typography>
