@@ -24,13 +24,13 @@ const Quiz = ({ data }) => {
     >
       <Grid container>
         <Grid item xs={6}>
-          <Typography variant="h6">{data.quiz.title}</Typography>
-          <Typography variant="body1">{data.class.title}</Typography>
-          <Typography variant="body1">{data.quiz.questions.length} question(s)</Typography>
-          <Typography variant="body1">{formatTime(data.quiz.timeLimit)} Time Limit</Typography>
+          <Typography variant="h6">{data.quizTitle}</Typography>
+          <Typography variant="body1">{data.classTitle}</Typography>
+          <Typography variant="body1">{data.questionCount} question(s)</Typography>
+          <Typography variant="body1">{formatTime(data.timeLimit)} Time Limit</Typography>
         </Grid>
         <Grid item container alignItems="center" justifyContent="flex-end" xs={6}>
-          <Typography variant="body1">Due {formatDate(data.date)}</Typography>
+          <Typography variant="body1">Due {formatDate(data.dueDate)}</Typography>
           <Button 
             variant="contained" 
             color="primary" 

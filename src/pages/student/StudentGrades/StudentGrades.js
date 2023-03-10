@@ -56,8 +56,8 @@ const StudentGrades = () => {
                 <TableBody>
                   {grades.map((grade, index) => (
                     <TableRow key={index}>
-                      <TableCell>{grade.class}</TableCell>
-                      <TableCell>{grade.quiz}</TableCell>
+                      <TableCell>{grade.classTitle}</TableCell>
+                      <TableCell>{grade.quizTitle}</TableCell>
                       <TableCell>{formatDate(grade.date)}</TableCell>
                       <TableCell>{grade.grade}%</TableCell>
                     </TableRow>

@@ -22,7 +22,7 @@ const QuizGradesTable = ({ quizGrades, loading }) => {
             <TableRow key={index}>
               <TableCell>{grade.classTitle}</TableCell>
               <TableCell>{grade.quizTitle}</TableCell>
-              <TableCell>{formatDate(grade.date)}</TableCell>
+              <TableCell>{formatDate(grade.dueDate)}</TableCell>
               <TableCell>{grade.completed}</TableCell>
               <TableCell>{grade.average !== null ? `${grade.average}%` : 'N/A'}</TableCell>
             </TableRow>

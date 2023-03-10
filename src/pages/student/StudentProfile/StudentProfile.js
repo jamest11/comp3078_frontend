@@ -47,7 +47,7 @@ const StudentProfile = () => {
                     <TableRow key={index}>
                       <TableCell>{quiz.quiz.title}</TableCell>
                       <TableCell>{quiz.class.title}</TableCell>
-                      <TableCell>{formatDate(quiz.quiz.date)}</TableCell>  
+                      <TableCell>{formatDate(quiz.quiz.dueDate)}</TableCell>  
                       <TableCell>
                         <Button size="small" variant="contained">Take Quiz</Button>
                       </TableCell>

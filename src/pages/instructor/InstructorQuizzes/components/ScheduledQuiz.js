@@ -12,7 +12,7 @@ const ScheduledQuiz = ({ data }) => {
       <Grid container >
         <Grid item xs={8}>
           <Typography variant="h6">{data.quizTitle}</Typography>
-          <Typography variant="body1" paragraph>{data.classTitle} &nbsp; <b>|</b> &nbsp; Due {formatDate(data.date)}</Typography>
+          <Typography variant="body1" paragraph>{data.classTitle} &nbsp; <b>|</b> &nbsp; Due {formatDate(data.dueDate)}</Typography>
         </Grid>
         <Grid 
           item 

@@ -33,7 +33,7 @@ const ScheduleQuizModal = ({ open, setOpen, quizzes, classes, callback }) => {
       reset();
       setDueDate(null);
 
-      register('date', {
+      register('dueDate', {
         required: {
           value: true,
           message: 'Due date is required'
@@ -72,15 +72,15 @@ const ScheduleQuizModal = ({ open, setOpen, quizzes, classes, callback }) => {
               label="Due Date"
               value={dueDate}
               onChange={(date) => {
-                setValue('date', dayjs(date).format(), { shouldValidate: true });
+                setValue('dueDate', dayjs(date).format(), { shouldValidate: true });
                 setDueDate(date);
               }}
               renderInput={(params) => (
                 <TextField 
                   {...params} 
                   fullWidth
-                  error={!!errors.date}
-                  helperText={errors.date?.message?.toString()}
+                  error={!!errors.dueDate}
+                  helperText={errors.dueDate?.message?.toString()}
                 />
               )}
             />
