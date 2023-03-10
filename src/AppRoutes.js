@@ -7,6 +7,8 @@ import StudentGrades from 'pages/student/StudentGrades';
 
 import CreateQuiz from 'pages/instructor/CreateQuiz';
 import InstructorQuizzes from 'pages/instructor/InstructorQuizzes';
+import DelScheduledQuiz from 'pages/instructor/InstructorQuizzes/DelScheduledQuiz';
+import DelQuiz from 'pages/instructor/InstructorQuizzes/DelQuiz';
 import InstructorGrades from 'pages/instructor/InstructorGrades';
 import InstructorClasses from 'pages/instructor/InstructorClasses';
 import AddStudents from 'pages/instructor/AddStudents';
@@ -82,6 +84,22 @@ const AppRoutes = () => {
         element={
           <PrivateRoute userType="instructor">
             <InstructorQuizzes />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/instructor-quizzes/delete-scheduled-quiz"
+        element={
+          <PrivateRoute userType="instructor">
+            <DelScheduledQuiz />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/instructor-quizzes/delete-quiz"
+        element={
+          <PrivateRoute userType="instructor">
+            <DelQuiz />
           </PrivateRoute>
         }
       />

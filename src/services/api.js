@@ -75,6 +75,14 @@ const getClassGrades = async () => {
   return axiosInstance.get('/instructor/class-grades');
 };
 
+const deleteScheduledQuiz = async (data) => {
+  return axiosInstance.delete('/instructor/scheduled-quiz', { data });
+};
+
+const deleteQuiz = async (data) => {
+  return axiosInstance.delete('/instructor/quiz', { data });
+};
+
 export const studentApi = { getStudentQuizzes, getStudentQuiz, submitQuiz, getStudentGrades };
 export const authApi = { setAuthHeader, login, register };
 export const instructorApi = { 
@@ -86,5 +94,7 @@ export const instructorApi = {
   getInstructorQuizzes, 
   getClasses, 
   getQuizGrades, 
-  getClassGrades 
+  getClassGrades,
+  deleteScheduledQuiz,
+  deleteQuiz
 };

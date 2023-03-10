@@ -1,8 +1,11 @@
 import { Button, Grid, Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { formatDate } from 'utils';
+import { useNavigate } from 'react-router-dom';
 
 const ScheduledQuiz = ({ data }) => {
+  const navigate = useNavigate();
+
   return (
     <Box
       component={Paper}
@@ -24,7 +27,14 @@ const ScheduledQuiz = ({ data }) => {
           sx={{ pb: 1 }}  
         >
           <Button variant="outlined" color="success" size="small">Edit</Button>
-          <Button variant="outlined" color="error" size="small">Delete</Button>
+          <Button 
+            variant="outlined" 
+            color="error" 
+            size="small"
+            onClick={() => navigate('/instructor-quizzes/delete-scheduled-quiz', { state: { quiz: data }})}
+          >
+            Delete
+          </Button>
         </Grid>
       </Grid>
     </Box>

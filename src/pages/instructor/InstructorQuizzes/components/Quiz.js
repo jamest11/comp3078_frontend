@@ -2,8 +2,11 @@ import { Button, Grid, Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 import { formatTime } from 'utils';
+import { useNavigate } from 'react-router-dom';
 
 const Quiz = ({ data }) => {
+  const navigate = useNavigate();
+
   return (
     <Box
       component={Paper}
@@ -25,7 +28,14 @@ const Quiz = ({ data }) => {
           gap={1}
         >
           <Button variant="outlined" color="success" size="small">Edit</Button>
-          <Button variant="outlined" color="error" size="small">Delete</Button>
+          <Button 
+            variant="outlined" 
+            color="error" 
+            size="small"
+            onClick={() => navigate('/instructor-quizzes/delete-quiz', { state: { quiz: data }})}
+          >
+            Delete
+          </Button>
         </Grid>
       </Grid>
 
