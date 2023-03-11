@@ -1,6 +1,6 @@
 import { Box, Button, Container, Grid, LinearProgress } from '@mui/material';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { instructorApi } from 'services/api';
@@ -17,11 +17,13 @@ const InstructorQuizzes = () => {
   const [scheduledQuizzes, setScheduledQuizzes] = useState([]);
   const [classes, setClasses] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const modalRef = useRef(null);
 
   const [qLoading, setQLoading] = useState(true);
   const [sqLoading, setSqLoading] = useState(true);
 
   const fetchScheduledQuizzes = async () => {
+    //setSqLoading(true);
     const res = await instructorApi.getScheduledQuizzes('incomplete');
 
     setScheduledQuizzes(res.data);
@@ -49,7 +51,14 @@ const InstructorQuizzes = () => {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 2 }}>
-      <ScheduleQuizModal open={showModal} setOpen={setShowModal} quizzes={quizzes} classes={classes} callback={fetchScheduledQuizzes} />
+      <ScheduleQuizModal 
+        open={showModal} 
+        setOpen={setShowModal} 
+        quizzes={quizzes} 
+        classes={classes} 
+        callback={fetchScheduledQuizzes} 
+        editData={modalRef.current}  
+      />
 
       <Title>Quizzes</Title>
       <TitleDivider />
@@ -63,7 +72,12 @@ const InstructorQuizzes = () => {
           ) : (
             <Box sx={{ overflow: 'auto', maxHeight: 500, maxWidth: 500 }}>
               {scheduledQuizzes.map((quiz, index) => (
-                <ScheduledQuiz key={index} data={quiz} />
+                <ScheduledQuiz 
+                  key={index} 
+                  data={quiz} 
+                  modalRef={modalRef} 
+                  setShowModal={setShowModal}
+                />
               ))}
             </Box>
           )}
@@ -72,7 +86,10 @@ const InstructorQuizzes = () => {
             variant="contained" 
             color="success"
             sx={{ mt: 1 }} 
-            onClick={() => setShowModal(true)}
+            onClick={() => {
+              modalRef.current = null;
+              setShowModal(true);
+            }}
           >
               Schedule Quiz
             </Button>

@@ -55,6 +55,10 @@ const updateClass = async (data) => {
   return axiosInstance.patch('/instructor/update-class', data);
 };
 
+const updateScheduledQuiz = async (id, dueDate) => {
+  return axiosInstance.patch('/instructor/update-scheduled-quiz', { id, dueDate});
+};
+
 const getInstructorQuizzes = async () => {
   return axiosInstance.get('/instructor/quizzes');
 };
@@ -87,9 +91,10 @@ export const studentApi = { getStudentQuizzes, getStudentQuiz, submitQuiz, getSt
 export const authApi = { setAuthHeader, login, register };
 export const instructorApi = { 
   createQuiz, 
+  createClass,
   scheduleQuiz,
   updateClass,
-  createClass,
+  updateScheduledQuiz,
   getScheduledQuizzes, 
   getInstructorQuizzes, 
   getClasses, 

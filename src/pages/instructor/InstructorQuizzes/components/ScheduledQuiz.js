@@ -3,7 +3,7 @@ import { Box } from '@mui/system';
 import { formatDate } from 'utils';
 import { useNavigate } from 'react-router-dom';
 
-const ScheduledQuiz = ({ data }) => {
+const ScheduledQuiz = ({ data, modalRef, setShowModal }) => {
   const navigate = useNavigate();
 
   return (
@@ -26,7 +26,17 @@ const ScheduledQuiz = ({ data }) => {
           gap={1}
           sx={{ pb: 1 }}  
         >
-          <Button variant="outlined" color="success" size="small">Edit</Button>
+          <Button 
+            variant="outlined" 
+            color="success" 
+            size="small"
+            onClick={() => {
+              modalRef.current = data;
+              setShowModal(true);
+            }}
+          >
+            Edit
+          </Button>
           <Button 
             variant="outlined" 
             color="error" 
