@@ -1,28 +1,58 @@
-import { Container, Box, FormGroup, TextField, InputLabel, Select, MenuItem, Button, FormControl, Typography, Paper } from '@mui/material';
-import { useForm, useFieldArray } from 'react-hook-form';
-import { useNavigate, Link } from 'react-router-dom';
+import { Container, Box, FormGroup, TextField, MenuItem, Button, Typography, Paper, FormHelperText } from '@mui/material';
+import LoadingButton from 'components/LoadingButton';
+import { useState } from 'react';
+import { useForm, useFieldArray, Controller } from 'react-hook-form';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 
 import { instructorApi } from 'services/api';
+import { formatTime } from 'utils';
 import QuizQuestion from './components/QuizQuestion';
 
 
 const CreateQuiz = () => {
   const navigate = useNavigate();
-  const { register, handleSubmit, control, formState: { errors } } = useForm();
+  const location = useLocation();
+  const [submitLoading, setSubmitLoading] = useState(false);
+
+  const editData = location.state?.quiz;
+  const emptyQuestion = { q: '', r1: '', r2: '', r3: '', r4: '', a: '' };
+  const timeOptions = [60, 120, 180, 300, 600, 900];
+
+  const { register, handleSubmit, control, formState: { errors, dirtyFields } } = useForm({
+    defaultValues: {
+      title: editData?.title ?? '',
+      timeLimit: editData?.timeLimit ?? '',
+      questions: editData?.questions ?? []
+    }
+  });
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'questions',
+    rules: { required: 'At least one question is required' }
   });
 
   const onSubmit = (data) => {
-    instructorApi.createQuiz(data)
-      .then(() => navigate('/instructor-quizzes'))
-      .catch(console.error);
+    setSubmitLoading(true);
+    if(editData) {
+      if(Object.keys(dirtyFields).length > 0) {
+        instructorApi.updateQuiz(editData._id, data) 
+          .then(() => navigate('/instructor-quizzes'))
+          .catch(console.error);
+      }
+      else {
+        navigate('/instructor-quizzes');
+      }
+    }
+    else {
+      instructorApi.createQuiz(data)
+        .then(() => navigate('/instructor-quizzes'))
+        .catch(console.error);
+    }
   };
 
   const addQuestion = () => {
-    append({ q: '', r1: '', r2: '', r3: '', r4: '', a: '' });
+    append(emptyQuestion);
   };
 
   return (
@@ -34,7 +64,11 @@ const CreateQuiz = () => {
         autoComplete="off"
       >
         <Paper elevation={6}>
-          <Typography variant="h4" sx={{ pt: 2, px: 2 }} gutterBottom>New Quiz</Typography>
+          <Typography variant="h4" sx={{ pt: 2, px: 2 }} gutterBottom>{editData? 'Edit Quiz' : 'New Quiz'}</Typography>
+          {errors.questions?.root && (
+            <FormHelperText sx={{ px:2, pb: 2 }} error>{errors.questions.root.message?.toString()}</FormHelperText>
+          )}
+
           <FormGroup row sx={{ pb: 2, mx: 2, columnGap: 1 }}>
             <TextField
               sx={{ width: '60ch' }}
@@ -43,36 +77,47 @@ const CreateQuiz = () => {
               size="small"
               spellCheck
               error={!!errors.title}
-              {...register('title', { required: true })}
+              helperText={errors.title?.message?.toString()}
+              {...register('title', { required: 'Quiz title is required' })}
             />
-            <FormControl size="small">
-              <InputLabel id="quiz-time-limit-label">Time Limit</InputLabel>
-              <Select
-                sx={{ width: 200 }}
-                labelId="quiz-time-limit-label"
-                label="Time Limit"
-                id="quiz-time-limit"
-                defaultValue=""
-                error={!!errors.timeLimit}
-                {...register('timeLimit', { required: true })}
-              >
-                <MenuItem value={60}>1:00</MenuItem>
-                <MenuItem value={120}>2:00</MenuItem>
-                <MenuItem value={180}>3:00</MenuItem>
-                <MenuItem value={300}>5:00</MenuItem>
-                <MenuItem value={600}>10:00</MenuItem>
-                <MenuItem value={900}>15:00</MenuItem>
-              </Select>
-            </FormControl>
+
+            <Controller             
+              control={control}
+              name="timeLimit"
+              rules={{ required: 'Select a time limit' }}
+              render={({ field, fieldState: { error } }) => (
+                <TextField
+                  {...field}
+                  select
+                  label="Time Limit"
+                  size="small"
+                  error={!!error}
+                  helperText={error?.message}
+                  sx={{ width: 200 }}
+                >
+                  {timeOptions.map((option) => (
+                    <MenuItem key={option} value={option}>{formatTime(option)}</MenuItem>
+                  ))}
+                </TextField>
+              )}
+            />
           </FormGroup>
 
           {fields.map((item, index) => (
-            <QuizQuestion key={item.id} index={index} register={register} errors={errors} remove={remove} />
+            <QuizQuestion key={item.id} {... {control, register, errors, index, remove }} />
           ))}
 
           <FormGroup row sx={{ gap: 2, mx: 2, py: 2 }}>
             <Button variant="contained" color="success" onClick={addQuestion}>Add Question</Button>
-            <Button type="submit" variant="contained">Save</Button>
+            <LoadingButton
+              variant="contained"
+              color="primary"
+              loading={submitLoading}
+              size="small"
+              onClick="submit"  
+            >
+              Save
+            </LoadingButton>
             <Button variant="contained" color="secondary" component={Link} to="/instructor-quizzes">Cancel</Button>
           </FormGroup>
         </Paper>

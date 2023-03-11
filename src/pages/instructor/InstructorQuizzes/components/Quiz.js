@@ -1,11 +1,25 @@
 import { Button, Grid, Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-
-import { formatTime } from 'utils';
+import LoadingButton from 'components/LoadingButton';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { instructorApi } from 'services/api';
+import { formatTime } from 'utils';
 
 const Quiz = ({ data }) => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  const fetchQuizAndEdit = async () => {
+    setLoading(true);
+    instructorApi.getInstructorQuizzes(data._id)
+      .then((res) => {
+        setLoading(false);
+        navigate('/create-quiz', { state: { quiz: res.data }});
+      })
+      .catch(console.error);
+  };
 
   return (
     <Box
@@ -27,7 +41,15 @@ const Quiz = ({ data }) => {
           xs={5}
           gap={1}
         >
-          <Button variant="outlined" color="success" size="small">Edit</Button>
+          <LoadingButton
+            variant="outlined"
+            color="primary"
+            size="small"
+            onClick={fetchQuizAndEdit}
+            loading={loading}
+          >
+            Edit
+          </LoadingButton>
           <Button 
             variant="outlined" 
             color="error" 
@@ -38,7 +60,6 @@ const Quiz = ({ data }) => {
           </Button>
         </Grid>
       </Grid>
-
     </Box>
   );
 };

@@ -59,8 +59,17 @@ const updateScheduledQuiz = async (id, dueDate) => {
   return axiosInstance.patch('/instructor/update-scheduled-quiz', { id, dueDate});
 };
 
-const getInstructorQuizzes = async () => {
-  return axiosInstance.get('/instructor/quizzes');
+const updateQuiz = async (id, data) => {
+  return axiosInstance.patch('/instructor/update-quiz', { id, data });
+};
+
+const getInstructorQuizzes = async (id = null) => {
+  if(id) {
+    return axiosInstance.get(`/instructor/quiz?id=${id}`);
+  }
+  else {
+    return axiosInstance.get('/instructor/quizzes');
+  }
 };
 
 const getScheduledQuizzes = async (complete = 'all') => {
@@ -95,6 +104,7 @@ export const instructorApi = {
   scheduleQuiz,
   updateClass,
   updateScheduledQuiz,
+  updateQuiz,
   getScheduledQuizzes, 
   getInstructorQuizzes, 
   getClasses, 
