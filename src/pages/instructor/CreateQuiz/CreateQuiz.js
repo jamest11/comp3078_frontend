@@ -8,6 +8,8 @@ import { instructorApi } from 'services/api';
 import { formatTime } from 'utils';
 import QuizQuestion from './components/QuizQuestion';
 
+const emptyQuestion = { q: '', r1: '', r2: '', r3: '', r4: '', a: '' };
+const timeOptions = [60, 120, 180, 300, 600, 900];
 
 const CreateQuiz = () => {
   const navigate = useNavigate();
@@ -15,8 +17,6 @@ const CreateQuiz = () => {
   const [submitLoading, setSubmitLoading] = useState(false);
 
   const editData = location.state?.quiz;
-  const emptyQuestion = { q: '', r1: '', r2: '', r3: '', r4: '', a: '' };
-  const timeOptions = [60, 120, 180, 300, 600, 900];
 
   const { register, handleSubmit, control, formState: { errors, dirtyFields } } = useForm({
     defaultValues: {
