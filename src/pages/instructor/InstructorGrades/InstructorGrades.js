@@ -7,6 +7,7 @@ import ClassGrade from './components/ClassGrade';
 import QuizGradesTable from './components/QuizGradesTable';
 import Subtitle from 'components/Subtitle';
 import TitleDivider from 'components/TitleDivider';
+import GradeDataGrid from './components/GradeDataGrid';
 
 const InstructorGrades = () => {
   const [qgLoading, setQgLoading] = useState(true);
@@ -39,16 +40,18 @@ const InstructorGrades = () => {
       <TitleDivider />
 
       <Grid container spacing={4}>
-        <Grid item sm={10} md={7}>
+        <Grid item sm={12} md={8}>
           <Subtitle>Ongoing Quizzes</Subtitle>
 
-          <QuizGradesTable loading={qgLoading} quizGrades={quizGrades.filter(q => q.complete === false)} />
+          {/*<QuizGradesTable loading={qgLoading} quizGrades={quizGrades.filter(q => q.complete === false)} />*/}
+          <GradeDataGrid quizGrades={quizGrades.filter(q => q.complete === false)} />
 
           <Typography variant="h5" sx={{ mt: 2 }} gutterBottom>Completed Quizzes</Typography>
-          <QuizGradesTable loading={qgLoading} quizGrades={quizGrades.filter(q => q.complete === true)} />
+          {/*<QuizGradesTable loading={qgLoading} quizGrades={quizGrades.filter(q => q.complete === true)} />*/}
+          <GradeDataGrid quizGrades={quizGrades.filter(q => q.complete === true)} />
         </Grid>
 
-        <Grid item>
+        <Grid item sm={12} md={4}>
           <Subtitle>Average Class Grades</Subtitle>
           {cgLoading ? (
             <LinearProgress />
