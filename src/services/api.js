@@ -63,13 +63,12 @@ const updateQuiz = async (id, data) => {
   return axiosInstance.patch('/instructor/update-quiz', { id, data });
 };
 
-const getInstructorQuizzes = async (id = null) => {
-  if(id) {
-    return axiosInstance.get(`/instructor/quiz?id=${id}`);
-  }
-  else {
-    return axiosInstance.get('/instructor/quizzes');
-  }
+const getInstructorQuiz = async (id) => {
+  return axiosInstance.get(`/instructor/quiz?id=${id}`);
+};
+
+const getInstructorQuizzes = async ({page = 1, limit = 4, pagination = false} = {}) => {
+  return axiosInstance.get(`/instructor/quizzes?pagination=${pagination}&page=${page}&limit=${limit}`);
 };
 
 const getScheduledQuizzes = async (complete = 'all') => {
@@ -107,6 +106,7 @@ export const instructorApi = {
   updateQuiz,
   getScheduledQuizzes, 
   getInstructorQuizzes, 
+  getInstructorQuiz,
   getClasses, 
   getQuizGrades, 
   getClassGrades,

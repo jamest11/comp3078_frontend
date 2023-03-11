@@ -13,7 +13,7 @@ const Quiz = ({ data }) => {
 
   const fetchQuizAndEdit = async () => {
     setLoading(true);
-    instructorApi.getInstructorQuizzes(data._id)
+    instructorApi.getInstructorQuiz(data._id)
       .then((res) => {
         setLoading(false);
         navigate('/create-quiz', { state: { quiz: res.data }});
@@ -25,7 +25,7 @@ const Quiz = ({ data }) => {
     <Box
       component={Paper}
       elevation={1}
-      sx={{ p: 2, my: 1, mr: 2 }}
+      sx={{ px: 2, py: 1 }}
     >
       <Grid container>
         <Grid item xs={7}>
@@ -43,7 +43,7 @@ const Quiz = ({ data }) => {
         >
           <LoadingButton
             variant="outlined"
-            color="primary"
+            color="success"
             size="small"
             onClick={fetchQuizAndEdit}
             loading={loading}
