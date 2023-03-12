@@ -1,4 +1,4 @@
-import { Box, Button, Container, Grid, LinearProgress } from '@mui/material';
+import { Button, Container, Grid, LinearProgress, Stack } from '@mui/material';
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -46,7 +46,7 @@ const InstructorQuizzes = () => {
   }, []);
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 2 }}>
+    <Container maxWidth="lg" sx={{ mt: 2, pb: 2 }}>
       <ScheduleQuizModal 
         open={showModal} 
         setOpen={setShowModal} 
@@ -59,14 +59,14 @@ const InstructorQuizzes = () => {
       <Title>Quizzes</Title>
       <TitleDivider />
       
-      <Grid container>
-        <Grid item xs={7}>
+      <Grid container spacing={1}>
+        <Grid item sm={12} md={7}>
           <Subtitle>Scheduled Quizzes</Subtitle>
         
           {sqLoading ? (
             <LinearProgress />
           ) : (
-            <Box sx={{ overflow: 'auto', maxHeight: 500, maxWidth: 500 }}>
+            <Stack spacing={1} sx={{ overflow: 'auto', maxHeight: 500, maxWidth: 500 }}>
               {scheduledQuizzes.map((quiz, index) => (
                 <ScheduledQuiz 
                   key={index} 
@@ -75,7 +75,7 @@ const InstructorQuizzes = () => {
                   setShowModal={setShowModal}
                 />
               ))}
-            </Box>
+            </Stack>
           )}
 
           <Button 
@@ -91,7 +91,7 @@ const InstructorQuizzes = () => {
           </Button>
         </Grid>
 
-        <Grid item xs={5}>
+        <Grid item sm={12} md={5}>
           <Subtitle>My Quizzes</Subtitle>
 
           <QuizContainer />

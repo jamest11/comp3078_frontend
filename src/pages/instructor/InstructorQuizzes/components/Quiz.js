@@ -30,8 +30,8 @@ const Quiz = ({ data }) => {
       <Grid container>
         <Grid item xs={7}>
           <Typography variant="h6">{data.title}</Typography>
-          <Typography variant="body1">{data.questionCount} Question(s)</Typography>
-          <Typography variant="body1">{formatTime(data.timeLimit)} Time Limit</Typography>
+          <Typography variant="body2">{data.questionCount} Question(s)</Typography>
+          <Typography variant="body2">{formatTime(data.timeLimit)} Time Limit</Typography>
         </Grid>
         <Grid 
           item 

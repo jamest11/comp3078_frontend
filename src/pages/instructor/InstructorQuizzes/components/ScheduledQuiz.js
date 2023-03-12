@@ -10,12 +10,19 @@ const ScheduledQuiz = ({ data, modalRef, setShowModal }) => {
     <Box
       component={Paper}
       elevation={1}
-      sx={{ px: 2, pt: 2, my: 1, mr: 2 }}
+      sx={{ px: 2, py: 1 }}
     >
-      <Grid container >
+      <Grid container>
         <Grid item xs={8}>
           <Typography variant="h6">{data.quizTitle}</Typography>
-          <Typography variant="body1" paragraph>{data.classTitle} &nbsp; <b>|</b> &nbsp; Due {formatDate(data.dueDate)}</Typography>
+          <Typography variant="body2">{data.classTitle}</Typography>
+          <Typography variant="body2">
+            Due {formatDate(data.dueDate)}
+            &nbsp; | &nbsp;Progress:&nbsp;
+            <Typography display="inline" variant="body2" fontWeight="medium">
+              {`${data.numComplete}/${data.numStudents}`}
+            </Typography>
+          </Typography>
         </Grid>
         <Grid 
           item 
@@ -23,8 +30,7 @@ const ScheduledQuiz = ({ data, modalRef, setShowModal }) => {
           alignItems="center" 
           justifyContent="flex-end" 
           xs={4} 
-          gap={1}
-          sx={{ pb: 1 }}  
+          gap={1} 
         >
           <Button 
             variant="outlined" 

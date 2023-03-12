@@ -27,7 +27,7 @@ const InstructorClasses = () => {
 
   useEffect(() => {
     const fetchClassGrades = async () => {
-      const res = await instructorApi.getClassGrades();
+      const res = await instructorApi.getInstructorGrades('class');
 
       setClassGrades(res.data);
     };

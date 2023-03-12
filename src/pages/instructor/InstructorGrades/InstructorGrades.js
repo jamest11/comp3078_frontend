@@ -4,13 +4,11 @@ import { useEffect, useState } from 'react';
 import { instructorApi } from 'services/api';
 import Title from 'components/Title';
 import ClassGrade from './components/ClassGrade';
-import QuizGradesTable from './components/QuizGradesTable';
 import Subtitle from 'components/Subtitle';
 import TitleDivider from 'components/TitleDivider';
 import GradeDataGrid from './components/GradeDataGrid';
 
 const InstructorGrades = () => {
-  const [qgLoading, setQgLoading] = useState(true);
   const [cgLoading, setCgLoading] = useState(true);
   const [quizGrades, setQuizGrades] = useState([]);
   const [classGrades, setClassGrades] = useState([]);
@@ -20,7 +18,6 @@ const InstructorGrades = () => {
       const res = await instructorApi.getInstructorGrades('quiz');
 
       setQuizGrades(res.data);
-      setQgLoading(false);
     };
     
     const fetchClassGrades = async () => {
@@ -43,12 +40,17 @@ const InstructorGrades = () => {
         <Grid item sm={12} md={8}>
           <Subtitle>Ongoing Quizzes</Subtitle>
 
-          {/*<QuizGradesTable loading={qgLoading} quizGrades={quizGrades.filter(q => q.complete === false)} />*/}
-          <GradeDataGrid quizGrades={quizGrades.filter(q => q.complete === false)} />
+          <GradeDataGrid 
+            quizGrades={quizGrades.filter(q => q.complete === false)} 
+            variant="incomplete" 
+          />
 
-          <Typography variant="h5" sx={{ mt: 2 }} gutterBottom>Completed Quizzes</Typography>
-          {/*<QuizGradesTable loading={qgLoading} quizGrades={quizGrades.filter(q => q.complete === true)} />*/}
-          <GradeDataGrid quizGrades={quizGrades.filter(q => q.complete === true)} />
+          <Typography variant="h5" sx={{ mt: 1 }} gutterBottom>Completed Quizzes</Typography>
+          
+          <GradeDataGrid 
+            quizGrades={quizGrades.filter(q => q.complete === true)} 
+            variant="complete" 
+          />
         </Grid>
 
         <Grid item sm={12} md={4}>

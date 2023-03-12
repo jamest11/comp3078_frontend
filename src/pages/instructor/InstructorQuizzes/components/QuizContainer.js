@@ -16,7 +16,7 @@ const QuizContainer = () => {
   };
 
   const fetchQuizzes = async (page) => {
-    const res = await instructorApi.getInstructorQuizzes({ page, pagination: true });
+    const res = await instructorApi.getInstructorQuizzes({ page, pagination: true, limit: 5 });
     
     setQuizzes(res.data.docs);
     setTotalPages(res.data.totalPages);
@@ -32,7 +32,7 @@ const QuizContainer = () => {
       {loading ? (
         <LinearProgress />
       ) : (
-          <Stack spacing={1}>
+          <Stack spacing={1} sx={{ maxWidth: 500 }}>
             {quizzes.map((quiz, index) => (
               <Quiz key={index} data={quiz} />
             ))}

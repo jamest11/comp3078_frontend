@@ -74,7 +74,7 @@ const GradeChart = ({ data }) => {
           defaultValue=""
           onChange={handleChange}
         >
-          <MenuItem key={-1} value="" dense>&nbsp;</MenuItem>
+          <MenuItem key={-1} value="" dense>All</MenuItem>
           {classNames.map((name, index) => (
             <MenuItem key={index} value={name} dense>{name}</MenuItem>
           ))}
