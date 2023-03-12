@@ -1,5 +1,5 @@
-import { Paper, Typography, useTheme } from '@mui/material';
-import { useRef } from 'react';
+import { Box, MenuItem, Paper, TextField, Typography, useTheme } from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
 import { Label, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 import { formatDate } from 'utils';
@@ -19,8 +19,9 @@ const CustomTooltip = ({ active, payload, styles }) => {
 
 const GradeChart = ({ data }) => {
   const theme = useTheme();
-  
-  const grades = data.sort((a, b) => a.date > b.date);
+  const [classNames, setClassNames] = useState([]);
+  const [grades, setGrades] = useState([]);
+
   const tooltipStyles = useRef({
     wrapper: {
       backgroundColor: theme.palette.grey['200'],
@@ -36,6 +37,23 @@ const GradeChart = ({ data }) => {
     }
   });
 
+  useEffect(() => {
+    const names = [...new Set(data.map((x) => x.classTitle))];
+    setClassNames(names);
+    setGrades([...data].reverse());
+  }, [data]);
+
+  const handleChange = (event) => {
+    const name = event.target.value;
+
+    if(name === '') {
+      setGrades([...data].reverse());
+    }
+    else {
+      setGrades([...data].reverse().filter((x) => x.classTitle === name));
+    }
+  };
+
   return (
     <Paper
       sx={{
@@ -45,7 +63,24 @@ const GradeChart = ({ data }) => {
         height: 240,
       }}
     >
-      <Typography variant="h6" color="primary" gutterBottom>Grade History</Typography>
+      <Box sx={{ display: 'flex', width: 1 }}>
+        <Typography variant="h6" color="primary" gutterBottom>Grade History</Typography>
+
+        <TextField 
+          sx={{ ml: 'auto', mr: 1, width: 200 }}
+          select 
+          size="small"
+          label="Class Filter"
+          defaultValue=""
+          onChange={handleChange}
+        >
+          <MenuItem key={-1} value="" dense>&nbsp;</MenuItem>
+          {classNames.map((name, index) => (
+            <MenuItem key={index} value={name} dense>{name}</MenuItem>
+          ))}
+        </TextField>
+      </Box>
+
       <ResponsiveContainer>
         <LineChart
           data={grades}
@@ -93,7 +128,7 @@ const GradeChart = ({ data }) => {
           />
           <Line
             isAnimationActive={false} 
-            type="monotone" 
+            type="linear" 
             dataKey="grade" 
             stroke={theme.palette.primary.main}
           />
