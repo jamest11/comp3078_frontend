@@ -17,14 +17,14 @@ const InstructorGrades = () => {
 
   useEffect(() => {
     const fetchQuizGrades = async () => {
-      const res = await instructorApi.getQuizGrades();
+      const res = await instructorApi.getInstructorGrades('quiz');
 
       setQuizGrades(res.data);
       setQgLoading(false);
     };
     
     const fetchClassGrades = async () => {
-      const res = await instructorApi.getClassGrades();
+      const res = await instructorApi.getInstructorGrades('class');
 
       setClassGrades(res.data);
       setCgLoading(false);

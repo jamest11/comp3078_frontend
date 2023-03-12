@@ -30,8 +30,11 @@ const getStudentQuiz = async (id) => {
   return axiosInstance.get(`/student/quiz?id=${id}`);
 };
 
-const getStudentGrades = async () => {
-  return axiosInstance.get('/student/grades');
+const getStudentGrades = async (type='class') => {
+  if(type === 'class') {
+    return axiosInstance.get('/student/class-grades');  
+  }
+  return axiosInstance.get('/student/quiz-grades');
 };
 
 const submitQuiz = async (data) => {
@@ -71,7 +74,7 @@ const getInstructorQuizzes = async ({page = 1, limit = 4, pagination = false} = 
   return axiosInstance.get(`/instructor/quizzes?pagination=${pagination}&page=${page}&limit=${limit}`);
 };
 
-const getScheduledQuizzes = async (complete = 'all') => {
+const getScheduledQuizzes = async (complete='all') => {
   return axiosInstance.get(`/instructor/scheduled-quizzes?filter=${complete}`);
 };
 
@@ -79,12 +82,11 @@ const getClasses = async () => {
   return axiosInstance.get('/instructor/classes');
 };
 
-const getQuizGrades = async () => {
+const getInstructorGrades = async (type='class') => {
+  if(type === 'class') {
+    return axiosInstance.get('/instructor/class-grades');
+  }
   return axiosInstance.get('/instructor/quiz-grades');
-};
-
-const getClassGrades = async () => {
-  return axiosInstance.get('/instructor/class-grades');
 };
 
 const deleteScheduledQuiz = async (data) => {
@@ -108,8 +110,7 @@ export const instructorApi = {
   getInstructorQuizzes, 
   getInstructorQuiz,
   getClasses, 
-  getQuizGrades, 
-  getClassGrades,
+  getInstructorGrades,
   deleteScheduledQuiz,
   deleteQuiz
 };
