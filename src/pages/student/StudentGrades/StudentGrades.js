@@ -50,10 +50,12 @@ const StudentGrades = () => {
                 </Typography>
               </Alert>
             ) : (
-              <GradeTable grades={quizGrades} />
-            )}
+              <>
+                <GradeTable grades={quizGrades} />
 
-            <GradeChart data={quizGrades} />
+                <GradeChart data={quizGrades} />
+              </>
+            )}
           </Stack>  
         </Grid>
 

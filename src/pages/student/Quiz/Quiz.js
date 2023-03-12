@@ -40,7 +40,7 @@ const Quiz = () => {
       setComplete(true);
       studentApi.submitQuiz({ id: data._id, responses: responses.current })
         .then((res) => {
-          setGrade({ correct: res.data.correct, total: res.data.total });
+          setGrade(res.data);
           setGraded(true);
         })
         .catch(console.error);
@@ -79,7 +79,11 @@ const Quiz = () => {
 
       {complete ? 
         (graded ? (
-          <QuizResult grade={grade} />
+          <QuizResult 
+            grade={grade} 
+            questions={questions} 
+            responses={responses.current} 
+          />
         ) : (
           <CircularProgress />
         )): (
