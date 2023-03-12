@@ -7,6 +7,7 @@ import Title from 'components/Title';
 import { studentApi } from 'services/api';
 import { formatDate } from 'utils';
 import { Link } from 'react-router-dom';
+import GradeChart from './components/GradeChart';
 
 const StudentGrades = () => {
   const [loading, setLoading] = useState(true);
@@ -28,8 +29,8 @@ const StudentGrades = () => {
       <TitleDivider />
 
       <Grid container spacing={4}>
-        <Grid item xs={6}>
-          {/*<Subtitle>All Grades</Subtitle>*/}
+        <Grid item xs={8}>
+          <Subtitle>Quiz Grades</Subtitle>
             
           {loading ? (
             <LinearProgress />
@@ -68,6 +69,9 @@ const StudentGrades = () => {
           )}
         </Grid>
         
+        <Grid item xs={8}>
+          <GradeChart data={grades} />
+        </Grid>
         {/*<Grid item xs={4}>
           <Subtitle>Average Grades</Subtitle>
         </Grid>*/}
