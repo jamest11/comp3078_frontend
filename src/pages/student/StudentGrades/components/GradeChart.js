@@ -1,16 +1,17 @@
 import { Box, MenuItem, Paper, TextField, Typography, useTheme } from '@mui/material';
-import { useEffect, useRef, useState } from 'react';
+import { tooltipStyles } from 'components/Layout';
+import { useEffect, useState } from 'react';
 import { Label, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 import { formatDate } from 'utils';
 
-const CustomTooltip = ({ active, payload, styles }) => {
+const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
-      <div style={styles.wrapper}>
-        <div style={styles.title}>{payload[0].payload.quizTitle}</div>
-        <div style={styles.desc}>{payload[0].payload.classTitle}</div>
-        <div style={styles.desc}>Grade: {payload[0].payload.grade}%</div>
+      <div style={tooltipStyles.wrapper}>
+        <div style={tooltipStyles.title}>{payload[0].payload.quizTitle}</div>
+        <div style={tooltipStyles.desc}>{payload[0].payload.classTitle}</div>
+        <div style={tooltipStyles.desc}>Grade: {payload[0].payload.grade}%</div>
       </div>
     );
   }
@@ -21,21 +22,6 @@ const GradeChart = ({ data }) => {
   const theme = useTheme();
   const [classNames, setClassNames] = useState([]);
   const [grades, setGrades] = useState([]);
-
-  const tooltipStyles = useRef({
-    wrapper: {
-      backgroundColor: theme.palette.grey['200'],
-      borderRadius: 4,
-      padding: 4
-    },
-    title: {
-      ...theme.typography.body2,
-      fontWeight: theme.typography.fontWeightMedium
-    },
-    desc: {
-      ...theme.typography.body2
-    }
-  });
 
   useEffect(() => {
     const names = [...new Set(data.map((x) => x.classTitle))];
@@ -123,7 +109,7 @@ const GradeChart = ({ data }) => {
           </YAxis>
           <Tooltip 
             // @ts-ignore
-            content={<CustomTooltip styles={tooltipStyles.current} />}
+            content={<CustomTooltip />}
             wrapperStyle={{ outline: 'none' }}
           />
           <Line

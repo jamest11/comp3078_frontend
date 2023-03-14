@@ -3,7 +3,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const ClassGrade = ({ data }) => {
   return (
-    <Accordion sx={{ minWidth: 400 }} disableGutters>
+    <Accordion disableGutters>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
       >

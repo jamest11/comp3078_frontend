@@ -45,6 +45,20 @@ const theme = createTheme({
   }
 });
 
+const tooltipStyles = {
+  wrapper: {
+    backgroundColor: theme.palette.grey['200'],
+    borderRadius: 4,
+    padding: 4
+  },
+  title: {
+    ...theme.typography.body2,
+    fontWeight: theme.typography.fontWeightMedium
+  },
+  desc: {
+    ...theme.typography.body2
+  }
+};
 
 const Layout = ({ children }) => {
   return (
@@ -59,4 +73,4 @@ const Layout = ({ children }) => {
 };
 
 export default Layout;
-export { theme };
+export { theme, tooltipStyles };

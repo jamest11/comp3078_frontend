@@ -7,6 +7,7 @@ import ClassGrade from './components/ClassGrade';
 import Subtitle from 'components/Subtitle';
 import TitleDivider from 'components/TitleDivider';
 import GradeDataGrid from './components/GradeDataGrid';
+import ClassGradesChart from './components/ClassGradesChart';
 
 const InstructorGrades = () => {
   const [cgLoading, setCgLoading] = useState(true);
@@ -64,6 +65,8 @@ const InstructorGrades = () => {
               ))}
             </>        
           )}
+
+          <ClassGradesChart data={classGrades} />
         </Grid>
       </Grid>
     </Container>
