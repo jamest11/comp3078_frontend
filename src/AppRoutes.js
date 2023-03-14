@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { createBrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
 import Quiz from 'pages/student/Quiz';
 import StudentProfile from 'pages/student/StudentProfile';
@@ -18,7 +18,105 @@ import Register from 'pages/public/Register';
 import UnknownPage from 'pages/public/UnknownPage';
 
 import PrivateRoute from 'security/PrivateRoute';
+import Layout from 'components/Layout';
+import { authApi } from 'services/api';
 
+const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    loader: () => {
+      const token = localStorage.getItem('token');
+      authApi.setAuthHeader(token);
+      return null;
+    },
+    children: [
+      {
+        path: '/',
+        element: <Navigate to="/login" replace />
+      },
+      {
+        path: '*',
+        element: <UnknownPage />
+      },
+      {
+        path: '/login',
+        element: <Login />
+      },
+      {
+        path: '/register',
+        element: <Register />
+      },
+      {
+        path: '/student',
+        element: (
+          <PrivateRoute userType="student">
+            <Outlet />
+          </PrivateRoute>
+        ),
+        children: [
+          {
+            path: '',
+            element: <StudentProfile/>
+          },
+          {
+            path: 'quiz',
+            element: <Quiz />
+          },
+          {
+            path: 'quizzes',
+            element: <StudentQuizzes />
+          },
+          {
+            path: 'grades',
+            element: <StudentGrades />
+          }
+        ]
+      },
+      {
+        path: '/instructor',
+        element: (
+          <PrivateRoute userType="instructor">
+            <Outlet />
+          </PrivateRoute>
+        ),
+        children: [
+          {
+            path: 'quizzes',
+            element: <InstructorQuizzes />,
+            children: [
+              {
+                path: 'delete-scheduled-quiz',
+                element: <DelScheduledQuiz />
+              },
+              {
+                path: 'delete-quiz',
+                element: <DelQuiz />
+              },
+              {
+                path: 'create-quiz',
+                element: <CreateQuiz />
+              }
+            ]
+          },
+          {
+            path: 'grades',
+            element: <InstructorGrades />
+          },
+          {
+            path: 'classes',
+            element: <InstructorClasses />,
+            children: [
+              {
+                path: 'add-students',
+                element: <AddStudents />
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]);
 
 const AppRoutes = () => {
   return (
@@ -26,7 +124,7 @@ const AppRoutes = () => {
       <Route 
         path="/"
         element={
-          <Navigate to="/login" replace />
+          <Navigate to="login" replace />
         }
       />
       <Route
@@ -140,3 +238,4 @@ const AppRoutes = () => {
 };
 
 export default AppRoutes;
+export { router };

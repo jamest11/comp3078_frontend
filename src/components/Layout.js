@@ -3,6 +3,7 @@ import { Box, Container } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import NavBar from './NavBar';
 import Footer from './Footer';
+import { Outlet } from 'react-router-dom';
 
 const theme = createTheme({
   palette: {
@@ -60,12 +61,12 @@ const tooltipStyles = {
   }
 };
 
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
     <Box>
       <NavBar />
       <Container component="main" sx={{ pb: 6 }}>
-        { children }
+        <Outlet />
       </Container>
       <Footer />
     </Box>
