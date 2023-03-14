@@ -1,12 +1,12 @@
 import { Button, Container, Grid, LinearProgress, Stack } from '@mui/material';
-
 import { useEffect, useRef, useState } from 'react';
 
 import { instructorApi } from 'services/api';
-import ScheduledQuiz from './components/ScheduledQuiz';
-import ScheduleQuizModal from './components/ScheduleQuizModal';
 import Subtitle from 'components/Subtitle';
 import Title from 'components/Title';
+
+import ScheduledQuiz from './components/ScheduledQuiz';
+import ScheduleQuizModal from './components/ScheduleQuizModal';
 import TitleDivider from 'components/TitleDivider';
 import QuizContainer from './components/QuizContainer';
 

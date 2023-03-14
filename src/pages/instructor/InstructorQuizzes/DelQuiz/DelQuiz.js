@@ -12,7 +12,7 @@ const DelQuiz = () => {
 
   const handleDelete = () => {
     instructorApi.deleteQuiz({ id: quiz._id })
-      .then((res) => navigate('/instructor-quizzes'))
+      .then((res) => navigate('..'))
       .catch(console.error);
   };
 

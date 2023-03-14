@@ -45,7 +45,7 @@ const QuizContainer = () => {
         variant="contained" 
         color="success"
         sx={{ mt: 1 }} 
-        onClick={() => navigate('/create-quiz')}
+        onClick={() => navigate('create-quiz')}
       >
         Create New Quiz
       </Button>

@@ -16,13 +16,16 @@ const ScheduledQuiz = ({ data, modalRef, setShowModal }) => {
         <Grid item xs={8}>
           <Typography variant="h6">{data.quizTitle}</Typography>
           <Typography variant="body2">{data.classTitle}</Typography>
-          <Typography variant="body2">
-            Due {formatDate(data.dueDate)}
-            &nbsp; | &nbsp;Progress:&nbsp;
+          <Box>
+            <Typography variant="body2" display="inline">
+              Due {formatDate(data.dueDate)}
+              &nbsp; | &nbsp;Progress:&nbsp;
+            </Typography>
             <Typography display="inline" variant="body2" fontWeight="medium">
               {`${data.numComplete}/${data.numStudents}`}
             </Typography>
-          </Typography>
+          </Box>
+
         </Grid>
         <Grid 
           item 
@@ -47,7 +50,7 @@ const ScheduledQuiz = ({ data, modalRef, setShowModal }) => {
             variant="outlined" 
             color="error" 
             size="small"
-            onClick={() => navigate('/instructor-quizzes/delete-scheduled-quiz', { state: { quiz: data }})}
+            onClick={() => navigate('delete-scheduled-quiz', { state: { quiz: data }})}
           >
             Delete
           </Button>

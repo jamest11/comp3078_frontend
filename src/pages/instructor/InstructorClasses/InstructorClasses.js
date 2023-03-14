@@ -113,7 +113,7 @@ const InstructorClasses = () => {
         <Button 
           variant="contained" 
           color="success"
-          onClick={() => navigate('/add-students')}
+          onClick={() => navigate('add-students')}
         >
           Add Students to Class
         </Button>

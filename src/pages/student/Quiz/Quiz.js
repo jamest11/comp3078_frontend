@@ -55,7 +55,7 @@ const Quiz = () => {
   }, [time, submitQuiz]);
 
   if(!data) {
-    return (<Navigate to="/student-quizzes" replace />);
+    return (<Navigate to="/student/quizzes" replace />);
   }
 
   const submitQuestion = (res) => {

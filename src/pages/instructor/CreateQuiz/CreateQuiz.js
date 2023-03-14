@@ -37,16 +37,16 @@ const CreateQuiz = () => {
     if(editData) {
       if(Object.keys(dirtyFields).length > 0) {
         instructorApi.updateQuiz(editData._id, data) 
-          .then(() => navigate('/instructor-quizzes'))
+          .then(() => navigate('..'))
           .catch(console.error);
       }
       else {
-        navigate('/instructor-quizzes');
+        navigate('..');
       }
     }
     else {
       instructorApi.createQuiz(data)
-        .then(() => navigate('/instructor-quizzes'))
+        .then(() => navigate('..'))
         .catch(console.error);
     }
   };
@@ -118,7 +118,7 @@ const CreateQuiz = () => {
             >
               Save
             </LoadingButton>
-            <Button variant="contained" color="secondary" component={Link} to="/instructor-quizzes">Cancel</Button>
+            <Button variant="contained" color="secondary" component={Link} to="..">Cancel</Button>
           </FormGroup>
         </Paper>
       </Box>

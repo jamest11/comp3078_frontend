@@ -16,7 +16,7 @@ const Quiz = ({ data }) => {
     instructorApi.getInstructorQuiz(data._id)
       .then((res) => {
         setLoading(false);
-        navigate('/create-quiz', { state: { quiz: res.data }});
+        navigate('create-quiz', { state: { quiz: res.data }});
       })
       .catch(console.error);
   };
@@ -54,7 +54,7 @@ const Quiz = ({ data }) => {
             variant="outlined" 
             color="error" 
             size="small"
-            onClick={() => navigate('/instructor-quizzes/delete-quiz', { state: { quiz: data }})}
+            onClick={() => navigate('delete-quiz', { state: { quiz: data }})}
           >
             Delete
           </Button>

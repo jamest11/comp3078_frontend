@@ -55,7 +55,7 @@ const router = createBrowserRouter([
         ),
         children: [
           {
-            path: '',
+            index: true,
             element: <StudentProfile/>
           },
           {
@@ -82,8 +82,11 @@ const router = createBrowserRouter([
         children: [
           {
             path: 'quizzes',
-            element: <InstructorQuizzes />,
             children: [
+              {
+                index: true,
+                element: <InstructorQuizzes />,
+              },
               {
                 path: 'delete-scheduled-quiz',
                 element: <DelScheduledQuiz />
@@ -104,8 +107,11 @@ const router = createBrowserRouter([
           },
           {
             path: 'classes',
-            element: <InstructorClasses />,
             children: [
+              {
+                index: true,
+                element: <InstructorClasses />,
+              },
               {
                 path: 'add-students',
                 element: <AddStudents />

@@ -13,10 +13,10 @@ const Login = () => {
 
   if(user && user.userType) {
     if(user.userType === 'instructor') {
-      return (<Navigate to="/instructor-quizzes" replace />);
+      return (<Navigate to="/instructor/quizzes" replace />);
     }
     else if(user.userType === 'student') {
-      return (<Navigate to="/student-quizzes" replace />);
+      return (<Navigate to="/student/quizzes" replace />);
     }
   }
 
@@ -25,10 +25,10 @@ const Login = () => {
       .then((res) => {
         handleLogin(res.data);
         if(res.data.user.userType === 'instructor') {
-          navigate('/instructor-quizzes');
+          navigate('/instructor/quizzes');
         }
         else if(res.data.user.userType === 'student') {
-          navigate('/student-quizzes');
+          navigate('/student/quizzes');
         }
       })
       .catch((err) => {

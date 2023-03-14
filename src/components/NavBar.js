@@ -25,39 +25,39 @@ const NavBar = () => {
             <>
               <Button 
                 sx={{ 
-                  color: (location.pathname === '/instructor-profile' ? 'text.light' : 'text.dark'), 
-                  ':hover': { color: 'text.light' 
-                }}}
+                  color: (location.pathname === '/instructor/profile' ? 'text.light' : 'text.dark'), 
+                  ':hover': { color: 'text.light' }
+                }}
               >
                 Profile
               </Button>
               <Button 
                 component={Link} 
-                to="/instructor-quizzes" 
+                to="/instructor/quizzes" 
                 sx={{ 
-                  color: (location.pathname === '/instructor-quizzes' ? 'text.light' : 'text.dark'), 
-                  ':hover': { color: 'text.light' 
-                }}}
+                  color: (location.pathname === '/instructor/quizzes' ? 'text.light' : 'text.dark'), 
+                  ':hover': { color: 'text.light' }
+                }}
               >
                 Quizzes
               </Button>
               <Button 
                 component={Link} 
-                to="/instructor-grades" 
+                to="/instructor/grades" 
                 sx={{ 
-                  color: (location.pathname === '/instructor-grades' ? 'text.light' : 'text.dark'), 
-                  ':hover': { color: 'text.light' 
-                }}}
+                  color: (location.pathname === '/instructor/grades' ? 'text.light' : 'text.dark'), 
+                  ':hover': { color: 'text.light' }
+                }}
               >
                 Grades
               </Button>
               <Button 
                 component={Link} 
-                to="/instructor-classes"
+                to="/instructor/classes"
                 sx={{ 
-                  color: (location.pathname === '/instructor-classes' ? 'text.light' : 'text.dark'), 
-                  ':hover': { color: 'text.light' 
-                }}}
+                  color: (location.pathname === '/instructor/classes' ? 'text.light' : 'text.dark'), 
+                  ':hover': { color: 'text.light' }
+                }}
               >
                 Classes
               </Button>
@@ -69,8 +69,8 @@ const NavBar = () => {
                 to="/student-profile" 
                 sx={{ 
                   color: (location.pathname === '/student-profile' ? 'text.light' : 'text.dark'), 
-                  ':hover': { color: 'text.light' 
-                }}}
+                  ':hover': { color: 'text.light' }
+                }}
               >
                 Profile
               </Button>
