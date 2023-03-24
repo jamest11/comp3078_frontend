@@ -18,7 +18,7 @@ const Quiz = ({ data }) => {
         setLoading(false);
         navigate('create-quiz', { state: { quiz: res.data }});
       })
-      .catch(console.error);
+      .catch(() => console.error('Server error'));
   };
 
   return (

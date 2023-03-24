@@ -14,14 +14,10 @@ const StudentQuizzes = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchQuizzes = async () => {
-      const res = await studentApi.getStudentQuizzes();
-      //console.log(res.data);
-      setQuizzes(res.data);
-      setLoading(false);
-    };
-
-    fetchQuizzes();
+    studentApi.getStudentQuizzes()
+      .then((res) => setQuizzes(res.data))
+      .catch((error) => console.error('Server error'))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -37,7 +33,7 @@ const StudentQuizzes = () => {
             You have completed all of your assigned quizzes. Great Work!
           </Typography>
           <Typography variant="body1">
-            Click <MUILink component={Link} to="/student-grades">here</MUILink> to view your grades.
+            Click <MUILink component={Link} to="/student/grades">here</MUILink> to view your grades.
           </Typography>
         </Alert>
       ) : (

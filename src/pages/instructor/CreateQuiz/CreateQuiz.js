@@ -38,7 +38,7 @@ const CreateQuiz = () => {
       if(Object.keys(dirtyFields).length > 0) {
         instructorApi.updateQuiz(editData._id, data) 
           .then(() => navigate('..'))
-          .catch(console.error);
+          .catch(() => console.error('Server error'));
       }
       else {
         navigate('..');
@@ -47,7 +47,7 @@ const CreateQuiz = () => {
     else {
       instructorApi.createQuiz(data)
         .then(() => navigate('..'))
-        .catch(console.error);
+        .catch(() => console.error('Server error'));
     }
   };
 

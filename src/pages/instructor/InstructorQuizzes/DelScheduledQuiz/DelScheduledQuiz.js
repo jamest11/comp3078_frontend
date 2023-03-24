@@ -13,7 +13,7 @@ const DelScheduledQuiz = () => {
   const handleDelete = () => {
     instructorApi.deleteScheduledQuiz({ id: quiz._id })
       .then((res) => navigate('..'))
-      .catch(console.error);
+      .catch(() => console.error('Server error'));
   };
 
   if(!quiz) {

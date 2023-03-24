@@ -2,7 +2,8 @@ import axios from 'axios';
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:4000/',
-  headers: { post: { 'Content-Type': 'application/json' } }
+  headers: { post: { 'Content-Type': 'application/json' } },
+  timeout: 3000
 });
 
 const setAuthHeader = (token) => {

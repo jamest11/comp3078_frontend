@@ -35,7 +35,7 @@ const QuizResult = ({ grade, questions, responses }) => {
 
       <Button 
         component={Link} 
-        to="/student-grades" 
+        to="/student/grades" 
         variant="contained" 
         color="success" 
         size="small"

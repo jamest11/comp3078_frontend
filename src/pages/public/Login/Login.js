@@ -32,8 +32,13 @@ const Login = () => {
         }
       })
       .catch((err) => {
-        setError('email', { type: 'server', message: 'Invalid credentials' });
-        setError('password', { type: 'server', message: 'Invalid credentials' });
+        if(err.code === 'ERR_NETWORK') {
+          console.error('Server error');
+        }
+        else {
+          setError('email', { type: 'server', message: 'Invalid credentials' });
+          setError('password', { type: 'server', message: 'Invalid credentials' });
+        }
       });
   };
 

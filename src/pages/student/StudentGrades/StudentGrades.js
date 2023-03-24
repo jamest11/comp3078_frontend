@@ -17,12 +17,17 @@ const StudentGrades = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const qgRes = await studentApi.getStudentGrades('quiz');
-      const cgRes = await studentApi.getStudentGrades('class');
+      try {
+        const qgRes = await studentApi.getStudentGrades('quiz');
+        const cgRes = await studentApi.getStudentGrades('class');
 
-      setQuizGrades(qgRes.data);
-      setClassGrades(cgRes.data);
-      setLoading(false);
+        setQuizGrades(qgRes.data);
+        setClassGrades(cgRes.data);
+      } catch(error) {
+        console.error('Server error');
+      } finally {
+        setLoading(false);
+      }
     };
     
     fetchData();
@@ -46,7 +51,7 @@ const StudentGrades = () => {
                   You haven't completed any quizzes yet.
                 </Typography>
                 <Typography variant="body1">
-                  Click <MUILink component={Link} to="/student-quizzes">here</MUILink> to view your assigned quizzes.
+                  Click <MUILink component={Link} to="/student/quizzes">here</MUILink> to view your assigned quizzes.
                 </Typography>
               </Alert>
             ) : (

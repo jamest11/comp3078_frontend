@@ -15,21 +15,21 @@ const InstructorGrades = () => {
   const [classGrades, setClassGrades] = useState([]);
 
   useEffect(() => {
-    const fetchQuizGrades = async () => {
-      const res = await instructorApi.getInstructorGrades('quiz');
+    const fetchData = async () => {
+      try {
+        const qgRes = await instructorApi.getInstructorGrades('quiz');
+        const cgRes = await instructorApi.getInstructorGrades('class');
 
-      setQuizGrades(res.data);
+        setQuizGrades(qgRes.data);
+        setClassGrades(cgRes.data);
+      } catch(error) {
+        console.error('Server error');
+      } finally {
+        setCgLoading(false);
+      }
     };
     
-    const fetchClassGrades = async () => {
-      const res = await instructorApi.getInstructorGrades('class');
-
-      setClassGrades(res.data);
-      setCgLoading(false);
-    };
-
-    fetchQuizGrades();
-    fetchClassGrades();
+    fetchData();
   }, []);
 
   return (

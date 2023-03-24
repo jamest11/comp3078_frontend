@@ -18,18 +18,18 @@ const InstructorClasses = () => {
 
   const [message, setMessage] = useState(location?.state?.message);
 
-  const fetchClasses = async () => {
-    const res = await instructorApi.getClasses();
-
-    setClasses(res.data);
-    setLoading(false);
+  const fetchClasses = () => {
+    instructorApi.getClasses()
+      .then((res) => setClasses(res.data))
+      .catch((error) => console.error('Server error'))
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {
-    const fetchClassGrades = async () => {
-      const res = await instructorApi.getInstructorGrades('class');
-
-      setClassGrades(res.data);
+    const fetchClassGrades = () => {
+      instructorApi.getInstructorGrades('class')
+        .then((res) => setClassGrades(res.data))
+        .catch((error) => console.error('Server error'));
     };
 
     fetchClasses();

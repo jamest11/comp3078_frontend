@@ -33,7 +33,7 @@ const CreateClassModal = ({ open, setOpen, callback }) => {
     setOpen(false);
     instructorApi.createClass(data)
       .then((res) => callback())
-      .catch(console.error);
+      .catch(() => console.error('Server error'));
   };
 
   return (

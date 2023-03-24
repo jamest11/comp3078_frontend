@@ -35,13 +35,13 @@ const ScheduleQuizModal = ({ open, setOpen, quizzes, classes, callback, editData
 
     if(editData) {
       instructorApi.updateScheduledQuiz(editData._id, data.dueDate)
-      .then((res) => callback())
-      .catch(console.error);
+        .then((res) => callback())
+        .catch(() => console.error('Server error'));
     }
     else {
       instructorApi.scheduleQuiz(data)
-      .then((res) => callback())
-      .catch(console.error);
+        .then((res) => callback())
+        .catch(() => console.error('Server error'));
     }
   };
 

@@ -43,7 +43,7 @@ const Quiz = () => {
           setGrade(res.data);
           setGraded(true);
         })
-        .catch(console.error);
+        .catch(() => console.error('Server error'));
     },
     [data._id]
   );

@@ -14,14 +14,12 @@ const AddStudents = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await instructorApi.getClasses();
-
-      setClasses(res.data);
-      setLoading(false);
-    };
-
-    fetchData();
+    instructorApi.getClasses()
+      .then((res) => {
+        setClasses(res.data);
+        setLoading(false);
+      })
+      .catch(() => console.error('Server error'));
   }, []);
 
   const onSubmit = (data) => {
@@ -41,7 +39,7 @@ const AddStudents = () => {
           text: `${res.data.count} new student(s) added to class ${res.data.class}`, severity: 'success' 
       }}}))
       //.then((res) => console.log(res.data))
-      .catch(console.error);
+      .catch(() => console.error('Server error'));
   };
 
   return (

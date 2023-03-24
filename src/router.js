@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
+import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
 
 import Quiz from 'pages/student/Quiz';
 import StudentProfile from 'pages/student/StudentProfile';
@@ -19,16 +19,10 @@ import UnknownPage from 'pages/public/UnknownPage';
 
 import PrivateRoute from 'security/PrivateRoute';
 import Layout from 'components/Layout';
-import { authApi } from 'services/api';
 
 const router = createBrowserRouter([
   {
     element: <Layout />,
-    loader: () => {
-      const token = localStorage.getItem('token');
-      authApi.setAuthHeader(token);
-      return null;
-    },
     children: [
       {
         path: '/',
@@ -124,124 +118,4 @@ const router = createBrowserRouter([
   }
 ]);
 
-const AppRoutes = () => {
-  return (
-    <Routes>
-      <Route 
-        path="/"
-        element={
-          <Navigate to="login" replace />
-        }
-      />
-      <Route
-        path="*"
-        element={
-          <UnknownPage />
-        }
-      />
-      <Route
-        path="/login"
-        element={
-          <Login />
-        }
-      />
-      <Route
-        path="/register"
-        element={
-          <Register />
-        }
-      />
-      <Route
-        path="/quiz"
-        element={
-          <PrivateRoute userType="student">
-            <Quiz />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/student-profile"
-        element={
-          <PrivateRoute userType="student">
-            <StudentProfile />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/student-quizzes"
-        element={
-          <PrivateRoute userType="student">
-            <StudentQuizzes />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/student-grades"
-        element={
-          <PrivateRoute userType="student">
-            <StudentGrades />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/instructor-quizzes"
-        element={
-          <PrivateRoute userType="instructor">
-            <InstructorQuizzes />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/instructor-quizzes/delete-scheduled-quiz"
-        element={
-          <PrivateRoute userType="instructor">
-            <DelScheduledQuiz />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/instructor-quizzes/delete-quiz"
-        element={
-          <PrivateRoute userType="instructor">
-            <DelQuiz />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/instructor-classes"
-        element={
-          <PrivateRoute userType="instructor">
-            <InstructorClasses />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/instructor-grades"
-        element={
-          <PrivateRoute userType="instructor">
-            <InstructorGrades />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/create-quiz"
-        element={
-          <PrivateRoute userType="instructor">
-            <CreateQuiz />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/add-students"
-        element={
-          <PrivateRoute userType="instructor">
-            <AddStudents />
-          </PrivateRoute>
-        }
-      />
-    </Routes>
-  );
-};
-
-export default AppRoutes;
-export { router };
+export default router;

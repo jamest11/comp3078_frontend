@@ -5,7 +5,7 @@ import {
 import { theme } from 'components/Layout';
 import { RouterProvider } from 'react-router-dom';
 import AuthContextProvider from 'security/AuthContextProvider';
-import { router } from './AppRoutes';
+import router from './router';
 
 function App() {
   return (

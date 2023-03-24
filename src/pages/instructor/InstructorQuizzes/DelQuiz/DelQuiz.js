@@ -13,7 +13,7 @@ const DelQuiz = () => {
   const handleDelete = () => {
     instructorApi.deleteQuiz({ id: quiz._id })
       .then((res) => navigate('..'))
-      .catch(console.error);
+      .catch(() => console.error('Server error'));
   };
 
   if(!quiz) {

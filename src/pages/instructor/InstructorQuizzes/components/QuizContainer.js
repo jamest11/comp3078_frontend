@@ -15,12 +15,14 @@ const QuizContainer = () => {
     setPage(value);
   };
 
-  const fetchQuizzes = async (page) => {
-    const res = await instructorApi.getInstructorQuizzes({ page, pagination: true, limit: 5 });
-    
-    setQuizzes(res.data.docs);
-    setTotalPages(res.data.totalPages);
-    setLoading(false);
+  const fetchQuizzes = (page) => {
+    instructorApi.getInstructorQuizzes({ page, pagination: true, limit: 5 })
+      .then((res) => {
+        setQuizzes(res.data.docs);
+        setTotalPages(res.data.totalPages);
+      })
+      .catch((error) => console.error('Server error'))
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {

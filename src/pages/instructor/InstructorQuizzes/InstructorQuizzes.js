@@ -19,30 +19,30 @@ const InstructorQuizzes = () => {
 
   const [sqLoading, setSqLoading] = useState(true);
 
-  const fetchScheduledQuizzes = async () => {
-    //setSqLoading(true);
-    const res = await instructorApi.getScheduledQuizzes('incomplete');
-
-    setScheduledQuizzes(res.data);
-    setSqLoading(false);
+  const updateScheduledQuizzes = () => {
+    instructorApi.getScheduledQuizzes('incomplete') 
+      .then((res) => setScheduledQuizzes(res.data))
+      .catch((error) => console.error('Server error'));
   };
 
   useEffect(() => {
-    const fetchQuizzes = async () => {
-      const res = await instructorApi.getInstructorQuizzes({ pagination: false });
-      
-      setQuizzes(res.data);
+    const fetchData = async () => {
+      try {
+        const qRes = await instructorApi.getInstructorQuizzes({ pagination: false });
+        const cRes = await instructorApi.getClasses();
+        const sqRes = await instructorApi.getScheduledQuizzes('incomplete'); 
+        
+        setQuizzes(qRes.data);
+        setScheduledQuizzes(sqRes.data);
+        setClasses(cRes.data);
+      } catch(error) {
+        console.error('Server error');
+      } finally {
+        setSqLoading(false);
+      }
     };
 
-    const fetchClasses = async () => {
-      const res = await instructorApi.getClasses();
-
-      setClasses(res.data);
-    };
-
-    fetchQuizzes();
-    fetchScheduledQuizzes();
-    fetchClasses();
+    fetchData();
   }, []);
 
   return (
@@ -52,7 +52,7 @@ const InstructorQuizzes = () => {
         setOpen={setShowModal} 
         quizzes={quizzes} 
         classes={classes} 
-        callback={fetchScheduledQuizzes} 
+        callback={updateScheduledQuizzes} 
         editData={modalRef.current}  
       />
 

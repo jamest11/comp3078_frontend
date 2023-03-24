@@ -11,9 +11,9 @@ const Quiz = ({ data }) => {
 
   const handleClick = (event) => {
     studentApi.getStudentQuiz(data._id)
-      .then((res) => navigate('/quiz', { state: { quizData: res.data }}))
+      .then((res) => navigate('/student/quiz', { state: { quizData: res.data }}))
       //.then((res) => console.log(res.data))
-      .catch(console.error);
+      .catch(() => console.error('Server error'));
   };
 
   return (
