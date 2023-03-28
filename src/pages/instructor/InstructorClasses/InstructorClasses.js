@@ -63,7 +63,7 @@ const InstructorClasses = () => {
         </Alert>
       )}
 
-      <Box maxWidth="sm" sx={{ overflow: 'auto', maxHeight: 500}}>
+      <Box maxWidth="sm">
         {loading ? (
           <LinearProgress />
         ) : (
@@ -90,8 +90,9 @@ const InstructorClasses = () => {
                         {ClassGrade(item._id)}
                       </Stack>
                     </Grid>
-                    <Grid item xs={12} sm={6} container justifyContent="flex-end">
-                      <Button variant="outlined" color="success" size="small" sx={{ mr: 1 }}>Edit</Button>
+                    <Grid item xs={12} sm={6} container justifyContent="flex-end" gap={1}>
+                      <Button variant="outlined" color="primary" size="small">Details</Button>
+                      <Button variant="outlined" color="success" size="small">Edit</Button>
                       <Button variant="outlined" color="error" size="small">Delete</Button>
                     </Grid>
                   </Grid>

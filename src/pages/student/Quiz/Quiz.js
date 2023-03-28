@@ -35,18 +35,16 @@ const Quiz = () => {
     };
   }, [complete]);
 
-  const submitQuiz = useCallback(
-    () => {
-      setComplete(true);
-      studentApi.submitQuiz({ id: data._id, responses: responses.current })
-        .then((res) => {
-          setGrade(res.data);
-          setGraded(true);
-        })
-        .catch(() => console.error('Server error'));
-    },
-    [data._id]
-  );
+  const submitQuiz = useCallback(() => {
+    console.log(responses.current);
+    setComplete(true);
+    studentApi.submitQuiz({ id: data._id, responses: responses.current })
+      .then((res) => {
+        setGrade(res.data);
+        setGraded(true);
+      })
+      .catch(() => console.error('Server error'));
+  }, [data._id]);
 
   useEffect(() => {
     if(time <= 0) {
@@ -59,8 +57,7 @@ const Quiz = () => {
   }
 
   const submitQuestion = (res) => {
-    responses.current = [...responses.current, res];
-    //console.log(responses.current);
+    responses.current = [...responses.current, parseInt(res)];
 
     if(currIndex === questions.length - 1) {
       submitQuiz();
@@ -90,7 +87,7 @@ const Quiz = () => {
         <>
           <QuizProgress progress={currIndex + 1} length={questions.length} time={time} />
           
-          <QuizQuestion data={currQuestion} callback={submitQuestion} />
+          <QuizQuestion data={currQuestion} submitQuestion={submitQuestion} />
         </>
       )}
 

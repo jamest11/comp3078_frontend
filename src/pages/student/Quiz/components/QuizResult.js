@@ -4,8 +4,6 @@ import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
 
 const QuizResult = ({ grade, questions, responses }) => {
-  console.log(responses);
-
   return (
     <Box sx={{ mt: 2 }}>      
       <Paper sx={{ maxWidth: 600, p: 2, mb: 1 }}>
@@ -23,7 +21,7 @@ const QuizResult = ({ grade, questions, responses }) => {
                 Q{index + 1}: {question.q}
               </Typography>
               <Typography variant="body2" display="flex" alignItems="center">
-                {question[responses[index]] ?? 'Not answered'}&nbsp;
+                {question.r[responses[index]] ?? 'Not answered'}&nbsp;
                 {grade.details[index] ? 
                   (<CheckIcon color="success" />) :
                   (<ClearIcon color="error" />)}

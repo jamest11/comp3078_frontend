@@ -6,14 +6,16 @@ import { useNavigate, Link, useLocation } from 'react-router-dom';
 
 import { instructorApi } from 'services/api';
 import { formatTime } from 'utils';
+import AddQuestionModal from './components/AddQuestionModal';
 import QuizQuestion from './components/QuizQuestion';
 
-const emptyQuestion = { q: '', r1: '', r2: '', r3: '', r4: '', a: '' };
+
 const timeOptions = [60, 120, 180, 300, 600, 900];
 
 const CreateQuiz = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [showModal, setShowModal] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
 
   const editData = location.state?.quiz;
@@ -51,12 +53,10 @@ const CreateQuiz = () => {
     }
   };
 
-  const addQuestion = () => {
-    append(emptyQuestion);
-  };
-
   return (
     <Container maxWidth="md" sx={{ mt: 2, pb: 2 }}>
+      <AddQuestionModal open={showModal} setOpen={setShowModal} append={append} />
+
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
@@ -103,12 +103,12 @@ const CreateQuiz = () => {
             />
           </FormGroup>
 
-          {fields.map((item, index) => (
-            <QuizQuestion key={item.id} {... {control, register, errors, index, remove }} />
+          {fields.map((qField, index) => (
+            <QuizQuestion key={qField.id} {... {control, register, errors, index, remove, qField }} />
           ))}
 
           <FormGroup row sx={{ gap: 2, mx: 2, py: 2 }}>
-            <Button variant="contained" color="success" onClick={addQuestion}>Add Question</Button>
+            <Button variant="contained" color="success" onClick={() => setShowModal(true)}>Add Question</Button>
             <LoadingButton
               variant="contained"
               color="primary"

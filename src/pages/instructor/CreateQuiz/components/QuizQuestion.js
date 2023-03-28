@@ -7,8 +7,7 @@ const responseField = {
   width: '40ch'
 };
 
-const QuizQuestion = ({ control, register, errors, index, remove}) => {
-
+const QuizQuestion = ({ control, register, errors, index, remove, qField}) => {
   return (
     <Box 
       component={Paper} 
@@ -41,62 +40,26 @@ const QuizQuestion = ({ control, register, errors, index, remove}) => {
           })}
         />
       </div>
+
       <div>
-        <TextField 
-          variant="outlined"
-          label="Option A"
-          size="small"
-          multiline
-          spellCheck
-          maxRows={4}
-          error={!!errors?.['questions']?.[index]?.['r1']}
-          sx={responseField}
-          {...register(`questions.${index}.r1`, {
-            required: true
-          })}
-        />
-        <TextField 
-          variant="outlined"
-          label="Option B"
-          size="small"
-          multiline
-          spellCheck
-          maxRows={4}
-          error={!!errors?.['questions']?.[index]?.['r2']}
-          sx={responseField}
-          {...register(`questions.${index}.r2`, {
-            required: true
-          })}
-        />
+        {qField.r.map((item, rIndex) => (
+          <TextField 
+            key={rIndex}
+            variant="outlined"
+            label={`Option ${String.fromCharCode('A'.charCodeAt(0) + rIndex)}`}
+            size="small"
+            multiline
+            spellCheck
+            maxRows={4}
+            error={!!errors?.['questions']?.[index]?.['r']?.[rIndex]}
+            sx={responseField}
+            {...register(`questions.${index}.r.${rIndex}`, {
+              required: true
+            })}
+          />
+        ))}
       </div>
-      <div>
-        <TextField 
-          variant="outlined"
-          label="Option C"
-          size="small"
-          multiline
-          spellCheck
-          maxRows={4}
-          error={!!errors?.['questions']?.[index]?.['r3']}
-          sx={responseField}
-          {...register(`questions.${index}.r3`, {
-            required: true
-          })}
-        />
-        <TextField 
-          variant="outlined"
-          label="Option D"
-          size="small"
-          multiline
-          spellCheck
-          maxRows={4}
-          error={!!errors?.['questions']?.[index]?.['r4']}
-          sx={responseField}
-          {...register(`questions.${index}.r4`, {
-            required: true
-          })}
-        />
-      </div>
+
       <div>
         <Controller             
           control={control}
@@ -112,10 +75,9 @@ const QuizQuestion = ({ control, register, errors, index, remove}) => {
               helperText={error?.message}
               sx={{ m: 1, width: 190 }}
             >
-              <MenuItem value={'r1'}>A</MenuItem>
-              <MenuItem value={'r2'}>B</MenuItem>
-              <MenuItem value={'r3'}>C</MenuItem>
-              <MenuItem value={'r4'}>D</MenuItem>
+              {qField.r.map((item, rIndex) => (
+                <MenuItem key={rIndex} value={rIndex}>{String.fromCharCode('A'.charCodeAt(0) + rIndex)}</MenuItem>
+              ))}
             </TextField>
           )}
         />

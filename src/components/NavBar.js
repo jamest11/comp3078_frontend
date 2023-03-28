@@ -66,7 +66,7 @@ const NavBar = () => {
             <>
               <Button 
                 component={Link} 
-                to="/student/profile" 
+                to="/student" 
                 sx={{ 
                   color: (location.pathname === '/student/profile' ? 'text.light' : 'text.dark'), 
                   ':hover': { color: 'text.light' }
