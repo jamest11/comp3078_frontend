@@ -55,7 +55,7 @@ const NavBar = () => {
                 component={Link} 
                 to="/instructor/classes"
                 sx={{ 
-                  color: (location.pathname === '/instructor/classes' ? 'text.light' : 'text.dark'), 
+                  color: (location.pathname.includes('/instructor/classes') ? 'text.light' : 'text.dark'), 
                   ':hover': { color: 'text.light' }
                 }}
               >

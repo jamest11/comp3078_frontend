@@ -1,39 +1,42 @@
 import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, Container, Divider, Grid, LinearProgress, Stack, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 
 import Title from 'components/Title';
 import TitleDivider from 'components/TitleDivider';
 import { instructorApi } from 'services/api';
-import CreateClassModal from './components/CreateClassModal';
 
 const InstructorClasses = () => {
   const [classes, setClasses] = useState([]);
   const [classGrades, setClassGrades] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showModal, setShowModal] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
   const [message, setMessage] = useState(location?.state?.message);
 
-  const fetchClasses = () => {
-    instructorApi.getClasses()
-      .then((res) => setClasses(res.data))
-      .catch((error) => console.error('Server error'))
-      .finally(() => setLoading(false));
+  const fetchGradesAndExport = (id) => {
+    instructorApi.getInstructorGrades('class', id)
+      .then((res) => navigate('export', { state: { data: res.data }}));
   };
 
   useEffect(() => {
-    const fetchClassGrades = () => {
-      instructorApi.getInstructorGrades('class')
-        .then((res) => setClassGrades(res.data))
-        .catch((error) => console.error('Server error'));
+    const fetchData = async () => {
+      try {
+        const cRes = await instructorApi.getClasses();
+        const cgRes = await instructorApi.getInstructorGrades('class');
+        
+        setClassGrades(cgRes.data);
+        setClasses(cRes.data);
+      } catch(error) {
+        console.error('Server error');
+      } finally {
+        setLoading(false);
+      }
     };
 
-    fetchClasses();
-    fetchClassGrades();
+    fetchData();
   }, []); 
 
   const ClassGrade = (id) => {
@@ -48,8 +51,6 @@ const InstructorClasses = () => {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 2 }}>
-      <CreateClassModal open={showModal} setOpen={setShowModal} callback={fetchClasses} />
-
       <Title>Classes</Title>
       <TitleDivider />
 
@@ -77,7 +78,7 @@ const InstructorClasses = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <Grid container alignItems="center">
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={5}>
                       <Stack 
                       direction="row"
                       divider={<Divider orientation="vertical" flexItem />}
@@ -90,9 +91,26 @@ const InstructorClasses = () => {
                         {ClassGrade(item._id)}
                       </Stack>
                     </Grid>
-                    <Grid item xs={12} sm={6} container justifyContent="flex-end" gap={1}>
-                      <Button variant="outlined" color="primary" size="small">Details</Button>
-                      <Button variant="outlined" color="success" size="small">Edit</Button>
+                    <Grid item xs container justifyContent="flex-end" gap={1}>
+                      <Button 
+                        variant="outlined" 
+                        color="success" 
+                        size="small"
+                        onClick={() => navigate('edit', { state: { class: item }})}
+                      >
+                        Edit
+                      </Button>
+                      {ClassGrade(item._id) ? (
+                        <Button 
+                        variant="outlined" 
+                        color="primary" 
+                        size="small"
+                        onClick={() => fetchGradesAndExport(item._id)}
+                        >
+                          Export Grades
+                        </Button>
+                      ) : null}
+
                       <Button variant="outlined" color="error" size="small">Delete</Button>
                     </Grid>
                   </Grid>
@@ -105,18 +123,12 @@ const InstructorClasses = () => {
 
       <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
         <Button 
+          component={Link}
           variant="contained" 
           color="success"
-          onClick={() => setShowModal(true)}
+          to="create-class"
         >
           Create New Class
-        </Button>
-        <Button 
-          variant="contained" 
-          color="success"
-          onClick={() => navigate('add-students')}
-        >
-          Add Students to Class
         </Button>
       </Stack>  
     </Container>

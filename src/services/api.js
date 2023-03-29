@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  //baseURL: 'http://localhost:4000/',
-  baseURL: 'https://capstone-backend-36217.herokuapp.com/',
+  baseURL: 'http://localhost:4000/',
+  //baseURL: 'https://capstone-backend-36217.herokuapp.com/',
   headers: { post: { 'Content-Type': 'application/json' } },
   timeout: 3000
 });
@@ -84,8 +84,11 @@ const getClasses = async () => {
   return axiosInstance.get('/instructor/classes');
 };
 
-const getInstructorGrades = async (type='class') => {
+const getInstructorGrades = async (type='class', id=null) => {
   if(type === 'class') {
+    if(id) {
+      return axiosInstance.get(`/instructor/class-grades-export?id=${id}`);
+    }
     return axiosInstance.get('/instructor/class-grades');
   }
   return axiosInstance.get('/instructor/quiz-grades');
