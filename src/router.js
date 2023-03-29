@@ -11,7 +11,8 @@ import DelScheduledQuiz from 'pages/instructor/InstructorQuizzes/DelScheduledQui
 import DelQuiz from 'pages/instructor/InstructorQuizzes/DelQuiz';
 import InstructorGrades from 'pages/instructor/InstructorGrades';
 import InstructorClasses from 'pages/instructor/InstructorClasses';
-import AddStudents from 'pages/instructor/AddStudents';
+import ClassForm from 'pages/instructor/InstructorClasses/ClassForm';
+import ExportGrades from 'pages/instructor/InstructorClasses/ClassGradesPDF';
 
 import Login from 'pages/public/Login';
 import Register from 'pages/public/Register';
@@ -107,8 +108,16 @@ const router = createBrowserRouter([
                 element: <InstructorClasses />,
               },
               {
-                path: 'add-students',
-                element: <AddStudents />
+                path: 'create-class',
+                element: <ClassForm />
+              },
+              {
+                path: 'edit',
+                element: <ClassForm />
+              },
+              {
+                path: 'export',
+                element: <ExportGrades />
               }
             ]
           }
