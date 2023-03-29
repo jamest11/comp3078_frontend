@@ -13,6 +13,7 @@ import InstructorGrades from 'pages/instructor/InstructorGrades';
 import InstructorClasses from 'pages/instructor/InstructorClasses';
 import ClassForm from 'pages/instructor/InstructorClasses/ClassForm';
 import ExportGrades from 'pages/instructor/InstructorClasses/ClassGradesPDF';
+import DelClass from 'pages/instructor/InstructorClasses/DelClass';
 
 import Login from 'pages/public/Login';
 import Register from 'pages/public/Register';
@@ -110,6 +111,10 @@ const router = createBrowserRouter([
               {
                 path: 'create-class',
                 element: <ClassForm />
+              },
+              {
+                path: 'delete-class',
+                element: <DelClass />
               },
               {
                 path: 'edit',

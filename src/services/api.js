@@ -102,6 +102,10 @@ const deleteQuiz = async (data) => {
   return axiosInstance.delete('/instructor/quiz', { data });
 };
 
+const deleteClass = async (data) => {
+  return axiosInstance.delete('/instructor/class', { data });
+};
+
 export const studentApi = { getStudentQuizzes, getStudentQuiz, submitQuiz, getStudentGrades };
 export const authApi = { setAuthHeader, login, register };
 export const instructorApi = { 
@@ -117,5 +121,6 @@ export const instructorApi = {
   getClasses, 
   getInstructorGrades,
   deleteScheduledQuiz,
-  deleteQuiz
+  deleteQuiz,
+  deleteClass
 };

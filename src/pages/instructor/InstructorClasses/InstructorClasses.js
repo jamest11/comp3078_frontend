@@ -111,7 +111,14 @@ const InstructorClasses = () => {
                         </Button>
                       ) : null}
 
-                      <Button variant="outlined" color="error" size="small">Delete</Button>
+                      <Button 
+                        variant="outlined" 
+                        color="error" 
+                        size="small"
+                        onClick={() => navigate('delete-class', { state: { class: item }})}
+                      >
+                        Delete
+                      </Button>
                     </Grid>
                   </Grid>
                 </AccordionDetails>
