@@ -5,7 +5,6 @@ import StudentProfile from 'pages/student/StudentProfile';
 import StudentQuizzes from 'pages/student/StudentQuizzes';
 import StudentGrades from 'pages/student/StudentGrades';
 
-import CreateQuiz from 'pages/instructor/CreateQuiz';
 import InstructorQuizzes from 'pages/instructor/InstructorQuizzes';
 import DelScheduledQuiz from 'pages/instructor/InstructorQuizzes/DelScheduledQuiz';
 import DelQuiz from 'pages/instructor/InstructorQuizzes/DelQuiz';
@@ -21,6 +20,7 @@ import UnknownPage from 'pages/public/UnknownPage';
 
 import PrivateRoute from 'security/PrivateRoute';
 import Layout from 'components/Layout';
+import CreateQuiz from 'pages/instructor/InstructorQuizzes/CreateQuiz';
 
 const router = createBrowserRouter([
   {
