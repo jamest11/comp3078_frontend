@@ -127,10 +127,7 @@ const Register = () => {
                 error={!!errors.password}
                 helperText={errors.password?.message?.toString()}
                 {...register('password', {
-                  required: {
-                    value: true,
-                    message: 'Password in required'
-                  },
+                  required: 'Password is required',
                   minLength: {
                     value: 6,
                     message: 'Password must be at least 6 characters'
@@ -146,10 +143,7 @@ const Register = () => {
                 error={!!errors.passwordConfirm}
                 helperText={errors?.passwordConfirm?.message?.toString()}
                 {...register('passwordConfirm', {
-                  required: {
-                    value: true,
-                    message: 'Confirm password'
-                  },
+                  required: 'Confirm password',
                   validate: (value) => value === getValues('password') || 'Passwords do not match'
                 })}
               />
