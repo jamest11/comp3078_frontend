@@ -1,33 +1,17 @@
 import { Button, LinearProgress, Pagination, Stack } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { instructorApi } from 'services/api';
 import Quiz from './Quiz';
 
-const QuizContainer = () => {
+const PAGE_SIZE = 4;
+
+const QuizContainer = ({ quizzes, loading }) => {
   const navigate = useNavigate();
-  const [quizzes, setQuizzes] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
 
   const handlePageChange = (event, value) => {
     setPage(value);
   };
-
-  const fetchQuizzes = (page) => {
-    instructorApi.getInstructorQuizzes({ page, pagination: true, limit: 5 })
-      .then((res) => {
-        setQuizzes(res.data.docs);
-        setTotalPages(res.data.totalPages);
-      })
-      .catch((error) => console.error('Server error'))
-      .finally(() => setLoading(false));
-  };
-
-  useEffect(() => {
-    fetchQuizzes(page);
-  }, [page]);
 
   return (
     <>
@@ -35,11 +19,15 @@ const QuizContainer = () => {
         <LinearProgress />
       ) : (
           <Stack spacing={1} sx={{ maxWidth: 500 }}>
-            {quizzes.map((quiz, index) => (
+            {quizzes.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).map((quiz, index) => (
               <Quiz key={index} data={quiz} />
             ))}
 
-            <Pagination count={totalPages} page={page} onChange={handlePageChange} />
+            <Pagination 
+              count={Math.floor(quizzes.length / PAGE_SIZE) > 0 ? Math.floor(quizzes.length / PAGE_SIZE) : 1} 
+              page={page} 
+              onChange={handlePageChange} 
+            />
           </Stack>
       )}
 

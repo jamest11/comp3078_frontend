@@ -72,8 +72,8 @@ const getInstructorQuiz = async (id) => {
   return axiosInstance.get(`/instructor/quiz?id=${id}`);
 };
 
-const getInstructorQuizzes = async ({page = 1, limit = 4, pagination = false} = {}) => {
-  return axiosInstance.get(`/instructor/quizzes?pagination=${pagination}&page=${page}&limit=${limit}`);
+const getInstructorQuizzes = async () => {
+  return axiosInstance.get(`/instructor/quizzes`);
 };
 
 const getScheduledQuizzes = async (complete='all') => {
