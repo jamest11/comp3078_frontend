@@ -21,6 +21,7 @@ import UnknownPage from 'pages/public/UnknownPage';
 import PrivateRoute from 'security/PrivateRoute';
 import Layout from 'components/Layout';
 import CreateQuiz from 'pages/instructor/InstructorQuizzes/CreateQuiz';
+import InstructorProfile from 'pages/instructor/InstructorProfile';
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         children: [
+          {
+            index: true,
+            element: <InstructorProfile />
+          },
           {
             path: 'quizzes',
             children: [
