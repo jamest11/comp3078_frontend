@@ -1,19 +1,22 @@
-import { Box, Paper, Avatar, Typography, TextField,  Button, Container, FormGroup } from '@mui/material';
+import { Box, Paper, Avatar, Typography, TextField,  Button, Container, FormGroup, Alert } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from 'security/AuthContextProvider';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 
 import { authApi } from 'services/api';
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [message, setMessage] = useState(location?.state?.message);
   const { register, handleSubmit, setError, formState: { errors } } = useForm();
   const { handleLogin, user } = useAuth();
 
   if(user && user.userType) {
     if(user.userType === 'instructor') {
-      return (<Navigate to="/instructor/quizzes" replace />);
+      return (<Navigate to="/instructor" replace />);
     }
     else if(user.userType === 'student') {
       return (<Navigate to="/student/quizzes" replace />);
@@ -22,15 +25,7 @@ const Login = () => {
 
   const onSubmit = (data) => {
     authApi.login(data)
-      .then((res) => {
-        handleLogin(res.data);
-        if(res.data.user.userType === 'instructor') {
-          navigate('/instructor/quizzes');
-        }
-        else if(res.data.user.userType === 'student') {
-          navigate('/student/quizzes');
-        }
-      })
+      .then((res) => handleLogin(res.data))
       .catch((err) => {
         if(err.code === 'ERR_NETWORK') {
           console.error('Server error');
@@ -44,12 +39,22 @@ const Login = () => {
 
   return (
     <Container maxWidth="xs">
+      {message && (
+        <Alert 
+          onClose={() => setMessage(undefined)} 
+          severity={message.severity} 
+          sx={{ mt: 4, maxWidth: 600 }}
+        >
+          {message.text}
+        </Alert>
+      )}
+
       <Box
         component={Paper}
         elevation={6}
         sx={{
           p: 6,
-          marginTop: 8,
+          mt: 4,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',

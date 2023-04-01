@@ -10,13 +10,14 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from 'security/AuthContextProvider';
 import { authApi } from 'services/api';
 import { emailValidatorRx } from 'utils';
+import LoadingButton from 'components/LoadingButton';
 
 const Register = () => {
   const { register, handleSubmit, setError, getValues, setValue, formState: { errors } } = useForm();
-
   const { user } = useAuth();
   const navigate = useNavigate();
   const [birthDate, setBirthDate] = useState(null);
+  const [submitLoading, setSubmitLoading] = useState(false);
   
   useEffect(() => {
     register('birthDate', {
@@ -37,11 +38,17 @@ const Register = () => {
   }
 
   const onSubmit = (data) => {
+    setSubmitLoading(true);
     authApi.register(data)
-      .then(() => navigate('/login'))
+      .then(() => navigate('/login', { 
+        state: { 
+          message: { text: 'Account registered. A verification link has been sent to your email', severity: 'success' }
+        }
+      }))
       .catch(err => {
         setError('email', { type: 'server', message: 'Email already in use' });
-      });
+      })
+      .finally(() => setSubmitLoading(false));
   };
 
   return (
@@ -192,7 +199,15 @@ const Register = () => {
             </Grid>
             <Grid item xs={12}>
               <FormGroup row sx={{ gap: 1 }}>
-                <Button type="submit" variant="contained">Submit</Button>
+                <LoadingButton
+                  variant="contained"
+                  color="primary"
+                  loading={submitLoading}
+                  size="small"
+                  onClick="submit"  
+                >
+                  Register
+                </LoadingButton>
                 <Button 
                   variant="contained" 
                   color="secondary"

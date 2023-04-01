@@ -17,6 +17,7 @@ import DelClass from 'pages/instructor/InstructorClasses/DelClass';
 import Login from 'pages/public/Login';
 import Register from 'pages/public/Register';
 import UnknownPage from 'pages/public/UnknownPage';
+import VerifyAccount from 'pages/public/VerifyAccount/VerifyAccount';
 
 import PrivateRoute from 'security/PrivateRoute';
 import Layout from 'components/Layout';
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: <Register />
+      },
+      {
+        path: '/verify/:token',
+        element: <VerifyAccount />
       },
       {
         path: '/student',
