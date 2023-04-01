@@ -10,11 +10,12 @@ const avgFormatter = (params) => {
 };
 
 const incompleteColumns = [
-  { field: 'classTitle', headerName: 'Class', flex: 1 },
   { field: 'quizTitle', headerName: 'Quiz', flex: 1 },
+  { field: 'classTitle', headerName: 'Class', flex: 1 },
   { 
     field: 'dueDate', 
     headerName: 'Due Date',
+    filterable: false,
     width: 120,
     valueFormatter: (params) => formatDate(params.value)
   },
@@ -22,6 +23,7 @@ const incompleteColumns = [
     field: 'progress', 
     headerName: '# Complete', 
     width: 120,
+    filterable: false,
     sortable: false,
     valueGetter: (params) => `${params.row.numComplete}/${params.row.numStudents}`
   },
@@ -29,22 +31,25 @@ const incompleteColumns = [
     field: 'average', 
     headerName: 'Avg. Score',
     width: 120,
+    filterable: false,
     valueFormatter: avgFormatter
   },
 ];
 
 const completeColumns = [
-  { field: 'classTitle', headerName: 'Class', flex: 1 },
   { field: 'quizTitle', headerName: 'Quiz', flex: 1 },
+  { field: 'classTitle', headerName: 'Class', flex: 1 },
   { 
     field: 'dueDate', 
     headerName: 'Completed On', 
+    filterable: false,
     width: 120,
     valueFormatter: (params) => formatDate(params.value)
   },
   { 
     field: 'average', 
     headerName: 'Avg. Score',
+    filterable: false,
     width: 120,
     valueFormatter: avgFormatter
   },
