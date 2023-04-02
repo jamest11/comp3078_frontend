@@ -19,7 +19,7 @@ const Login = () => {
       return (<Navigate to="/instructor" replace />);
     }
     else if(user.userType === 'student') {
-      return (<Navigate to="/student/quizzes" replace />);
+      return (<Navigate to="/student" replace />);
     }
   }
 

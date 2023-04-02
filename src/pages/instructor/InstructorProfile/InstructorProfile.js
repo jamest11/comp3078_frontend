@@ -1,9 +1,10 @@
 import { Button, ButtonGroup, Container, Grid, Paper, Stack } from '@mui/material';
+import { Link } from 'react-router-dom';
+
 import Subtitle from 'components/Subtitle';
 import Title from 'components/Title';
 import TitleDivider from 'components/TitleDivider';
 import UserCard from 'components/UserCard';
-import { Link } from 'react-router-dom';
 
 const InstructorProfile = () => {
   return (

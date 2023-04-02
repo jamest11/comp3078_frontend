@@ -30,10 +30,10 @@ const Register = () => {
 
   if(user && user.userType) {
     if(user.userType === 'instructor') {
-      return (<Navigate to="/instructor/quizzes" replace />);
+      return (<Navigate to="/instructor" replace />);
     }
     else if(user.userType === 'student') {
-      return (<Navigate to="/student/quizzes" replace />);
+      return (<Navigate to="/student" replace />);
     }
   }
 
