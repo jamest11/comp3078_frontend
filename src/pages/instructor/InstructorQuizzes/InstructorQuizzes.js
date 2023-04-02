@@ -93,13 +93,12 @@ const InstructorQuizzes = () => {
             <LinearProgress />
           ) : (
             <Stack spacing={1} sx={{ maxWidth: 500 }}>
-              <Stack direction="row" alignItems="center">
-                <Pagination 
-                  count={Math.ceil(filteredQuizzes.length / PAGE_SIZE)} 
-                  page={sqPage} 
-                  onChange={handlePageChange} 
-                />
-              </Stack>
+              <Pagination 
+                count={Math.ceil(filteredQuizzes.length / PAGE_SIZE)} 
+                page={sqPage} 
+                onChange={handlePageChange} 
+              />
+
               {filteredQuizzes.slice((sqPage - 1) * PAGE_SIZE, sqPage * PAGE_SIZE).map((quiz, index) => (
                 <ScheduledQuiz 
                   key={index} 
