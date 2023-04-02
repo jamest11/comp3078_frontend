@@ -1,20 +1,5 @@
-import { Box, Paper, Typography, useTheme } from '@mui/material';
-import { tooltipStyles } from 'components/Layout';
-import { Bar, BarChart, CartesianGrid, Label, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-
-
-const CustomTooltip = ({ active, payload }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div style={tooltipStyles.wrapper}>
-        <div style={tooltipStyles.title}>{payload[0].payload.quizTitle}</div>
-        <div style={tooltipStyles.desc}>{payload[0].payload.classTitle}</div>
-        <div style={tooltipStyles.desc}>Grade: {payload[0].payload.grade}%</div>
-      </div>
-    );
-  }
-  return null;
-};
+import { Paper, Typography, useTheme } from '@mui/material';
+import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 const ClassGradesChart = ({ data }) => {
   const theme = useTheme();
