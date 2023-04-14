@@ -15,11 +15,14 @@ const StudentGrades = () => {
   const [quizGrades, setQuizGrades] = useState([]);
   const [classGrades, setClassGrades] = useState([]);
 
+  console.log(quizGrades);
+  console.log(classGrades);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const qgRes = await studentApi.getStudentGrades('quiz');
-        const cgRes = await studentApi.getStudentGrades('class');
+        const qgRes = await studentApi.getStudentGrades({type: 'quiz' });
+        const cgRes = await studentApi.getStudentGrades({type: 'class'});
 
         setQuizGrades(qgRes.data);
         setClassGrades(cgRes.data);
