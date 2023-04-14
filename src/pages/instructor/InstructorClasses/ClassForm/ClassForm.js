@@ -40,7 +40,6 @@ const ClassForm = () => {
         (student) => student.trim().replaceAll(',','')
       );
       for(let student of newStudents) {
-        console.log(student);
         if(!student.match(emailValidatorRx)) {
           setError('newStudents', { type: 'validate', message: 'Invalid email for at least one student'});
           return;
@@ -56,6 +55,7 @@ const ClassForm = () => {
 
     if(editData) {
       instructorApi.updateClass({
+        title: data.title,
         class: editData._id,
         newStudents,
         delStudents
@@ -73,8 +73,6 @@ const ClassForm = () => {
         .catch(() => console.error('Server error'))
         .finally(() => setSubmitLoading(false));
     }
-
-    console.log(delStudents); 
   };
 
   return (

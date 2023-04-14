@@ -43,7 +43,7 @@ const InstructorClasses = () => {
     const grade = classGrades.find((x) => x._id === id);
 
     if(grade && grade.count > 0){
-      return (<Typography>{grade.average}% average</Typography>);
+      return (<Typography>{Math.round(grade.average * 100) / 100}% average</Typography>);
     }
 
     return null;
