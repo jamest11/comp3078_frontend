@@ -10,7 +10,7 @@ import AddQuestionModal from './components/AddQuestionModal';
 import QuizQuestion from './components/QuizQuestion';
 
 
-const timeOptions = [60, 120, 180, 300, 600, 900];
+const timeOptions = [60, 120, 180, 300, 600, 900, 1200, 1500];
 
 const CreateQuiz = () => {
   const navigate = useNavigate();
