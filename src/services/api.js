@@ -36,9 +36,12 @@ const getStudentQuiz = async (id) => {
   return axiosInstance.get(`/student/quiz?id=${id}`);
 };
 
-const getStudentGrades = async (type='class') => {
+const getStudentGrades = async ({type, summary=null}) => {
   if(type === 'class') {
     return axiosInstance.get('/student/class-grades');  
+  }
+  else if(summary) {
+    return axiosInstance.get(`/student/quiz-grades?summary=${summary}`);
   }
   return axiosInstance.get('/student/quiz-grades');
 };
