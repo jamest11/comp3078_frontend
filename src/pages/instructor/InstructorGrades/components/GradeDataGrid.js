@@ -3,10 +3,10 @@ import { DataGrid } from '@mui/x-data-grid';
 import { formatDate } from 'utils';
 
 const avgFormatter = (params) => {
-  if(!params.value) {
+  if(!params.value && typeof params.value != 'number') {
     return 'N/A';
   }
-  return `${params.value}%`;
+  return `${Math.round(params.value * 100) / 100}%`;
 };
 
 const incompleteColumns = [

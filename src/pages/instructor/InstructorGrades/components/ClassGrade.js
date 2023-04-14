@@ -18,7 +18,7 @@ const ClassGrade = ({ data }) => {
             <>
               <Chip 
                 color={ data.average <= 50 ? 'error' : (data.average < 70 ? 'warning' : 'success')} 
-                label={`${data.average}%`} 
+                label={`${Math.round(data.average * 100) / 100}%`} 
               />
               <Typography variant="body2" display="inline" sx={{ ml: 1 }}>
                 over {data.count} {data.count === 1 ? 'quiz' : 'quizzes'}

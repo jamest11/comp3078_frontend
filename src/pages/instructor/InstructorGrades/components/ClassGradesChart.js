@@ -4,6 +4,8 @@ import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recha
 const ClassGradesChart = ({ data }) => {
   const theme = useTheme();
   
+  console.log(data);
+
   return (
     <Paper
       sx={{
